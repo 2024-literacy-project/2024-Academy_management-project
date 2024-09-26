@@ -3,7 +3,7 @@ name: "\U0001F4C4document issue template"
 about: 문서 작성 시 활용
 title: "[Feature/DocHtml] Title"
 labels: "\U0001F4C3 Docs"
-assignees: inredzero
+assignees: ''
 
 ---
 
