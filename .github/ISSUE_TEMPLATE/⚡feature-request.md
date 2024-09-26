@@ -2,7 +2,7 @@
 name: "⚡Feature request"
 about: 기능 추가/삭제/수정
 title: "[Feature/featureName] Title"
-labels: "✨ Feature"
+labels: "\U0001F41E BugFix, ✨ Feature"
 assignees: ''
 
 ---
