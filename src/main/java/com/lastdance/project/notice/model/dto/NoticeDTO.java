@@ -1,12 +1,14 @@
 package com.lastdance.project.notice.model.dto;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class NoticeDTO {
    private int notice_no;
    private String notice_title;
    private String notice_txt;
-   private Date notice_date;
+   private LocalDate notice_date;
    private int member_no;
 
     public String getNotice_title() {
@@ -25,11 +27,11 @@ public class NoticeDTO {
         this.notice_txt = notice_txt;
     }
 
-    public Date getNotice_date() {
+    public LocalDate getNotice_date() {
         return notice_date;
     }
 
-    public void setNotice_date(Date notice_date) {
+    public void setNotice_date(LocalDate notice_date) {
         this.notice_date = notice_date;
     }
 
@@ -50,7 +52,7 @@ public class NoticeDTO {
     }
 
 
-    public NoticeDTO(int notice_no, String notice_title, String notice_txt, Date notice_date, int member_no) {
+    public NoticeDTO(int notice_no, String notice_title, String notice_txt, LocalDate notice_date, int member_no) {
         this.notice_no = notice_no;
         this.notice_title = notice_title;
         this.notice_txt = notice_txt;

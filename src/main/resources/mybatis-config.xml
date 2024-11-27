@@ -2,6 +2,10 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <typeHandlers>
+        <typeHandler javaType="java.time.LocalDate" handler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+    </typeHandlers>
+
     <mappers>
         <mapper resource="mapper/TestMapper.xml"/>
         <mapper resource="mapper/NoticeMapper.xml"/>
