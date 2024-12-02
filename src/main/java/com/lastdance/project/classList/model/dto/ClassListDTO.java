@@ -69,4 +69,6 @@ public class ClassListDTO {
                 ", member_no=" + member_no +
                 '}';
     }
+
+
 }

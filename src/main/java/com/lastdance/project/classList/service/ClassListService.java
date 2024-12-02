@@ -16,6 +16,4 @@ public interface ClassListService {
     ClassListDTO getClassByNo(int class_no);    //class_no로 조회
 
 
-
-
 }

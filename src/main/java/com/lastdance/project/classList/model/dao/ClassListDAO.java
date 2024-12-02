@@ -17,6 +17,4 @@ public interface ClassListDAO {
     /* 클래스리스트 상세보기 */
     ClassListDTO getClassByNo(int class_no);
 
-
-
 }
