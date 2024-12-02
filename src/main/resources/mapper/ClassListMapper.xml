@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lastdance.project.classList.model.dao.ClassListDAO">
+
+    <!-- 클래스리스트 확인 -->
+    <select id="getAllClassList" resultType="com.lastdance.project.classList.model.dto.ClassListDTO">
+        SELECT * FROM `class`
+    </select>
+
+    <!-- 클래스리스트 추가 -->
+    <insert id="insertClass" parameterType="com.lastdance.project.classList.model.dto.ClassListDTO">
+        INSERT INTO `class` (class_name, class_schedule, subject_no, member_no)
+        VALUES (#{class_name}, #{class_schedule}, #{subject_no}, #{member_no})
+    </insert>
+
+    <!-- 클래스리스트 상세보기-->
+    <select id="getClassByNo" parameterType="int" resultType="com.lastdance.project.classList.model.dto.ClassListDTO">
+        SELECT * FROM `class` WHERE class_no = #{class_no}
+    </select>
+
+
+
+
+</mapper>
