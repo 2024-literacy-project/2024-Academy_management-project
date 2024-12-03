@@ -247,7 +247,7 @@ h6 {
 }
 
 .card-body {
-  padding: 0 20px 20px 20px;
+  padding: 20px;
 }
 
 .card-img-overlay {
@@ -1230,4 +1230,11 @@ h6 {
   text-align: center;
   font-size: 13px;
   color: #012970;
+}
+
+/*------------------
+# 추가 css
+---------------------- */
+.custom-flex {
+  gap: 10px;
 }

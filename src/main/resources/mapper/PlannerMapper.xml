@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lastdance.project.planner.model.PlannerDAO">
+
+    <select id="getPlannerByNo" parameterType="int" resultType="com.lastdance.project.planner.model.PlannerDTO">
+        SELECT p.planner_no,
+               p.planner_title,
+               p.planner_txt,
+               p.planner_date,
+               p.member_no,
+               m.name AS name
+        FROM planner p
+                 JOIN member m ON p.member_no = m.member_no
+        WHERE p.planner_no = #{planner_no}
+    </select>
+
+    <select id="getPlannerByUserId" parameterType="String" resultType="com.lastdance.project.planner.model.PlannerDTO">
+        SELECT p.planner_no,
+               p.planner_title,
+               p.planner_txt,
+               p.planner_date,
+               p.member_no,
+               m.name AS name
+        FROM planner p
+                 JOIN member m ON p.member_no = m.member_no
+        WHERE m.id = #{id}
+
+    </select>
+
+    <select id="getNameByUserId" parameterType="String" resultType="String">
+        SELECT name
+        FROM member
+        WHERE id = #{id}
+    </select>
+
+    <select id="getMemberNoById" parameterType="String" resultType="int">
+        SELECT member_no
+        FROM member
+        WHERE id = #{id};
+    </select>
+
+    <!-- 플래너 추가 -->
+    <insert id="insertPlanner" parameterType="com.lastdance.project.planner.model.PlannerDTO">
+        INSERT INTO planner (planner_title, planner_txt, planner_date, member_no)
+        VALUES (#{planner_title}, #{planner_txt}, #{planner_date}, #{member_no})
+    </insert>
+
+    <!-- 플래너 삭제  -->
+    <delete id="deletePlanner" parameterType="int">
+        DELETE FROM planner WHERE planner_no = #{planner_no}
+    </delete>
+
+    <!--  플래너 수정  -->
+    <update id="updatePlanner" parameterType="com.lastdance.project.planner.model.PlannerDTO">
+        UPDATE planner
+        SET planner_title = #{planner_title}, planner_txt = #{planner_txt}, planner_date = #{planner_date}
+        WHERE planner_no = #{planner_no}
+    </update>
+
+    <select id="findByNo" parameterType="int" resultType="com.lastdance.project.planner.model.PlannerDTO">
+        SELECT * FROM planner WHERE planner_no = #{planner_no}
+    </select>
+
+</mapper>
