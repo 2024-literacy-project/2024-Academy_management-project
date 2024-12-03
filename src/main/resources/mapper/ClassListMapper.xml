@@ -6,7 +6,18 @@
 
     <!-- 클래스리스트 확인 -->
     <select id="getAllClassList" resultType="com.lastdance.project.classList.model.dto.ClassListDTO">
-        SELECT * FROM `class`
+--         SELECT * FROM `class`
+            SELECT
+                c.class_no,
+                c.class_name,
+                c.class_schedule,
+                c.subject_no,
+                c.member_no,
+                s.subject_name, -- 과목 이름
+                m.name  -- 관련인 이름
+            FROM `class` c
+                     JOIN subject s ON c.subject_no = s.subject_no -- 과목과 연결
+                     JOIN member m ON c.member_no = m.member_no -- 관련인과 연결
     </select>
 
     <!-- 클래스리스트 추가 -->
@@ -20,5 +31,19 @@
         SELECT * FROM `class` WHERE class_no = #{class_no}
     </select>
 
+    <!-- 클래스리스트 수정 -->
+    <update id="updateClass" parameterType="com.lastdance.project.classList.model.dto.ClassListDTO">
+        UPDATE `class`
+        SET class_name = #{class_name},
+            class_schedule = #{class_schedule},
+            subject_no = #{subject_no},
+            member_no = #{member_no}
+        WHERE class_no = #{class_no}
+    </update>
+
+    <!-- 클래스리스트 삭제 -->
+    <delete id="deleteClass" parameterType="int">
+        DELETE FROM `class` WHERE class_no = #{class_no}
+    </delete>
 
 </mapper>

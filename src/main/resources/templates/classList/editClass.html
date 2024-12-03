@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>클래스 리스트</title>
+    <title>클래스 리스트 추가</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -29,8 +29,8 @@
     <!-- Template Main CSS File -->
     <link href="/css/style.css" rel="stylesheet">
 
-<!--    <style></style>-->
-<!--    <link rel="stylesheet" type="text/css" th:href="@{/css/classList/classList.css}"/>-->
+    <!--    <style></style>-->
+    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/classList/classList.css}"/>-->
 
 </head>
 
@@ -194,93 +194,43 @@
         <h1>클래스</h1>
     </div><!-- End Page Title -->
 
-    <!-- 클래스 리스트 -->
+    <!-- 클래스 수정 -->
     <section>
-        <div>
-            <h3>클래스 리스트</h3>
-            <!---->
-            <table border="1" style="text-align: center; border-collapse: collapse; background-color: white;border: 1px solid lightgray;width: 90%">
-                <thead>
-                <tr style="height: 40px;width:80px;border: 1px solid lightgray;">
-                    <th>클래스 번호</th>
-                    <th>클래스명</th>
-                    <th>수업일정</th>
-<!--                    <th>과목번호</th>-->
-                    <th>과목명</th>
-<!--                    <th>관련인번호</th>-->
-                    <th>관련인이름</th>
-                </tr>
-                </thead>
-                <tbody>
-                <!-- 클래스 리스트를 여기에 출력 -->
-                <tr th:each="classList : ${classList}">
-                    <td th:text="${classList.class_no}"></td>
-                    <td th:text="${classList.class_name}"></td>
-                    <td th:text="${classList.class_schedule}"></td>
-<!--                    <td th:text="${classList.subject_no}"></td>-->
-                    <td th:text="${classList.subject_name}"></td>
-<!--                    <td th:text="${classList.member_no}"></td>-->
-                    <td th:text="${classList.name}"></td>
+        <h3>클래스 수정</h3>
+        <form th:action="@{/classList/edit/{class_no}(class_no=${classDetail.class_no})}" method="post">
+            <label for="class_name">클래스명 : </label>
+            <input type="text" id="class_name" name="class_name" th:value="${classDetail.class_name}" required>
+            <br>
 
-                    <!-- 클래스 상세보기 버튼 -->
-                    <td>
-                        <a th:href="@{/classList/detail/{class_no}(class_no=${classList.class_no})}">
-<!--                            <button style="border: 1px solid gray;">상세보기</button>-->
-                            <button type="button" class="btn btn-secondary">상세보기</button>
-                        </a>
-                    </td>
+            <label for="class_schedule">수업 일정 : </label>
+            <input type="text" id="class_schedule" name="class_schedule" th:value="${classDetail.class_schedule}" required>
+            <br>
 
-                    <!-- 클래스 수정 버튼 -->
-                    <td>
-                        <a th:href="@{/classList/edit/{class_no}(class_no=${classList.class_no})}">
-<!--                            <button style="border: 1px solid gray;">수정</button>-->
-                            <button type="button" class="btn btn-secondary">수정</button>
-                        </a>
-                    </td>
+            <label for="subject_no">과목번호 :</label>
+            <input type="number" id="subject_no" name="subject_no" th:value="${classDetail.subject_no}" required>
+            <br>
 
-                    <!-- 클래스 삭제 버튼 -->
-                    <td>
-                        <a th:href="@{/classList/delete/{class_no}(class_no=${classList.class_no})}"
-                           onclick="return confirm('정말 삭제하시겠습니까?');">
-<!--                            <button style="border: 1px solid gray;">삭제</button>-->
-                            <button type="button" class="btn btn-secondary">삭제</button>
-                        </a>
-                    </td>
+            <label for="member_no">관련인번호 : </label>
+            <input type="number" id="member_no" name="member_no" th:value="${classDetail.member_no}" required>
+            <br>
 
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <br>
-        <!-- 클래스 추가 버튼 -->
-<!--        <div style="margin-top: 20px;">-->
-<!--            <button style="padding: 10px 15px;border: 1px solid lightgray;background-color: navy">-->
-<!--                <a href="/classList/addClass" style="text-decoration: none; color: white;">클래스 추가</a>-->
+            <!-- 저장 버튼 -->
+<!--            <button type="submit" style="padding: 10px 15px;border: 1px solid lightgray;background-color: navy; color:white;">-->
+<!--                저장-->
 <!--            </button>-->
-<!--        </div>-->
-        <div>
+            <button type="submit" class="btn btn-primary">저장</button>
+        </form>
+
+        <!-- 목록으로 버튼-->
+        <div style="margin-top: 20px;">
+<!--            <button style="padding: 10px 15px;border: 1px solid lightgray;background-color: navy">-->
+<!--                <a href="/classList" style="text-decoration: none; color: white;">목록으로</a>-->
+<!--            </button>-->
             <button type="button" class="btn btn-primary">
-                <a href="/classList/addClass" style="color: white;">클래스 추가</a>
+                <a href="/classList" style="text-decoration: none; color: white;">목록으로</a>
             </button>
         </div>
 
-        <!-- 버튼 예시 -->
-<!--        <div class="card">-->
-<!--            <div class="card-body">-->
-<!--                <h5 class="card-title">Default Buttons</h5>-->
-
-<!--                <button type="button" class="btn btn-primary">Primary</button>-->
-<!--                <button type="button" class="btn btn-secondary">Secondary</button>-->
-<!--                <button type="button" class="btn btn-success">Success</button>-->
-<!--                <button type="button" class="btn btn-danger">Danger</button>-->
-<!--                <button type="button" class="btn btn-warning">Warning</button>-->
-<!--                <button type="button" class="btn btn-info">Info</button>-->
-<!--                <button type="button" class="btn btn-light">Light</button>-->
-<!--                <button type="button" class="btn btn-dark">Dark</button>-->
-<!--                <button type="button" class="btn btn-link">Link</button>-->
-<!--            </div>-->
-<!--        </div>-->
     </section>
 
 </main><!-- End #main -->

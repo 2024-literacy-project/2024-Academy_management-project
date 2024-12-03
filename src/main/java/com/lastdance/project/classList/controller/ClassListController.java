@@ -43,6 +43,8 @@ public class ClassListController {
 
     @GetMapping("/addClass")
     public String showAddClassPage() {  //클래스 추가 페이지 띄우기
+
+
         return "classList/addClass";
     }
 
@@ -52,6 +54,28 @@ public class ClassListController {
         ClassListDTO classDetail = classListServiceImpl.getClassByNo(classNo);
         model.addAttribute("classDetail", classDetail); // 상세정보를 모델에 추가
         return "classList/classDetail"; // 상세보기 페이지 렌더링
+    }
+
+    /* 클래스리스트 수정 */
+    @GetMapping("/edit/{class_no}")
+    public String showEditClass(@PathVariable("class_no") int classNo, Model model){
+        ClassListDTO classDetail = classListServiceImpl.getClassByNo(classNo);
+        model.addAttribute("classDetail", classDetail);
+        return "classList/editClass";
+    }
+
+    @PostMapping("/edit/{class_no}")
+    public String updateClass(@PathVariable("class_no") int classNo, ClassListDTO classListDTO){
+        classListDTO.setClass_no(classNo);  //
+        classListServiceImpl.updateClass(classListDTO);
+        return "redirect:/classList";       //수정 후 -> 목록 페이지로
+    }
+
+    /* 클래스리스트 삭제 */
+    @GetMapping("/delete/{class_no}")
+    public String deleteClass(@PathVariable("class_no") int classNo) {
+        classListServiceImpl.deleteClass(classNo); // 삭제 처리
+        return "redirect:/classList"; // 삭제 후 목록 페이지로 리다이렉트
     }
 
 

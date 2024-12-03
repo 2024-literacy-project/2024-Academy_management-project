@@ -35,5 +35,16 @@ public class ClassListServiceImpl implements ClassListService{
         return classListDAO.getClassByNo(class_no);
     }
 
+    /* 클래스리스트 수정 */
+    @Override
+    public void updateClass(ClassListDTO classListDTO) {
+        classListDAO.updateClass(classListDTO);
+    }
+
+    /* 클래스리스트 삭제 */
+    @Override
+    public void deleteClass(int class_no) {
+        classListDAO.deleteClass(class_no);
+    }
 
 }

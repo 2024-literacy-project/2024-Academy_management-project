@@ -17,4 +17,10 @@ public interface ClassListDAO {
     /* 클래스리스트 상세보기 */
     ClassListDTO getClassByNo(int class_no);
 
+    /* 클래스리스트 수정 */
+    void updateClass(ClassListDTO classListDTO);
+
+    /* 클래스리스트 삭제 */
+    void deleteClass(int class_no);
+
 }

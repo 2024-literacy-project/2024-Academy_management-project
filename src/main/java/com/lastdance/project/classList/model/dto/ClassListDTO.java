@@ -7,16 +7,21 @@ public class ClassListDTO {
     private String class_schedule;
     private int subject_no;
     private int member_no;
+    //
+    private String subject_name;    //과목 이름
+    private String name;            //관련인 이름
 
     public ClassListDTO() {
     }
 
-    public ClassListDTO(int class_no, String class_name, String class_schedule, int subject_no, int member_no) {
+    public ClassListDTO(int class_no, String class_name, String class_schedule, int subject_no, int member_no, String subject_name, String name) {
         this.class_no = class_no;
         this.class_name = class_name;
         this.class_schedule = class_schedule;
         this.subject_no = subject_no;
         this.member_no = member_no;
+        this.subject_name = subject_name;
+        this.name = name;
     }
 
     public int getClass_no() {
@@ -59,6 +64,22 @@ public class ClassListDTO {
         this.member_no = member_no;
     }
 
+    public String getSubject_name() {
+        return subject_name;
+    }
+
+    public void setSubject_name(String subject_name) {
+        this.subject_name = subject_name;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "ClassListDTO{" +
@@ -67,8 +88,9 @@ public class ClassListDTO {
                 ", class_schedule='" + class_schedule + '\'' +
                 ", subject_no=" + subject_no +
                 ", member_no=" + member_no +
+                ", subject_name='" + subject_name + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
-
 
 }
