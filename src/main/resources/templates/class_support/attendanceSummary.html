@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>출석 관리 - 일자별 출결 현황</title>
+
+    <!-- Add your CSS links here -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>일자별 출결 현황 표시</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../templates/index.html">Home</a></li>
+                <li class="breadcrumb-item">수업 관리</li>
+                <li class="breadcrumb-item active">일자별 출결 현황 표시</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <div class="container mt-5">
+        <div class="form-group">
+            <label for="dateSelect">날짜를 선택하세요:</label>
+            <input type="date" id="dateSelect" name="dateSelect" class="form-control" required>
+        </div>
+        <div class="form-group mt-4">
+            <label for="classSelect">클래스를 선택하세요:</label>
+            <select id="classSelect" name="class_no" class="form-control" required>
+                <option value="" disabled selected>클래스를 선택하세요...</option>
+                <option th:each="class : ${classList}"
+                        th:value="${class.class_no}"
+                        th:text="${class.class_name}">
+                </option>
+            </select>
+        </div>
+
+
+        <button id="viewAttendanceSummary" type="button" class="btn btn-primary mt-4">출석 현황 조회</button>
+
+        <div id="attendanceSummaryContainer" class="mt-4" style="display: none;">
+            <h4>출석 현황 (날짜: <span id="selectedDate"></span>)</h4>
+            <p id="noDataMessage" style="display: none; color: red;">조회된 출석 현황이 없습니다.</p>
+            <p>총원: <span id="totalCount"></span>명</p>
+            <p>출석: <span id="presentCount"></span>명</p>
+            <p>조퇴: <span id="earlyLeaveCount"></span>명</p>
+            <p>결석: <span id="absentCount"></span>명</p>
+        </div>
+    </div>
+</main>
+
+<!-- JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('#viewAttendanceSummary').click(function () {
+            const date = $('#dateSelect').val(); // 선택한 날짜
+            const classNo = $('#classSelect').val(); // 선택한 클래스 번호
+
+            console.log('Selected date:', date);
+            console.log('Selected class_no:', classNo);
+
+            if (date && classNo) {
+                $.ajax({
+                    url: '/class_support/attendanceSummary',
+                    type: 'GET',
+                    data: {
+                        class_no: classNo,
+                        date: date
+                    },
+                    success: function (data) {
+                        console.log('Response:', data);
+                        if (data && data.attendanceList && data.attendanceList.length > 0) {
+                            $('#totalCount').text(data.attendanceList.length);
+                            $('#presentCount').text(data.presentCount || 0);
+                            $('#earlyLeaveCount').text(data.earlyLeaveCount || 0);
+                            $('#absentCount').text(data.absentCount || 0);
+                            $('#selectedDate').text(date);
+                            $('#attendanceSummaryContainer').show();
+                            $('#noDataMessage').hide();
+                        } else {
+                            $('#attendanceSummaryContainer').hide();
+                            $('#noDataMessage').show();
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error details:', xhr.responseText);
+                        alert('서버 요청에 실패했습니다.');
+                    }
+                });
+            } else {
+                alert('날짜와 클래스를 모두 선택해주세요.');
+            }
+        });
+    });
+
+
+
+</script>
+</body>
+
+</html>

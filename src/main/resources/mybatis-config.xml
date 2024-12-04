@@ -4,5 +4,7 @@
 <configuration>
     <mappers>
         <mapper resource="mapper/TestMapper.xml"/>
+        <mapper resource="mapper/StudentAttendanceMapper.xml"/>
+        <mapper resource="mapper/StudentClassMapper.xml"/>
     </mappers>
 </configuration>
