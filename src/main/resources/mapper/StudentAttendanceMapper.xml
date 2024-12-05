@@ -42,4 +42,25 @@
         WHERE sa.stu_attendance_date = #{attendanceDate}
     </select>
 
+    <select id="getAttendanceSummaryByDateAndClass" parameterType="map" resultType="com.lastdance.project.class_support.model.dto.StudentAttendanceDTO">
+        SELECT
+            sa.stu_attendance_no,
+            sa.stu_attendance_status,
+            sa.stu_attendance_date,
+            sa.member_no,
+            sa.attendance_time,
+            sa.home_time,
+            sc.class_no,
+            m.name AS student_name
+        FROM student_attendance sa
+                 JOIN student_class sc ON sa.member_no = sc.member_no
+                 JOIN member m ON sa.member_no = m.member_no
+        WHERE DATE(sa.stu_attendance_date) = #{date}
+          AND sc.class_no = #{class_no}
+    </select>
+
+
+
+
+
 </mapper>

@@ -8,6 +8,7 @@ import com.lastdance.project.class_support.model.dto.StudentClassDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -81,10 +82,19 @@ public class StudentAttendanceService {
 
 
     public List<StudentAttendanceDTO> getAttendanceSummaryByDateAndClass(Date date, int class_no) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = sdf.format(date); // 날짜를 문자열로 변환
+
         Map<String, Object> params = new HashMap<>();
-        params.put("date", date);
-        params.put("class_no", class_no);
+        params.put("date", formattedDate); // 변환된 날짜 전달
+        params.put("class_no", class_no); // 클래스 번호 전달
+
+        // 디버깅용 출력
+        System.out.println("Params for DAO: " + params);
+
         return studentAttendanceDao.getAttendanceSummaryByDateAndClass(params);
     }
+
+
 
 }

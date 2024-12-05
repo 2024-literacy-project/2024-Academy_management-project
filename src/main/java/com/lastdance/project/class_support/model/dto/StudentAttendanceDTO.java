@@ -10,8 +10,13 @@ public class StudentAttendanceDTO {
     private String attendance_time;
     private String home_time;
     private int class_no; // 클래스 번호 추가
+    private String student_name;
 
     public StudentAttendanceDTO() {
+    }
+
+    public StudentAttendanceDTO(String student_name) {
+        this.student_name = student_name;
     }
 
     public StudentAttendanceDTO(int stu_attendance_no, String stu_attendance_status, Date stu_attendance_date, int member_no, String attendance_time, String home_time, int class_no) {
@@ -22,6 +27,7 @@ public class StudentAttendanceDTO {
         this.attendance_time = attendance_time;
         this.home_time = home_time;
         this.class_no = class_no;
+
     }
 
     public int getStu_attendance_no() {
@@ -80,6 +86,14 @@ public class StudentAttendanceDTO {
         this.class_no = class_no;
     }
 
+    public String getStudent_name() {
+        return student_name;
+    }
+
+    public void setStudent_name(String student_name) {
+        this.student_name = student_name;
+    }
+
     @Override
     public String toString() {
         return "StudentAttendanceDTO{" +
@@ -90,6 +104,7 @@ public class StudentAttendanceDTO {
                 ", attendance_time='" + attendance_time + '\'' +
                 ", home_time='" + home_time + '\'' +
                 ", class_no=" + class_no +
+                ", student_name='" + student_name + '\'' +
                 '}';
     }
 }

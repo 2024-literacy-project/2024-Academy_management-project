@@ -39,7 +39,12 @@
     </delete>
     <!-- 모든 클래스 정보를 가져오기 (UI 전용 간단한 정보) -->
     <select id="getAllClassesForUI" resultType="com.lastdance.project.class_support.model.dto.ClassDTO">
-        SELECT class_no, class_name
+        SELECT
+            class_no,
+            class_name,
+            class_schedule,
+            subject_no,
+            member_no
         FROM class
     </select>
 
