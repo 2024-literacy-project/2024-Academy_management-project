@@ -31,6 +31,9 @@
 
     <!-- jQuery Library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
+
 </head>
 
 <body>
@@ -142,11 +145,7 @@
                                 <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">일자별 출결 현황 표시</span>
                             </a>
                         </li>
-                        <li>
-                            <a href="/class_support/studentAttendanceCheck">
-                                <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">학생용 출석</span>
-                            </a>
-                        </li>
+
                     </ul>
 
 
@@ -237,16 +236,22 @@
         <div id="loadingMessage" style="display: none; color: blue;" class="mt-3">
             데이터를 가져오는 중입니다. 잠시만 기다려주세요...
         </div>
+        <div id="noDataMessage" style="display: none; color: red;" class="mt-3">
+            조회된 내용이 없습니다.
+        </div>
 
         <!-- 출석 현황 결과 -->
         <div id="attendanceSummaryContainer" class="mt-4" style="display: none;">
-            <h4>출석 현황 (날짜: <span id="selectedDate"></span>)</h4>
-            <p id="noDataMessage" style="display: none; color: red;">조회된 출석 현황이 없습니다.</p>
-            <p>총원: <span id="totalCount"></span>명</p>
-            <p>출석: <span id="presentCount"></span>명</p>
-            <p>지각: <span id="lateCount"></span>명</p> <!-- 지각자 추가 -->
-            <p>조퇴: <span id="earlyLeaveCount"></span>명</p>
-            <p>결석: <span id="absentCount"></span>명</p>
+<!--            <h4>출석 현황 (날짜: <span id="selectedDate"></span>)</h4>-->
+
+<!--            <p>총원: <span id="totalCount"></span>명</p>-->
+<!--            <p>출석: <span id="presentCount"></span>명</p>-->
+<!--            <p>지각: <span id="lateCount"></span>명</p> &lt;!&ndash; 지각자 추가 &ndash;&gt;-->
+<!--            <p>조퇴: <span id="earlyLeaveCount"></span>명</p>-->
+<!--            <p>결석: <span id="absentCount"></span>명</p>-->
+            <!-- 파이 차트 컨테이너 -->
+            <div id="attendancePieChart" style="min-height: 400px;" class="echart mt-4"></div>
+
         </div>
     </div>
 </main>
@@ -281,12 +286,54 @@
                         console.log("Received Data:", data); // 응답 데이터 출력
 
                         if (data.attendanceList && data.attendanceList.length > 0) {
-                            document.getElementById('totalCount').innerText = data.attendanceList.length || 0;
-                            document.getElementById('presentCount').innerText = data.presentCount || 0;
-                            document.getElementById('lateCount').innerText = data.lateCount || 0;
-                            document.getElementById('earlyLeaveCount').innerText = data.earlyLeaveCount || 0;
-                            document.getElementById('absentCount').innerText = data.absentCount || 0;
-                            document.getElementById('selectedDate').innerText = date;
+
+                            // 파이 차트 데이터 생성
+                            const attendanceData = [
+                                { value: data.presentCount, name: '출석' },
+                                { value: data.lateCount, name: '지각' },
+                                { value: data.earlyLeaveCount, name: '조퇴' },
+                                { value: data.absentCount, name: '결석' }
+                            ];
+
+                            // 파이 차트 초기화 및 렌더링
+                            const chartDom = document.querySelector("#attendancePieChart");
+                            const myChart = echarts.init(chartDom);
+
+                            const option = {
+                                title: {
+                                    text: '출석 현황',
+                                    subtext: `날짜: ${date}`,
+                                    left: 'center'
+                                },
+                                tooltip: {
+                                    trigger: 'item',
+                                    formatter: '{b}: {c}명 ({d}%)'
+                                },
+                                legend: {
+                                    orient: 'vertical',
+                                    left: 'left'
+                                },
+                                series: [
+                                    {
+                                        name: '출석 데이터',
+                                        type: 'pie',
+                                        radius: '50%',
+                                        data: attendanceData,
+                                        emphasis: {
+                                            itemStyle: {
+                                                shadowBlur: 10,
+                                                shadowOffsetX: 0,
+                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                            }
+                                        },
+                                        label: {
+                                            formatter: '{b}: {c}명'
+                                        }
+                                    }
+                                ]
+                            };
+
+                            myChart.setOption(option);
 
                             attendanceSummaryContainer.style.display = 'block';
                             noDataMessage.style.display = 'none';
