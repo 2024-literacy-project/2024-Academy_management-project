@@ -7,5 +7,6 @@
         <mapper resource="mapper/PlannerMapper.xml"/>
         <mapper resource="mapper/MemberMapper.xml"/>
         <mapper resource="mapper/ScheduleMapper.xml"/>
+        <mapper resource="mapper/ClassMapper.xml"/>
     </mappers>
 </configuration>
