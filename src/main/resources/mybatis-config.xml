@@ -4,6 +4,9 @@
 <configuration>
     <mappers>
         <mapper resource="mapper/TestMapper.xml"/>
+        <mapper resource="mapper/MemberMapper.xml"/>
         <mapper resource="mapper/ClassListMapper.xml"/>
+        <mapper resource="mapper/EmployeeListMapper.xml"/>
+        <mapper resource="mapper/StudentListMapper.xml"/>
     </mappers>
 </configuration>
