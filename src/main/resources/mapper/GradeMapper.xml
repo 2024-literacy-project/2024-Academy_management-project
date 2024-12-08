@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lastdance.project.class_support.model.dao.GradeDAO">
+
+    <!-- 클래스와 날짜를 기준으로 성적 조회 -->
+    <select id="getGradesByClass" resultType="com.lastdance.project.class_support.model.dto.GradeDTO">
+        SELECT
+            t.test_no AS testNo,
+            t.test_name AS testName,
+            t.test_date AS testDate,
+            t.test_info AS testInfo,
+            t.test_result AS score,
+            m.name AS studentName,
+            sc.class_no AS classNo
+        FROM
+            student_test st
+                JOIN test t ON st.test_no = t.test_no
+                JOIN member m ON st.member_no = m.member_no
+                JOIN student_class sc ON m.member_no = sc.member_no
+        WHERE
+            sc.class_no = #{class_no}
+          AND t.test_date = #{test_date}
+    </select>
+
+    <!-- 클래스별 성적 등록 -->
+    <insert id="addClassTest">
+        INSERT INTO class_test (class_no, test_no, member_no)
+        VALUES (#{classNo}, #{testNo}, #{memberNo});
+    </insert>
+    <!-- 학생별 성적 등록 -->
+    <insert id="addStudentTest">
+        INSERT INTO student_test (test_no, member_no)
+        VALUES (#{testNo}, #{memberNo});
+    </insert>
+
+    <insert id="insertGrade" parameterType="com.lastdance.project.class_support.model.dto.GradeDTO" useGeneratedKeys="true" keyProperty="testNo">
+        INSERT INTO test (test_name, test_date, test_info, test_result)
+        VALUES (#{testName}, #{testDate}, #{testInfo}, #{score});
+    </insert>
+
+
+
+    <!-- 성적 수정 -->
+    <update id="updateGrade">
+        UPDATE test
+        SET test_result = #{score}
+        WHERE test_no = #{testNo};
+    </update>
+
+    <!-- 성적 삭제 -->
+    <delete id="deleteGrade">
+        DELETE FROM student_test
+        WHERE test_no = #{testNo} AND member_no = #{memberNo};
+    </delete>
+
+
+    <delete id="deleteTest">
+        DELETE FROM test
+        WHERE test_no = #{testNo};
+    </delete>
+
+    <!-- 클래스 시험 삭제 -->
+    <delete id="deleteClassTest">
+        DELETE FROM class_test
+        WHERE class_no = #{classNo} AND test_no = #{testNo};
+    </delete>
+</mapper>

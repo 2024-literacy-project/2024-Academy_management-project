@@ -19,4 +19,7 @@ public class ClassService {
     public List<ClassDTO> getAllClasses(){
         return classDAO.getAllClasses();
     };
+    public int getTeacherMemberNoByClassNo(int classNo) {
+        return classDAO.getTeacherMemberNoByClassNo(classNo);
+    }
 }

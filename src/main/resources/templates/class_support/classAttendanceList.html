@@ -51,6 +51,7 @@
 </header><!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
+
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -149,15 +150,30 @@
                 </li>
 
                 <li>
-                    <a href="../forms-layouts.html">
-                        <i class="bi bi-circle"></i><span>성적등록</span>
+                    <a class="nav-link collapsed" data-bs-target="#grade-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-circle"></i><span>성적관리</span><i class="bi bi-chevron-down ms-auto"></i>
                     </a>
+                    <ul id="grade-nav" class="nav-content collapse background-color: #fff;" data-bs-parent="#forms-nav">
+                        <li>
+                            <a href="/class_support/gradeRegistration">
+                                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">성적 등록</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/class_support/gradeSearch">
+                                <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">성적 관리</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+
                 </li>
-                <li>
-                    <a href="../forms-editors.html">
-                        <i class="bi bi-circle"></i><span>과제등록</span>
-                    </a>
-                </li>
+<!--                <li>-->
+<!--                    <a href="../forms-editors.html">-->
+<!--                        <i class="bi bi-circle"></i><span>과제등록</span>-->
+<!--                    </a>-->
+<!--                </li>-->
                 <li>
                     <a href="../forms-validation.html">
                         <i class="bi bi-circle"></i><span>플래너</span>
@@ -200,6 +216,7 @@
         </li><!-- End 학생상세페이지 Nav -->
     </ul>
 </aside><!-- End Sidebar-->
+
 
 <main id="main" class="main">
 <div class="pagetitle">

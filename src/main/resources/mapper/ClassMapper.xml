@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lastdance.project.class_support.model.dao.ClassDAO">
+
+    <!-- 모든 클래스 정보 조회 -->
+    <select id="getAllClasses" resultType="com.lastdance.project.class_support.model.dto.ClassDTO">
+        SELECT * FROM class
+    </select>
+
+    <!-- class_no 기준 클래스 정보 조회 -->
+    <select id="getClassByClassNo" parameterType="int" resultType="com.lastdance.project.class_support.model.dto.ClassDTO">
+        SELECT * FROM class WHERE class_no = #{class_no}
+    </select>
+
+
+
+    <!-- 추가: 클래스번호로 담당 직원 member_no 조회 -->
+    <select id="getTeacherMemberNoByClassNo" parameterType="int" resultType="int">
+        SELECT member_no
+        FROM class
+        WHERE class_no = #{classNo}
+            LIMIT 1
+    </select>
+
+</mapper>

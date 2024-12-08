@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+<<head>
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>일자별 출결 현황 표시</title>
+    <title>Dashboard - NiceAdmin Bootstrap Template</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -29,13 +28,6 @@
     <!-- Template Main CSS File -->
     <link href="/css/style.css" rel="stylesheet">
 
-    <!-- jQuery Library -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/echarts/dist/echarts.min.js"></script>
-
-</head>
-
 <body>
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
@@ -45,6 +37,7 @@
             <img src="/assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">LastDance</span>
         </a>
+        <!--      <i class="bi bi-list toggle-sidebar-btn"></i>-->
     </div><!-- End Logo -->
 
     <nav class="header-nav ms-auto">
@@ -52,8 +45,6 @@
     </nav><!-- End Icons Navigation -->
 
 </header><!-- End Header -->
-
-
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
@@ -170,7 +161,6 @@
 
                     </ul>
 
-
                 </li>
 <!--                <li>-->
 <!--                    <a href="../forms-editors.html">-->
@@ -220,159 +210,157 @@
     </ul>
 </aside><!-- End Sidebar-->
 
+
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>일자별 출결 현황 표시</h1>
+        <h1>성적 등록</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="../templates/index.html">Home</a></li>
                 <li class="breadcrumb-item">수업 관리</li>
-                <li class="breadcrumb-item active">일자별 출결 현황 표시</li>
+                <li class="breadcrumb-item active">성적등록</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
 
-    <div class="container mt-5">
-        <div class="form-group">
-            <label for="dateSelect">날짜를 선택하세요:</label>
-            <input type="date" id="dateSelect" name="dateSelect" class="form-control" required>
-        </div>
-        <div class="form-group mt-4">
-            <label for="classSelect">클래스를 선택하세요:</label>
-            <select id="classSelect" name="class_no" class="form-control" required>
-                <option value="" disabled selected>클래스를 선택하세요...</option>
-                <option th:each="class : ${classList}" th:value="${class.class_no}" th:text="${class.class_name}"></option>
-            </select>
-        </div>
-
-
-        <button id="viewAttendanceSummary" type="button" class="btn btn-primary mt-4">출석 현황 조회</button>
-
-        <!-- 로딩 메시지 -->
-        <div id="loadingMessage" style="display: none; color: blue;" class="mt-3">
-            데이터를 가져오는 중입니다. 잠시만 기다려주세요...
-        </div>
-        <div id="noDataMessage" style="display: none; color: red;" class="mt-3">
-            조회된 내용이 없습니다.
-        </div>
-
-        <!-- 출석 현황 결과 -->
-        <div id="attendanceSummaryContainer" class="mt-4" style="display: none;">
-<!--            <h4>출석 현황 (날짜: <span id="selectedDate"></span>)</h4>-->
-
-<!--            <p>총원: <span id="totalCount"></span>명</p>-->
-<!--            <p>출석: <span id="presentCount"></span>명</p>-->
-<!--            <p>지각: <span id="lateCount"></span>명</p> &lt;!&ndash; 지각자 추가 &ndash;&gt;-->
-<!--            <p>조퇴: <span id="earlyLeaveCount"></span>명</p>-->
-<!--            <p>결석: <span id="absentCount"></span>명</p>-->
-            <!-- 파이 차트 컨테이너 -->
-            <div id="attendancePieChart" style="min-height: 400px;" class="echart mt-4"></div>
-
-        </div>
+    <!-- 1. 클래스 선택 -->
+    <div class="mb-4">
+        <label for="classSelect" class="form-label">클래스 선택</label>
+        <select id="classSelect" class="form-select" required>
+            <option value="" disabled selected>클래스를 선택하세요</option>
+            <option th:each="class : ${classList}" th:value="${class.class_no}" th:text="${class.class_name}"></option>
+        </select>
     </div>
+
+    <!-- 2. 학생 선택 -->
+    <div class="mb-4" id="studentSelectContainer" style="display: none;">
+        <label for="studentSelect" class="form-label">학생 선택</label>
+        <select id="studentSelect" class="form-select" required>
+            <option value="" disabled selected>학생을 선택하세요</option>
+        </select>
+    </div>
+
+    <!-- 2. 시험 날짜 선택 -->
+    <div class="mb-4">
+        <label for="testDate" class="form-label">시험 날짜</label>
+        <input type="date" id="testDate" class="form-control" required>
+    </div>
+
+    <!-- 시험 이름 -->
+    <div class="mb-4">
+        <label for="testName" class="form-label">시험 이름</label>
+        <input type="text" id="testName" class="form-control" placeholder="시험 이름을 입력하세요" required>
+    </div>
+
+    <!-- 3. 시험 정보 입력 -->
+    <div class="mb-4">
+        <label for="testInfo" class="form-label">시험 정보</label>
+        <input type="text" id="testInfo" class="form-control" placeholder="시험 정보를 입력하세요" required>
+    </div>
+
+    <!-- 4. 시험 점수 입력 -->
+    <div class="mb-4">
+        <label for="testScore" class="form-label">시험 점수</label>
+        <input type="number" id="testScore" class="form-control" placeholder="점수를 입력하세요" min="0" max="100" step="0.01" required>
+    </div>
+
+    <!-- 5. 등록 버튼 -->
+    <div class="text-center">
+        <button id="registerGrade" class="btn btn-primary">등록</button>
+    </div>
+</div>
 </main>
 
-<!-- JavaScript -->
+<!-- Script -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const registerButton = document.getElementById('registerGrade');
+        const studentSelect = document.getElementById('studentSelect');
+        const studentSelectContainer = document.getElementById('studentSelectContainer');
         const classSelect = document.getElementById('classSelect');
-        const viewAttendanceButton = document.getElementById('viewAttendanceSummary');
-        const loadingMessage = document.getElementById('loadingMessage');
-        const attendanceSummaryContainer = document.getElementById('attendanceSummaryContainer');
-        const noDataMessage = document.getElementById('noDataMessage');
-        const dateSelect = document.getElementById('dateSelect');
 
-        viewAttendanceButton.addEventListener('click', function () {
-            const date = dateSelect.value;
-            const classNo = classSelect.value;
 
-            if (date && classNo) {
-                loadingMessage.style.display = 'block';
-                attendanceSummaryContainer.style.display = 'none';
-                noDataMessage.style.display = 'none';
+        classSelect.addEventListener('change', function () {
+            const classNo = this.value;
 
-                fetch(`/class_support/attendanceSummaryData?class_no=${classNo}&date=${date}`)
+            if (classNo) {
+                fetch(`/class_support/studentsByClass?class_no=${classNo}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // 학생 드롭다운 초기화
+                        studentSelect.innerHTML = '<option value="" disabled selected>학생을 선택하세요</option>';
+                        // 학생 목록 추가
+                        data.forEach(student => {
+                            const option = document.createElement('option');
+                            option.value = student.member_no;
+                            option.textContent = student.name;
+                            studentSelect.appendChild(option);
+                        });
+                        studentSelectContainer.style.display = 'block'; // 학생 선택 창 표시
+                    })
+                    .catch(error => {
+                        console.error('Error fetching students:', error);
+                        alert('학생 목록을 불러오는 중 오류가 발생했습니다.');
+                    });
+            } else {
+                studentSelectContainer.style.display = 'none';
+            }
+        });
+
+        //성적등록
+        registerButton.addEventListener('click', function () {
+            const classNo = document.getElementById('classSelect').value;
+            const testDate = document.getElementById('testDate').value;
+            const testName = document.getElementById('testName').value;
+            const testInfo = document.getElementById('testInfo').value;
+            const testScore = document.getElementById('testScore').value;
+            const memberNo = document.getElementById('studentSelect').value;
+
+            if (classNo && memberNo && testDate && testInfo && testScore) {
+                const gradeData = {
+                    classNo: classNo,
+                    memberNo : memberNo,
+                    testDate: testDate,
+                    testName: testName,
+                    testInfo: testInfo,
+                    score: testScore
+                };
+
+                fetch('/class_support/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(gradeData)
+                })
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! status: ${response.status}`);
                         }
-                        return response.json();
+                        return response.text();
                     })
-                    .then(data => {
-                        console.log("Received Data:", data); // 응답 데이터 출력
-
-                        if (data.attendanceList && data.attendanceList.length > 0) {
-
-                            // 파이 차트 데이터 생성
-                            const attendanceData = [
-                                { value: data.presentCount, name: '출석' },
-                                { value: data.lateCount, name: '지각' },
-                                { value: data.earlyLeaveCount, name: '조퇴' },
-                                { value: data.absentCount, name: '결석' }
-                            ];
-
-                            // 파이 차트 초기화 및 렌더링
-                            const chartDom = document.querySelector("#attendancePieChart");
-                            const myChart = echarts.init(chartDom);
-
-                            const option = {
-                                title: {
-                                    text: '출석 현황',
-                                    subtext: `날짜: ${date}`,
-                                    left: 'center'
-                                },
-                                tooltip: {
-                                    trigger: 'item',
-                                    formatter: '{b}: {c}명 ({d}%)'
-                                },
-                                legend: {
-                                    orient: 'vertical',
-                                    left: 'left'
-                                },
-                                series: [
-                                    {
-                                        name: '출석 데이터',
-                                        type: 'pie',
-                                        radius: '50%',
-                                        data: attendanceData,
-                                        emphasis: {
-                                            itemStyle: {
-                                                shadowBlur: 10,
-                                                shadowOffsetX: 0,
-                                                shadowColor: 'rgba(0, 0, 0, 0.5)'
-                                            }
-                                        },
-                                        label: {
-                                            formatter: '{b}: {c}명'
-                                        }
-                                    }
-                                ]
-                            };
-
-                            myChart.setOption(option);
-
-                            attendanceSummaryContainer.style.display = 'block';
-                            noDataMessage.style.display = 'none';
-                        } else {
-                            attendanceSummaryContainer.style.display = 'none';
-                            noDataMessage.style.display = 'block';
-                        }
+                    .then(message => {
+                        alert(message);
+                        // 폼 초기화 (선택적)
+                        document.getElementById('classSelect').value = "";
+                        document.getElementById('studentSelect').innerHTML = '<option value="" disabled selected>학생을 선택하세요</option>';
+                        document.getElementById('studentSelectContainer').style.display = 'none';  // 학생 선택 창 숨기기
+                        document.getElementById('testDate').value = "";
+                        document.getElementById('testName').value = "";
+                        document.getElementById('testInfo').value = "";
+                        document.getElementById('testScore').value = "";
                     })
                     .catch(error => {
-                        console.error('Error fetching attendance data:', error);
-                        alert('데이터 가져오는 중 오류가 발생했습니다.');
-                    })
-                    .finally(() => {
-                        loadingMessage.style.display = 'none';
+                        console.error('Error registering grade:', error);
+                        alert('성적 등록 중 오류가 발생했습니다. 다시 시도해주세요.');
                     });
-
             } else {
-                alert('날짜와 클래스를 모두 선택해주세요.');
+                alert('모든 필드를 올바르게 입력해주세요.');
             }
         });
     });
 </script>
-!-- ======= Footer ======= -->
+
 <footer id="footer" class="footer">
     <div class="copyright">
         &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
@@ -400,3 +388,4 @@
 </body>
 
 </html>
+

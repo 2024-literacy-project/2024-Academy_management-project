@@ -6,5 +6,7 @@
         <mapper resource="mapper/TestMapper.xml"/>
         <mapper resource="mapper/StudentAttendanceMapper.xml"/>
         <mapper resource="mapper/StudentClassMapper.xml"/>
+        <mapper resource="mapper/GradeMapper.xml"/>
+        <mapper resource="mapper/ClassMapper.xml"/>
     </mappers>
 </configuration>
