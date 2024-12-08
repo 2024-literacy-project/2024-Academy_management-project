@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lastdance.project.studentList.model.dao.StudentListDAO">
+
+    <!-- 학생 목록 조회 -->
+    <select id="getAllStudents" resultType="com.lastdance.project.studentList.model.dto.StudentListDTO">
+        SELECT
+            s.member_no,
+            s.school,
+            s.grade,
+            s.parent_contact,
+            m.name,     -- 이름
+            m.id,
+            m.password,
+            m.role_type,
+            m.birth_date,
+            m.phone,
+            m.address,
+            m.enroll_date
+        FROM student s
+        JOIN member m ON s.member_no = m.member_no
+    </select>
+
+    <!-- 학생 추가 -->
+
+    <!-- 학생 상세보기 -->
+    <select id="getStudentByNo" parameterType="int" resultType="com.lastdance.project.studentList.model.dto.StudentListDTO">
+        SELECT
+            s.member_no,
+            s.school,
+            s.grade,
+            s.parent_contact,
+            m.name,     -- 이름
+            m.id,
+            m.password,
+            m.role_type,
+            m.birth_date,
+            m.phone,
+            m.address,
+            m.enroll_date
+        FROM student s
+        JOIN member m ON s.member_no = m.member_no
+        WHERE m.member_no = #{member_no}
+    </select>
+
+    <!-- 학생 수정 -->
+    <update id="updateStudent" parameterType="com.lastdance.project.studentList.model.dto.StudentListDTO">
+        UPDATE student s
+        JOIN member m ON s.member_no = m.member_no
+        SET m.name = #{name},
+            m.id = #{id},
+            m.password = #{password},
+            m.role_type = #{role_type},
+            m.birth_date = #{birth_date},
+            m.phone = #{phone},
+            m.address = #{address},
+            m.enroll_date = #{enroll_date},
+            s.school = #{school},               -- student
+            s.grade = #{grade},
+            s.parent_contact = #{parent_contact}
+        WHERE s.member_no = #{member_no}
+    </update>
+
+    <!-- 학생 삭제 -->
+    <delete id="deleteStudent" parameterType="int">
+        DELETE FROM student WHERE member_no = #{member_no}
+    </delete>
+
+
+</mapper>
