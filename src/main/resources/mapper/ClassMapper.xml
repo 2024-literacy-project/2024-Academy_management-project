@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lastdance.project.ClassSupport.model.ClassDAO">
+
+    <!-- 클래스 목록 -->
+    <select id="getClassList" parameterType="String" resultType="com.lastdance.project.ClassSupport.model.ClassDTO">
+        SELECT
+            class.class_no,
+            class.class_name,
+            class.class_schedule,
+            member.name,
+            member.member_no
+         FROM
+            class
+         JOIN
+              member
+              ON class.member_no = member.member_no
+         WHERE
+            member.id = #{id};
+    </select>
+
+    <!--    클래스별 학생 목록 -->
+    <select id="getStudentList" parameterType="int" resultType="com.lastdance.project.ClassSupport.model.ClassDTO">
+        SELECT
+            sc.member_no,
+            m.name,
+            m.id
+        FROM
+            student_class sc
+        JOIN
+            member m ON sc.member_no = m.member_no
+        WHERE
+            sc.class_no = #{class_no};
+    </select>
+</mapper>
