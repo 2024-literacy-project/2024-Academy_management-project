@@ -8,15 +8,17 @@ public class GradeDTO {
     private int memberNo; // 학생 번호
     private String studentName; // 학생 이름
     private String testInfo; // 시험 정보
-    private double score; // 성적
+    private int score; // 성적
     private Date testDate; // 시험 날짜 (YYYY-MM-DD)
     private String testName;
 
     // 기본 생성자
-    public GradeDTO() {}
+    public GradeDTO() {
+
+    }
 
     // 모든 필드 포함 생성자
-    public GradeDTO(int testNo, int classNo, int memberNo, String studentName, String testInfo, double score, Date testDate, String testName) {
+    public GradeDTO(int testNo, int classNo, int memberNo, String studentName, String testInfo, int score, Date testDate, String testName) {
         this.testNo = testNo;
         this.classNo = classNo;
         this.memberNo = memberNo;
@@ -78,11 +80,11 @@ public class GradeDTO {
         this.testInfo = testInfo;
     }
 
-    public double getScore() {
+    public int getScore() {
         return score;
     }
 
-    public void setScore(double score) {
+    public void setScore(int score) {
         this.score = score;
     }
 

@@ -12,6 +12,9 @@
     <link href="/assets/img/favicon.png" rel="icon">
     <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
 
     <!-- Vendor CSS Files -->
     <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -27,24 +30,18 @@
 </head>
 
 <body>
-<!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-
     <div class="d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
             <img src="/assets/img/logo.png" alt="">
             <span class="d-none d-lg-block">LastDance</span>
         </a>
-        <!--      <i class="bi bi-list toggle-sidebar-btn"></i>-->
     </div><!-- End Logo -->
-
     <nav class="header-nav ms-auto">
         <button type="button" class="btn btn-outline-dark" href="#">로그아웃</button>
     </nav><!-- End Icons Navigation -->
-
 </header><!-- End Header -->
 
-<!-- ======= Sidebar ======= -->
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
@@ -215,147 +212,182 @@
     </ul>
 </aside><!-- End Sidebar-->
 
-
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>성적 관리</h1>
+        <h1>클래스 성적 수정 및 추가</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="../templates/index.html">Home</a></li>
                 <li class="breadcrumb-item">수업 관리</li>
-                <li class="breadcrumb-item active">성적 관리</li>
+                <li class="breadcrumb-item active">클래스 성적 수정 및 추가</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
 
-    <!-- 1. 새로운 시험과 성적 등록 폼 -->
     <section class="mb-5">
-        <h2>새로운 시험과 성적 등록</h2>
-        <form id="registerGradeForm">
+        <h2>기존 시험에 점수 추가</h2>
+        <form id="addScoreForm">
             <!-- 클래스 선택 -->
             <div class="mb-4">
-                <label for="classSelect" class="form-label">클래스 선택</label>
-                <select id="classSelect" class="form-select" required>
+                <label for="existingClassSelect" class="form-label">클래스 선택</label>
+                <select id="existingClassSelect" class="form-select" required>
                     <option value="" disabled selected>클래스를 선택하세요</option>
                     <option th:each="cls : ${classList}" th:value="${cls.class_no}" th:text="${cls.class_name}"></option>
                 </select>
             </div>
 
-            <!-- 학생 선택 -->
-            <div class="mb-4" id="studentSelectContainer" style="display: none;">
-                <label for="studentSelect" class="form-label">학생 선택</label>
-                <select id="studentSelect" class="form-select" required>
-                    <option value="" disabled selected>학생을 선택하세요</option>
+            <div class="mb-4" id="existingTestSelectContainer" style="display: none;">
+                <label for="existingTestSelect" class="form-label">시험 선택</label>
+                <select id="existingTestSelect" class="form-select" required>
+                    <option value="" disabled selected>시험을 선택하세요</option>
                 </select>
             </div>
 
-            <!-- 시험 이름 입력 -->
-            <div class="mb-4">
-                <label for="testName" class="form-label">시험 이름</label>
-                <input type="text" id="testName" class="form-control" placeholder="시험 이름을 입력하세요" required>
+            <!-- 학생 점수 입력 테이블 -->
+            <div class="mb-4" id="studentScoreContainer" style="display: none;">
+                <h4>학생 점수 입력</h4>
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th>학생 이름</th>
+                        <th>점수</th>
+                    </tr>
+                    </thead>
+                    <tbody id="studentScoreBody">
+                    </tbody>
+                </table>
             </div>
 
-            <!-- 시험 정보 입력 -->
-            <div class="mb-4">
-                <label for="testInfo" class="form-label">시험 정보</label>
-                <input type="text" id="testInfo" class="form-control" placeholder="시험 정보를 입력하세요" required>
-            </div>
-
-            <!-- 시험 날짜 입력 -->
-            <div class="mb-4">
-                <label for="testDate" class="form-label">시험 날짜</label>
-                <input type="date" id="testDate" class="form-control" required>
-            </div>
-
-            <!-- 시험 점수 입력 -->
-            <div class="mb-4">
-                <label for="testScore" class="form-label">시험 점수</label>
-                <input type="number" id="testScore" class="form-control" placeholder="점수를 입력하세요" min="0" max="100" step="1" required>
-            </div>
-
-            <!-- 등록 버튼 -->
             <div class="text-center">
-                <button type="submit" class="btn btn-primary">등록</button>
+                <button type="submit" class="btn btn-primary">점수 추가/수정</button>
             </div>
         </form>
     </section>
 
     <hr>
-
-
 </main>
 
-<!-- Script -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // 새로운 시험과 성적 등록 폼 요소
-        const registerGradeForm = document.getElementById('registerGradeForm');
-        const classSelect = document.getElementById('classSelect');
-        const studentSelect = document.getElementById('studentSelect');
-        const studentSelectContainer = document.getElementById('studentSelectContainer');
+        const addScoreForm = document.getElementById('addScoreForm');
+        const existingClassSelect = document.getElementById('existingClassSelect');
+        const existingTestSelect = document.getElementById('existingTestSelect');
+        const existingTestSelectContainer = document.getElementById('existingTestSelectContainer');
 
+        const studentScoreContainer = document.getElementById('studentScoreContainer');
+        const studentScoreBody = document.getElementById('studentScoreBody');
 
-        // 클래스 선택 시 학생 목록 로드 (새로운 시험 등록 폼)
-        classSelect.addEventListener('change', function () {
+        let selectedClassNo = null;
+        let selectedTestNo = null;
+
+        // 클래스 선택 시 시험 목록 로드
+        existingClassSelect.addEventListener('change', function () {
             const classNo = this.value;
+            selectedClassNo = classNo;
 
             if (classNo) {
-                fetch(`/class_support/studentsByClass?class_no=${classNo}`)
+                fetch(`/class_support/testsByClass?class_no=${classNo}`)
                     .then(response => response.json())
                     .then(data => {
-                        // 학생 드롭다운 초기화
-                        studentSelect.innerHTML = '<option value="" disabled selected>학생을 선택하세요</option>';
-                        // 학생 목록 추가
-                        data.forEach(student => {
-                            const option = document.createElement('option');
-                            option.value = student.member_no; // member_no
-                            option.textContent = student.name; // student_name
-                            studentSelect.appendChild(option);
-                        });
-                        studentSelectContainer.style.display = 'block'; // 학생 선택 창 표시
+                        existingTestSelect.innerHTML = '<option value="" disabled selected>시험을 선택하세요</option>';
+                        if (data.length > 0) {
+                            data.forEach(test => {
+                                const option = document.createElement('option');
+                                option.value = test.testNo;
+                                const testDate = new Date(test.testDate);
+                                const formattedDate = testDate.toISOString().split('T')[0];
+                                option.textContent = `${test.testName} (${formattedDate})`;
+                                existingTestSelect.appendChild(option);
+                            });
+                            existingTestSelectContainer.style.display = 'block';
+                        } else {
+                            existingTestSelectContainer.style.display = 'none';
+                        }
+                        studentScoreContainer.style.display = 'none';
+                    })
+                    .catch(error => {
+                        console.error('Error fetching tests:', error);
+                        alert('시험 목록을 불러오는 중 오류가 발생했습니다.');
+                    });
+            } else {
+                existingTestSelectContainer.style.display = 'none';
+                studentScoreContainer.style.display = 'none';
+            }
+        });
+
+        // 시험 선택 시 해당 클래스의 모든 학생과 시험 점수 정보 로드
+        existingTestSelect.addEventListener('change', function () {
+            const testNo = this.value;
+            selectedTestNo = testNo;
+
+            if (testNo && selectedClassNo) {
+                // 클래스와 시험에 따른 모든 학생 조회
+                fetch(`/class_support/studentsByClassAndTest?class_no=${selectedClassNo}&test_no=${testNo}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        studentScoreBody.innerHTML = '';
+                        if (Array.isArray(data) && data.length > 0) {
+                            data.forEach(student => {
+                                const row = document.createElement('tr');
+                                // score가 null이면 입력 필요, 아니면 해당 값 표시
+                                const scoreValue = (student.score === null || student.score === undefined) ? '' : student.score;
+                                row.innerHTML = `
+                                    <td>${student.name}</td>
+                                    <td>
+                                        <input type="hidden" name="member_no" value="${student.member_no}">
+                                        <input type="number" name="score" class="form-control" min="0" max="100" step="1" value="${scoreValue}">
+                                    </td>
+                                `;
+                                studentScoreBody.appendChild(row);
+                            });
+                            studentScoreContainer.style.display = 'block';
+                        } else {
+                            studentScoreContainer.style.display = 'none';
+                            alert('해당 클래스에 학생이 없거나 로딩 중 오류가 발생했습니다.');
+                        }
                     })
                     .catch(error => {
                         console.error('Error fetching students:', error);
                         alert('학생 목록을 불러오는 중 오류가 발생했습니다.');
                     });
             } else {
-                studentSelectContainer.style.display = 'none';
+                studentScoreContainer.style.display = 'none';
             }
         });
 
+        // 폼 제출 시 모든 학생의 점수 추가/수정
+        addScoreForm.addEventListener('submit', function (e) {
+            e.preventDefault();
 
+            if (selectedClassNo && selectedTestNo) {
+                const rows = studentScoreBody.querySelectorAll('tr');
+                const scoreDataList = [];
 
+                rows.forEach(row => {
+                    const memberNo = parseInt(row.querySelector('input[name="member_no"]').value, 10);
+                    const scoreInput = row.querySelector('input[name="score"]');
+                    let scoreVal = scoreInput.value;
+                    scoreVal = scoreVal === '' ? null : parseInt(scoreVal, 10);
 
-        // 새로운 시험과 성적 등록 폼 제출 처리
-        registerGradeForm.addEventListener('submit', function (e) {
-            e.preventDefault(); // 폼 기본 제출 방지
+                    if (!isNaN(memberNo)) {
+                        scoreDataList.push({
+                            testNo: parseInt(selectedTestNo),
+                            memberNo: memberNo,
+                            score: scoreVal
+                        });
+                    }
+                });
 
-            const classNo = classSelect.value;
-            const testName = document.getElementById('testName').value.trim();
-            const testInfo = document.getElementById('testInfo').value.trim();
-            const testDate = document.getElementById('testDate').value;
-            const testScore = document.getElementById('testScore').value;
-            const memberNo = studentSelect.value;
-
-            // 필수 필드 확인
-            if (classNo && memberNo && testName && testInfo && testDate && testScore) {
-                const gradeData = {
-                    classNo: parseInt(classNo),
-                    memberNo: parseInt(memberNo),
-                    testName: testName,
-                    testInfo: testInfo,
-                    testDate: testDate,
-                    score: parseInt(testScore)
-                };
-
-                console.log('Sending gradeData:', gradeData); // 데이터 확인
-
-                fetch('/class_support/register', {
+                // 모든 점수 데이터를 서버로 전송 (배치 엔드포인트 사용)
+                fetch('/class_support/addScores', { // 수정된 부분: '/addScores'로 변경
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(gradeData)
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(scoreDataList)
                 })
                     .then(response => {
                         if (!response.ok) {
@@ -365,20 +397,19 @@
                     })
                     .then(message => {
                         alert(message);
-                        // 폼 초기화
-                        registerGradeForm.reset();
-                        studentSelectContainer.style.display = 'none';
+                        addScoreForm.reset();
+                        existingTestSelectContainer.style.display = 'none';
+                        studentScoreContainer.style.display = 'none';
                     })
                     .catch(error => {
-                        console.error('Error registering grade:', error);
-                        alert('성적 등록 중 오류가 발생했습니다. 다시 시도해주세요.');
+                        console.error('Error adding scores:', error);
+                        alert('점수 추가/수정 중 오류가 발생했습니다. 다시 시도해주세요.');
                     });
+
             } else {
-                alert('모든 필드를 올바르게 입력해주세요.');
+                alert('클래스와 시험을 선택해주세요.');
             }
         });
-
-
     });
 </script>
 
@@ -389,9 +420,11 @@
     <div class="credits">
         Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
     </div>
-</footer><!-- End Footer -->
+</footer>
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+</a>
 
 <!-- Vendor JS Files -->
 <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
@@ -402,10 +435,6 @@
 <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
 <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
 <script src="/assets/vendor/php-email-form/validate.js"></script>
-
-<!-- Template Main JS File -->
 <script src="/assets/js/main.js"></script>
-
 </body>
-
 </html>

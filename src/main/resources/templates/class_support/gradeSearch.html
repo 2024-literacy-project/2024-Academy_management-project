@@ -1,10 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>성적 검색</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="container mt-5">
+    <h1 class="text-center mb-4">성적 검색</h1>
 
+    <!-- 클래스 선택 -->
+    <div class="mb-4">
+        <label for="classSelect" class="form-label">클래스 선택</label>
+        <select id="classSelect" class="form-select" required>
+            <option value="" disabled selected>클래스를 선택하세요</option>
+            <option th:each="class : ${classList}" th:value="${class.class_no}" th:text="${class.class_name}"></option>
+        </select>
+    </div>
+
+    <!-- 시험 날짜 선택 -->
+    <div class="mb-4">
+        <label for="testDate" class="form-label">시험 날짜</label>
+        <input type="date" id="testDate" class="form-control" required>
+    </div>
+
+    <!-- 시험 정보 선택 -->
+    <div class="mb-4">
+        <label for="testInfo" class="form-label">시험 정보</label>
+        <select id="testInfo" class="form-select" required>
+            <option value="" disabled selected>시험 정보를 선택하세요</option>
+            <option th:each="test : ${testList}"
+                    th:value="${test.testNo}"
+                    th:text="${test.testName}"></option>
+        </select>
+    </div>
+
+    <!-- 검색 버튼 -->
+    <div class="text-center">
+        <button id="searchGrades" class="btn btn-primary">검색</button>
+    </div>
+
+    <!-- 검색 결과 표시 -->
+    <div id="resultsContainer" class="mt-5" style="display: none;">
+        <h2 class="text-center mb-4">학생 성적 리스트</h2>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>학생 이름</th>
+                <th>시험 정보</th>
+                <th>점수</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+            </thead>
+            <tbody id="resultsTableBody">
+            <!-- 검색 결과 데이터가 여기에 추가됩니다 -->
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchButton = document.getElementById('searchGrades');
+        const resultsContainer = document.getElementById('resultsContainer');
+        const resultsTableBody = document.getElementById('resultsTableBody');
+
+        searchButton.addEventListener('click', function () {
+            const classNo = document.getElementById('classSelect').value;
+            const testDate = document.getElementById('testDate').value;
+            const testNo  = document.getElementById('testInfo').value;
+
+            if (classNo && testDate && testNo) {
+                fetch(`/class_support/grades/search?class_no=${classNo}&test_date=${testDate}&test_no=${testNo}`)
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log('Response data:', data); // 응답 데이터 확인
+                        resultsTableBody.innerHTML = '';
+                        if (data.grades && data.grades.length > 0) {
+                            data.grades.forEach(grade => {
+                                const row = document.createElement('tr');
+                                row.innerHTML = `
+                                <td>` + grade.studentName + `</td>
+                                    <td>` + grade.testInfo + `</td>
+                                    <td>` + grade.score + `</td>
+                                    <td><button class="btn btn-warning btn-sm">수정</button></td>
+                                    <td><button class="btn btn-danger btn-sm">삭제</button></td>
+                                `;
+                                resultsTableBody.appendChild(row);
+                            });
+                            resultsContainer.style.display = 'block';
+                        } else {
+                            alert('검색된 성적이 없습니다.');
+                            resultsContainer.style.display = 'none';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching grades:', error);
+                        alert('성적 검색 중 오류가 발생했습니다. 다시 시도해주세요.');
+                    });
+            } else {
+                alert('모든 필드를 올바르게 입력해주세요.');
+            }
+        });
+    });
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -5,17 +5,27 @@ public class StudentDTO {
     private String school; // 소속 학교
     private int grade; // 학년
     private String parent_contact; // 보호자 연락처
-    private int member_no; // 관련인 번호
+    private int member_no;
+    private  int score;
 
     public StudentDTO() {
     }
 
-    public StudentDTO(String name, String school, int grade, String parent_contact, int member_no) {
+    public StudentDTO(String name, String school, int grade, String parent_contact, int member_no, int score) {
         this.name = name;
         this.school = school;
         this.grade = grade;
         this.parent_contact = parent_contact;
         this.member_no = member_no;
+        this.score = score;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
     public String getName() {
@@ -66,6 +76,7 @@ public class StudentDTO {
                 ", grade=" + grade +
                 ", parent_contact='" + parent_contact + '\'' +
                 ", member_no=" + member_no +
+                ", score=" + score +
                 '}';
     }
 }

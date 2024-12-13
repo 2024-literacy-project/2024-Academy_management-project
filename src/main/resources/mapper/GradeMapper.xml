@@ -3,14 +3,14 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lastdance.project.class_support.model.dao.GradeDAO">
 
-    <!-- 클래스와 날짜를 기준으로 성적 조회 -->
-    <select id="getGradesByClass" resultType="com.lastdance.project.class_support.model.dto.GradeDTO">
+    <!-- 클래스와 날짜, 시험 번호를 기준으로 성적 조회 -->
+    <select id="getGradesByClass" parameterType="map" resultType="com.lastdance.project.class_support.model.dto.GradeDTO">
         SELECT
             t.test_no AS testNo,
             t.test_name AS testName,
             t.test_date AS testDate,
             t.test_info AS testInfo,
-            t.test_result AS score,
+            st.score AS score,
             m.name AS studentName,
             sc.class_no AS classNo
         FROM
@@ -21,48 +21,109 @@
         WHERE
             sc.class_no = #{class_no}
           AND t.test_date = #{test_date}
+          AND t.test_no = #{test_no}
     </select>
 
-    <!-- 클래스별 성적 등록 -->
+    <!-- 클래스 시험 등록 -->
     <insert id="addClassTest">
         INSERT INTO class_test (class_no, test_no, member_no)
-        VALUES (#{classNo}, #{testNo}, #{memberNo});
-    </insert>
-    <!-- 학생별 성적 등록 -->
-    <insert id="addStudentTest">
-        INSERT INTO student_test (test_no, member_no)
-        VALUES (#{testNo}, #{memberNo});
+        VALUES (#{class_no}, #{test_no}, #{member_no});
     </insert>
 
-    <insert id="insertGrade" parameterType="com.lastdance.project.class_support.model.dto.GradeDTO" useGeneratedKeys="true" keyProperty="testNo">
-        INSERT INTO test (test_name, test_date, test_info, test_result)
-        VALUES (#{testName}, #{testDate}, #{testInfo}, #{score});
+    <!-- 수정된 insert 또는 update 메서드 -->
+    <insert id="addOrUpdateStudentTest">
+        INSERT INTO student_test (test_no, member_no, score)
+        VALUES (#{test_no}, #{member_no}, #{score})
+            ON DUPLICATE KEY UPDATE score = VALUES(score);
     </insert>
 
-
+    <!-- 시험 정보 삽입 -->
+    <insert id="insertTest" parameterType="com.lastdance.project.class_support.model.dto.TestDTO" useGeneratedKeys="true" keyProperty="testNo">
+        INSERT INTO test (test_name, test_date, test_info)
+        VALUES (#{testName}, #{testDate}, #{testInfo});
+    </insert>
 
     <!-- 성적 수정 -->
     <update id="updateGrade">
+        UPDATE student_test
+        SET score = #{score}
+        WHERE test_no = #{test_no} AND member_no = #{member_no};
+    </update>
+    <!-- 시험의 평균 점수 업데이트 -->
+    <update id="updateTestResult">
         UPDATE test
-        SET test_result = #{score}
+        SET test_result = (
+            SELECT AVG(score)
+            FROM student_test
+            WHERE test_no = #{testNo}
+        )
         WHERE test_no = #{testNo};
     </update>
+
 
     <!-- 성적 삭제 -->
     <delete id="deleteGrade">
         DELETE FROM student_test
-        WHERE test_no = #{testNo} AND member_no = #{memberNo};
+        WHERE test_no = #{test_no} AND member_no = #{member_no};
     </delete>
 
+    <!-- 모든 시험 정보 조회 -->
+    <select id="getAllTests" resultType="com.lastdance.project.class_support.model.dto.TestDTO">
+        SELECT
+            test_no AS testNo,
+            test_name AS testName,
+            test_date AS testDate,
+            test_info AS testInfo,
+            test_result AS testResult
+        FROM test
+    </select>
 
-    <delete id="deleteTest">
-        DELETE FROM test
-        WHERE test_no = #{testNo};
-    </delete>
+    <!-- 클래스별 시험 목록 조회 (조인 사용) -->
+    <select id="getTestsByClass" parameterType="int" resultType="com.lastdance.project.class_support.model.dto.TestDTO">
+        SELECT
+            t.test_no AS testNo,
+            t.test_name AS testName,
+            t.test_date AS testDate,
+            t.test_info AS testInfo,
+            t.test_result AS testResult
+        FROM test t
+                 JOIN class_test ct ON t.test_no = ct.test_no
+        WHERE ct.class_no = #{class_no}
+    </select>
 
-    <!-- 클래스 시험 삭제 -->
-    <delete id="deleteClassTest">
-        DELETE FROM class_test
-        WHERE class_no = #{classNo} AND test_no = #{testNo};
-    </delete>
+    <!-- 시험별 학생 목록 조회 -->
+    <select id="getStudentsByTest" parameterType="int" resultType="com.lastdance.project.class_support.model.dto.StudentDTO">
+        SELECT
+            s.member_no AS member_no,
+            m.name AS name
+        FROM student_test st
+                 JOIN student s ON st.member_no = s.member_no
+                 JOIN member m ON s.member_no = m.member_no
+        WHERE st.test_no = #{test_no}
+    </select>
+
+    <!-- 특정 클래스의 모든 학생과 해당 시험 점수를 LEFT JOIN으로 조회 -->
+    <select id="getStudentsByClassAndTest" parameterType="map" resultType="com.lastdance.project.class_support.model.dto.StudentDTO">
+        SELECT
+            m.member_no AS member_no,
+            m.name AS name,
+            st.score AS score
+        FROM student_class sc
+                 JOIN member m ON sc.member_no = m.member_no
+                 LEFT JOIN student_test st ON st.member_no = m.member_no AND st.test_no = #{test_no}
+        WHERE sc.class_no = #{class_no}
+    </select>
+
+    <insert id="addOrUpdateStudentTests" parameterType="java.util.List">
+        INSERT INTO student_test (test_no, member_no, score)
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            (#{item.testNo}, #{item.memberNo}, #{item.score})
+        </foreach>
+        ON DUPLICATE KEY UPDATE
+        score = VALUES(score)
+    </insert>
+
+
+
 </mapper>
