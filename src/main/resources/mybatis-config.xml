@@ -8,5 +8,6 @@
         <mapper resource="mapper/ClassListMapper.xml"/>
         <mapper resource="mapper/EmployeeListMapper.xml"/>
         <mapper resource="mapper/StudentListMapper.xml"/>
+        <mapper resource="mapper/SubjectMapper.xml"/>
     </mappers>
 </configuration>

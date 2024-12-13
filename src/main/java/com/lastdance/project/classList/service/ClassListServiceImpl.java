@@ -2,6 +2,7 @@ package com.lastdance.project.classList.service;
 
 import com.lastdance.project.classList.model.dao.ClassListDAO;
 import com.lastdance.project.classList.model.dto.ClassListDTO;
+import com.lastdance.project.studentList.model.dto.StudentListDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -45,6 +46,13 @@ public class ClassListServiceImpl implements ClassListService{
     @Override
     public void deleteClass(int class_no) {
         classListDAO.deleteClass(class_no);
+    }
+
+
+    /* 클래스-학생 조회 */
+    @Override
+    public List<StudentListDTO> getStudentsByClassNo(int classNo){
+        return classListDAO.getStudentsByClassNo(classNo);
     }
 
 }

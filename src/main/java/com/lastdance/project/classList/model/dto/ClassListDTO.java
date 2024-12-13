@@ -8,8 +8,8 @@ public class ClassListDTO {
     private int subject_no;
     private int member_no;
     //
-    private String subject_name;    //과목 이름
-    private String name;            //관련인 이름
+    private String subject_name;    //과목 이름 (table: subject)
+    private String name;            //관련인 이름 (table: member)
 
     public ClassListDTO() {
     }

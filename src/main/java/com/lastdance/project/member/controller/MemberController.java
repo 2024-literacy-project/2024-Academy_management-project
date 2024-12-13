@@ -1,7 +1,6 @@
 package com.lastdance.project.member.controller;
 
 import com.lastdance.project.member.model.dto.MemberDTO;
-import com.lastdance.project.member.service.MemberService;
 import com.lastdance.project.member.service.MemberServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -191,54 +191,90 @@
 <main id="main" class="main">
 
     <div class="pagetitle">
-        <h1>클래스</h1>
+        <h1>클래스 목록</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../templates/index.html">Home</a></li>
+                <li class="breadcrumb-item">학원관리</li>
+                <li class="breadcrumb-item active">클래스목록</li>
+            </ol>
+        </nav>
     </div><!-- End Page Title -->
 
     <!-- 클래스 추가 -->
-    <section>
-        <h3>클래스 추가</h3>
-        <form action="/classList/addClass" method="post">
-            <label for="class_name">클래스명</label>
-            <div>
-                <input type="text" id="class_name" name="class_name" required  style="width: 80%;">
-            </div>
-            <br>
+    <section class="section">
+        <div class="row">
+            <!--            <div class="col-lg-6">-->
 
-            <label for="class_schedule">수업 일정</label>
-            <div>
-                <input type="text" id="class_schedule" name="class_schedule" required  style="width: 80%;">
-            </div>
-            <br>
+            <!-- Start form div -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">클래스 추가</h5>
 
-            <label for="subject_no">과목번호</label>
-            <div>
-                <input type="number" id="subject_no" name="subject_no" required  style="width: 80%;">
-            </div>
-            <br>
+                    <form action="/classList/addClass" method="post">
+                        <div class="row mb-3">
+                            <label for="class_name" class="col-sm-2 col-form-label">클래스명 </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="class_name" name="class_name" required>
+                            </div>
+                        </div>
 
-            <label for="member_no">관련인번호</label>
-            <div>
-                <input type="number" id="member_no" name="member_no" required  style="width: 80%;">
-            </div>
-            <br>
+                        <div class="row mb-3">
+                            <label for="class_schedule" class="col-sm-2 col-form-label">수업 일정 </label>
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control" id="class_schedule" name="class_schedule" required>
+                            </div>
+                        </div>
 
-            <div style="margin-top: 20px;">
-                <!-- 추가 버튼 -->
-<!--                <button type="submit" style="padding: 10px 15px;border: 1px solid lightgray;background-color: navy;color: white;">-->
-<!--                    추가-->
-<!--                </button>-->
-                <button type="submit" class="btn btn-primary">추가</button>
+<!--                        <div class="row mb-3">-->
+<!--                            <label for="subject_no" class="col-sm-2 col-form-label">과목번호 </label>-->
+<!--                            <div class="col-sm-10">-->
+<!--                                <input type="number" class="form-control" id="subject_no" name="subject_no" required>-->
+<!--                            </div>-->
+<!--                        </div>-->
 
-                <!-- 취소 버튼 -->
-<!--                <button style="padding: 10px 15px;border: 1px solid lightgray;background-color: navy">-->
-<!--                    <a href="/classList" style="text-decoration: none; color: white;">취소</a>-->
-<!--                </button>-->
-                <button type="button" class="btn btn-primary">
-                    <a href="/classList" style="text-decoration: none; color: white;">취소</a>
-                </button>
-            </div>
+<!--                        <div class="row mb-3">-->
+<!--                            <label for="member_no" class="col-sm-2 col-form-label">관련인번호 </label>-->
+<!--                            <div class="col-sm-10">-->
+<!--                                <input type="number" class="form-control" id="member_no" name="member_no" required>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="row mb-3">
+                            <label for="subject_no" class="col-sm-2 col-form-label">과목명</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="subject_no" name="subject_no" required>
+                                    <option value="" disabled selected>과목을 선택해주세요</option>
+                                    <option th:each="subject : ${subjects}" th:value="${subject.subject_no}" th:text="${subject.subject_name}"></option>
+                                </select>
+                            </div>
+                        </div>
 
-        </form>
+                        <div class="row mb-3">
+                            <label for="member_no" class="col-sm-2 col-form-label">관련인 이름</label>
+                            <div class="col-sm-10">
+                                <select class="form-control" id="member_no" name="member_no" required>
+                                    <option value="" disabled selected>관련인을 선택해주세요</option>
+                                    <option th:each="member : ${members}" th:value="${member.member_no}" th:text="${member.name}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="text-center">
+                            <!-- 추가 버튼 -->
+                            <button type="submit" class="btn btn-primary">추가</button>
+
+                            <!-- 취소 버튼 -->
+                            <button type="button" class="btn btn-primary">
+                                <a href="/classList" style="text-decoration: none; color: white;">취소</a>
+                            </button>
+                        </div>
+
+                    </form><!-- End form -->
+                </div>
+            </div><!--End form div-->
+
+            <!--            </div>-->
+        </div>
     </section>
 
 </main><!-- End #main -->
