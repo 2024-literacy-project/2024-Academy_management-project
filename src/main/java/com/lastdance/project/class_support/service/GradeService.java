@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -104,12 +105,15 @@ public class GradeService {
      * @param testNo   시험 번호
      * @return 성적 리스트
      */
-    public List<GradeDTO> getGradesByClassAndDate(int classNo, Date testDate, int testNo) {
-        Map<String, Object> params = new HashMap<>();
-        params.put("class_no", classNo);
-        params.put("test_date", testDate);
-        params.put("test_no", testNo); // 시험 번호 추가
-        return gradeDAO.getGradesByClass(params);
+//    public List<GradeDTO> getGradesByClassAndDate(int classNo, Date testDate, int testNo) {
+//        Map<String, Object> params = new HashMap<>();
+//        params.put("class_no", classNo);
+//        params.put("test_date", testDate);
+//        params.put("test_no", testNo); // 시험 번호 추가
+//        return gradeDAO.getGradesByClass(params);
+//    }
+    public List<GradeDTO> getGradesByClassAndDate(int classNo, LocalDate testDate, int testNo) {
+        return gradeDAO.getGradesByClassAndDate(classNo, testDate, testNo);
     }
     /**
      * 클래스별 시험 목록 조회

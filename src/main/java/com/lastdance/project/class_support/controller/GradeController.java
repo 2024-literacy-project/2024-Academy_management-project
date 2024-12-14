@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -32,10 +33,11 @@ public class GradeController {
     @ResponseBody
     public Map<String, Object> getGradesByClassAndDate(
             @RequestParam("class_no") int classNo,
-            @RequestParam("test_date") @DateTimeFormat(pattern = "yyyy-MM-dd") Date testDate,
+            @RequestParam("test_date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate testDate,
             @RequestParam("test_no") int testNo
     ) {
         List<GradeDTO> gradeList = gradeService.getGradesByClassAndDate(classNo, testDate, testNo);
+
 
         Map<String, Object> response = new HashMap<>();
         response.put("grades", gradeList);

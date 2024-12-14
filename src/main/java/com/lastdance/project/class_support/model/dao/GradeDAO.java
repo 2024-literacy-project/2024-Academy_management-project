@@ -6,6 +6,8 @@ import com.lastdance.project.class_support.model.dto.StudentDTO;
 import com.lastdance.project.class_support.model.dto.TestDTO;
 import org.apache.ibatis.annotations.Param;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +18,8 @@ public interface GradeDAO {
     // 성적 등록: Test 테이블에 시험 정보 삽입
     int insertTest(TestDTO testDTO);
     // 성적 조회 (클래스 기준)
-    List<GradeDTO> getGradesByClass(Map<String, Object> params);
+    List<GradeDTO> getGradesByClassAndDate(@Param("class_no") int classNo, @Param("test_date") LocalDate testDate, @Param("test_no") int testNo);
+
     // 성적 조회
     List<TestDTO> getAllTests();
     // 클래스별 시험 목록 조회

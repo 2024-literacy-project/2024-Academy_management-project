@@ -4,11 +4,11 @@
 <mapper namespace="com.lastdance.project.class_support.model.dao.GradeDAO">
 
     <!-- 클래스와 날짜, 시험 번호를 기준으로 성적 조회 -->
-    <select id="getGradesByClass" parameterType="map" resultType="com.lastdance.project.class_support.model.dto.GradeDTO">
+    <select id="getGradesByClassAndDate" parameterType="map" resultType="com.lastdance.project.class_support.model.dto.GradeDTO">
         SELECT
             t.test_no AS testNo,
             t.test_name AS testName,
-            t.test_date AS testDate,
+            DATE_FORMAT(t.test_date, '%Y-%m-%d') AS testDate,
             t.test_info AS testInfo,
             st.score AS score,
             m.name AS studentName,

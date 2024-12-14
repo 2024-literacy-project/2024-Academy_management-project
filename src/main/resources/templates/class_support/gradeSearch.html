@@ -1,81 +1,399 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>성적 검색</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>성적 검색 - LastDance</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="/assets/img/favicon.png" rel="icon">
+    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|
+    Nunito:300,300i,400,400i,600,600i,700,700i|
+    Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="/css/style.css" rel="stylesheet">
 </head>
+
 <body>
-<div class="container mt-5">
-    <h1 class="text-center mb-4">성적 검색</h1>
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <div class="d-flex align-items-center justify-content-between">
+        <a href="index.html" class="logo d-flex align-items-center">
+            <img src="/assets/img/logo.png" alt="">
+            <span class="d-none d-lg-block">LastDance</span>
+        </a>
+    </div><!-- End Logo -->
+    <nav class="header-nav ms-auto">
+        <button type="button" class="btn btn-outline-dark" href="#">로그아웃</button>
+    </nav><!-- End Icons Navigation -->
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link " href="/index">
+                <i class="bi bi-grid"></i>
+                <span>메인</span>
+            </a>
+        </li><!-- End 메인 Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link " href="/academy-management/dashboard">
+                <i class="bi bi-grid"></i>
+                <span>학원현황</span>
+            </a>
+        </li><!-- End 학원현황 Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i><span>학원관리</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+
+            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="../components-alerts.html">
+                        <i class="bi bi-circle"></i><span>학원정보</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../components-accordion.html">
+                        <i class="bi bi-circle"></i><span>강사등록</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../components-badges.html">
+                        <i class="bi bi-circle"></i><span>강사목록</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../components-cards.html">
+                        <i class="bi bi-circle"></i><span>클래스목록</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../components-buttons.html">
+                        <i class="bi bi-circle"></i><span>권한</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End 학원관리 Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i><span>학생관리</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="forms.html">
+                        <i class="bi bi-circle"></i><span>학생등록</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../tables-data.html">
+                        <i class="bi bi-circle"></i><span>학생정보</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End 학생관리 Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i><span>수업지원</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li>
+                    <a class="nav-link collapsed" data-bs-target="#attendance-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-circle"></i><span>출석관리</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="attendance-nav" class="nav-content collapse background-color: #fff;" data-bs-parent="#forms-nav">
+                        <li>
+                            <a href="/class_support/classAttendanceList">
+                                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">출석/결석 체크</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/class_support/attendanceSummary">
+                                <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">일자별 출결 현황 표시</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+
+                </li>
+
+                <li>
+                    <a class="nav-link collapsed" data-bs-target="#grade-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-circle"></i><span>성적관리</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="grade-nav" class="nav-content collapse background-color: #fff;" data-bs-parent="#forms-nav">
+                        <li>
+                            <a href="/class_support/gradeRegistration">
+                                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">성적 등록</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/class_support/gradeUpdate">
+                                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">성적 관리</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/class_support/gradeSearch">
+                                <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">성적 검색</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+
+                </li>
+                <li>
+                    <a href="../forms-validation.html">
+                        <i class="bi bi-circle"></i><span>플래너</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End 수업지원 Nav -->
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-bar-chart"></i><span>학생상세페이지</span><i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+                <li>
+                    <a href="../charts-chartjs.html">
+                        <i class="bi bi-circle"></i><span>학생정보</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../charts-apexcharts.html">
+                        <i class="bi bi-circle"></i><span>클래스/시간표</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../charts-echarts.html">
+                        <i class="bi bi-circle"></i><span>출석현황</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../charts-echarts.html">
+                        <i class="bi bi-circle"></i><span>학습리포트</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="../charts-echarts.html">
+                        <i class="bi bi-circle"></i><span>My플래너</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End 학생상세페이지 Nav -->
+    </ul>
+</aside><!-- End Sidebar-->
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>클래스 성적 검색</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../templates/index.html">Home</a></li>
+                <li class="breadcrumb-item">수업 관리</li>
+                <li class="breadcrumb-item active">클래스 성적 검색</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
     <!-- 클래스 선택 -->
-    <div class="mb-4">
-        <label for="classSelect" class="form-label">클래스 선택</label>
-        <select id="classSelect" class="form-select" required>
-            <option value="" disabled selected>클래스를 선택하세요</option>
-            <option th:each="class : ${classList}" th:value="${class.class_no}" th:text="${class.class_name}"></option>
-        </select>
+    <form id="addScoreForm">
+        <!-- 클래스 선택 -->
+        <div class="mb-4">
+            <label for="existingClassSelect" class="form-label">클래스 선택</label>
+            <select id="existingClassSelect" class="form-select" required>
+                <option value="" disabled selected>클래스를 선택하세요</option>
+                <option th:each="cls : ${classList}" th:value="${cls.class_no}" th:text="${cls.class_name}"></option>
+            </select>
+        </div>
+
+        <div class="mb-4" id="existingTestSelectContainer" style="display: none;">
+            <label for="existingTestSelect" class="form-label">시험 선택</label>
+            <select id="existingTestSelect" class="form-select" required>
+                <option value="" disabled selected>시험을 선택하세요</option>
+            </select>
+        </div>
+
+        <!-- 학생 점수 입력 테이블 -->
+        <div class="mb-4" id="studentScoreContainer" style="display: none;">
+            <h4>학생 점수 입력</h4>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>학생 이름</th>
+                    <th>점수</th>
+                </tr>
+                </thead>
+                <tbody id="studentScoreBody">
+                </tbody>
+            </table>
+        </div>
+
+
+    </form>
+
+    <!-- 차트 표시 -->
+    <div id="chartContainer" class="mt-5" style="display: none;">
+        <h2 class="text-center mb-4">성적 통계</h2>
+        <canvas id="lineChart" style="max-height: 400px;"></canvas>
     </div>
 
-    <!-- 시험 날짜 선택 -->
-    <div class="mb-4">
-        <label for="testDate" class="form-label">시험 날짜</label>
-        <input type="date" id="testDate" class="form-control" required>
-    </div>
-
-    <!-- 시험 정보 선택 -->
-    <div class="mb-4">
-        <label for="testInfo" class="form-label">시험 정보</label>
-        <select id="testInfo" class="form-select" required>
-            <option value="" disabled selected>시험 정보를 선택하세요</option>
-            <option th:each="test : ${testList}"
-                    th:value="${test.testNo}"
-                    th:text="${test.testName}"></option>
-        </select>
-    </div>
-
-    <!-- 검색 버튼 -->
-    <div class="text-center">
-        <button id="searchGrades" class="btn btn-primary">검색</button>
-    </div>
-
-    <!-- 검색 결과 표시 -->
-    <div id="resultsContainer" class="mt-5" style="display: none;">
-        <h2 class="text-center mb-4">학생 성적 리스트</h2>
-        <table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>학생 이름</th>
-                <th>시험 정보</th>
-                <th>점수</th>
-                <th>수정</th>
-                <th>삭제</th>
-            </tr>
-            </thead>
-            <tbody id="resultsTableBody">
-            <!-- 검색 결과 데이터가 여기에 추가됩니다 -->
-            </tbody>
-        </table>
-    </div>
-</div>
+</main>
 
 <!-- Script -->
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js CDN 추가 -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const searchButton = document.getElementById('searchGrades');
-        const resultsContainer = document.getElementById('resultsContainer');
-        const resultsTableBody = document.getElementById('resultsTableBody');
+        const gradeSearchForm = document.getElementById('addScoreForm');
+        console.log('addScoreForm:', gradeSearchForm);
+        if (!gradeSearchForm) {
+            console.error('addScoreForm 요소를 찾을 수 없습니다.');
+            return;
+        }
 
-        searchButton.addEventListener('click', function () {
-            const classNo = document.getElementById('classSelect').value;
-            const testDate = document.getElementById('testDate').value;
-            const testNo  = document.getElementById('testInfo').value;
+        const existingClassSelect = document.getElementById('existingClassSelect');
+        console.log('existingClassSelect:', existingClassSelect);
+        if (!existingClassSelect) {
+            console.error('existingClassSelect 요소를 찾을 수 없습니다.');
+            return;
+        }
 
-            if (classNo && testDate && testNo) {
-                fetch(`/class_support/grades/search?class_no=${classNo}&test_date=${testDate}&test_no=${testNo}`)
+        const existingTestSelect = document.getElementById('existingTestSelect');
+        console.log('existingTestSelect:', existingTestSelect);
+        if (!existingTestSelect) {
+            console.error('existingTestSelect 요소를 찾을 수 없습니다.');
+            return;
+        }
+
+        const existingTestSelectContainer = document.getElementById('existingTestSelectContainer');
+        console.log('existingTestSelectContainer:', existingTestSelectContainer);
+        if (!existingTestSelectContainer) {
+            console.error('existingTestSelectContainer 요소를 찾을 수 없습니다.');
+            return;
+        }
+
+        const studentScoreContainer = document.getElementById('studentScoreContainer');
+        console.log('studentScoreContainer:', studentScoreContainer);
+        if (!studentScoreContainer) {
+            console.error('studentScoreContainer 요소를 찾을 수 없습니다.');
+            return;
+        }
+
+        const studentScoreBody = document.getElementById('studentScoreBody');
+        console.log('studentScoreBody:', studentScoreBody);
+        if (!studentScoreBody) {
+            console.error('studentScoreBody 요소를 찾을 수 없습니다.');
+            return;
+        }
+
+        // 고정된 색상 배열 (필요 시 수정)
+        const barColors = [
+            'rgba(255, 99, 132, 0.2)',    // 빨강
+            'rgba(54, 162, 235, 0.2)',    // 파랑
+            'rgba(255, 206, 86, 0.2)',    // 노랑
+            'rgba(75, 192, 192, 0.2)',    // 청록
+            'rgba(153, 102, 255, 0.2)',   // 보라
+            'rgba(255, 159, 64, 0.2)',    // 주황
+            // 필요에 따라 더 추가
+        ];
+
+        const barBorderColors = [
+            'rgba(255, 99, 132, 1)',      // 빨강
+            'rgba(54, 162, 235, 1)',      // 파랑
+            'rgba(255, 206, 86, 1)',      // 노랑
+            'rgba(75, 192, 192, 1)',      // 청록
+            'rgba(153, 102, 255, 1)',     // 보라
+            'rgba(255, 159, 64, 1)',      // 주황
+            // 필요에 따라 더 추가
+        ];
+        let selectedClassNo = null;
+        let selectedTestNo = null;
+        let lineChart = null; // Chart.js 인스턴스 저장 변수
+
+        // 클래스 선택 시 시험 목록 로드
+        existingClassSelect.addEventListener('change', function () {
+            const classNo = this.value;
+            selectedClassNo = classNo;
+
+            if (classNo) {
+                fetch(`/class_support/testsByClass?class_no=${classNo}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        existingTestSelect.innerHTML = '<option value="" disabled selected>시험을 선택하세요</option>';
+                        if (data.length > 0) {
+                            data.forEach(test => {
+                                const option = document.createElement('option');
+                                option.value = test.testNo;
+
+                                // 날짜 형식 변경 (yyyy-mm-dd)
+                                const testDate = new Date(test.testDate);
+                                const year = testDate.getFullYear();
+                                const month = String(testDate.getMonth() + 1).padStart(2, '0');
+                                const day = String(testDate.getDate()).padStart(2, '0');
+                                const formattedDate = `${year}-${month}-${day}`;
+
+                                option.textContent = `${test.testName} (${formattedDate})`;
+                                existingTestSelect.appendChild(option);
+                            });
+                            existingTestSelectContainer.style.display = 'block';
+                        } else {
+                            existingTestSelectContainer.style.display = 'none';
+                        }
+                        studentScoreContainer.style.display = 'none';
+                        // 차트 숨기기
+                        document.getElementById('chartContainer').style.display = 'none';
+                        if (lineChart !== null) {
+                            lineChart.destroy();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching tests:', error);
+                        alert('시험 목록을 불러오는 중 오류가 발생했습니다.');
+                    });
+            } else {
+                existingTestSelectContainer.style.display = 'none';
+                studentScoreContainer.style.display = 'none';
+                document.getElementById('chartContainer').style.display = 'none';
+                if (lineChart !== null) {
+                    lineChart.destroy();
+                }
+            }
+        });
+
+        // 시험 선택 시 해당 클래스의 모든 학생과 시험 점수 정보 로드 및 차트 생성
+        existingTestSelect.addEventListener('change', function () {
+            const testNo = this.value;
+            selectedTestNo = testNo;
+
+            if (testNo && selectedClassNo) {
+                // 클래스와 시험에 따른 모든 학생 조회
+                fetch(`/class_support/studentsByClassAndTest?class_no=${selectedClassNo}&test_no=${testNo}`)
                     .then(response => {
                         if (!response.ok) {
                             throw new Error(`HTTP error! status: ${response.status}`);
@@ -83,38 +401,117 @@
                         return response.json();
                     })
                     .then(data => {
-                        console.log('Response data:', data); // 응답 데이터 확인
-                        resultsTableBody.innerHTML = '';
-                        if (data.grades && data.grades.length > 0) {
-                            data.grades.forEach(grade => {
+                        studentScoreBody.innerHTML = '';
+                        if (Array.isArray(data) && data.length > 0) {
+                            const labels = [];
+                            const scores = [];
+
+                            data.forEach(student => {
                                 const row = document.createElement('tr');
+                                const scoreValue = (student.score === null || student.score === undefined) ? 'N/A' : student.score;
                                 row.innerHTML = `
-                                <td>` + grade.studentName + `</td>
-                                    <td>` + grade.testInfo + `</td>
-                                    <td>` + grade.score + `</td>
-                                    <td><button class="btn btn-warning btn-sm">수정</button></td>
-                                    <td><button class="btn btn-danger btn-sm">삭제</button></td>
+                                    <td>${student.name}</td>
+                                    <td>${scoreValue}</td>
                                 `;
-                                resultsTableBody.appendChild(row);
+                                studentScoreBody.appendChild(row);
+
+                                labels.push(student.name);
+                                scores.push(student.score !== null && student.score !== undefined ? student.score : 0); // 'N/A'를 0으로 대체
                             });
-                            resultsContainer.style.display = 'block';
+                            studentScoreContainer.style.display = 'block';
+
+                            // 차트 데이터 준비
+                            const chartData = {
+                                labels: labels,
+                                datasets: [{
+                                    label: '점수',
+                                    data: scores,
+                                    backgroundColor: barColors.slice(0, scores.length),      // 각 막대의 배경색
+                                    borderColor: barBorderColors.slice(0, scores.length),    // 각 막대의 테두리색
+                                    borderWidth: 1
+                                }]
+                            };
+
+                            // 차트 옵션 설정
+                            const config = {
+                                type: 'bar', // 막대 차트
+                                data: chartData,
+                                options: {
+                                    legend: {
+                                       
+                                    scales: {
+                                        y: {
+                                            beginAtZero: true,
+                                            max: 100
+                                        }
+                                    }
+                                }
+                            };
+
+                            // 기존 차트가 있다면 파괴하고 새로 생성
+                            if (lineChart !== null) {
+                                lineChart.destroy();
+                            }
+
+                            const ctx = document.getElementById('lineChart').getContext('2d');
+                            lineChart = new Chart(ctx, config);
+
+                            // 차트 표시
+                            document.getElementById('chartContainer').style.display = 'block';
                         } else {
-                            alert('검색된 성적이 없습니다.');
-                            resultsContainer.style.display = 'none';
+                            studentScoreContainer.style.display = 'none';
+                            alert('해당 클래스에 학생이 없거나 로딩 중 오류가 발생했습니다.');
+                            document.getElementById('chartContainer').style.display = 'none';
+                            if (lineChart !== null) {
+                                lineChart.destroy();
+                            }
                         }
                     })
                     .catch(error => {
-                        console.error('Error fetching grades:', error);
-                        alert('성적 검색 중 오류가 발생했습니다. 다시 시도해주세요.');
+                        console.error('Error fetching students:', error);
+                        alert('학생 목록을 불러오는 중 오류가 발생했습니다.');
+                        document.getElementById('chartContainer').style.display = 'none';
+                        if (lineChart !== null) {
+                            lineChart.destroy();
+                        }
                     });
             } else {
-                alert('모든 필드를 올바르게 입력해주세요.');
+                studentScoreContainer.style.display = 'none';
+                document.getElementById('chartContainer').style.display = 'none';
+                if (lineChart !== null) {
+                    lineChart.destroy();
+                }
             }
         });
+
     });
 </script>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+</footer>
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+    <i class="bi bi-arrow-up-short"></i>
+</a>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+<script src="/assets/js/main.js"></script>
 </body>
 </html>
