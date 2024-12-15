@@ -40,6 +40,7 @@
       <img th:src="@{/assets/img/logo.png}" alt="Logo">
       <span class="d-none d-lg-block" th:text="'LastDance'">LastDance</span>
     </a>
+    <!--      <i class="bi bi-list toggle-sidebar-btn"></i>-->
   </div><!-- End Logo -->
 
   <nav class="header-nav ms-auto">
@@ -48,7 +49,7 @@
 
 </header><!-- End Header -->
 
-<!-- ======= Sidr Bar ======= -->
+<!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
 
   <ul class="sidebar-nav" id="sidebar-nav">
@@ -340,11 +341,30 @@
 
 
                 </div><!-- End sidebar recent posts-->
+                <!-- 공지사항 리스트 -->
+                <div th:if="${#lists.isEmpty(noticeList)}">
+                  <p>현재 공지사항이 없습니다.</p>
+                </div>
+
+                <!-- 공지사항 리스트 -->
+                <div th:each="notice : ${noticeList}" class="post-item clearfix">
+                  <!-- 기본 이미지 대체 -->
+<!--                  <img src="/assets/img/news-1.jpg" alt="공지 이미지">-->
+                  <h4>
+                    <a th:href="@{/notice/{notice_no}(notice_no=${notice.notice_no})}" th:text="${notice.notice_title}">공지사항 제목</a>
+                  </h4>
+                  <p th:text="${notice.notice_txt}">공지사항 내용</p>
+                </div>
+              </div><!-- End sidebar recent posts -->
+
+
+
 
               </div>
             </div><!-- End 공지사항 -->
 
         </div>
+    </div>
   </section>
 
 </main><!-- End #main -->
