@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lastdance.project.sessionsecurity.user.model.dao.ExamMapper">
+
+    <resultMap id="Exam" type="com.lastdance.project.sessionsecurity.user.model.dto.ExamResultDTO">
+        <id property="examNo" column="test_no"/>
+        <result property="examName" column="test_name"/>
+        <result property="examDate" column="test_date"/>
+        <result property="score" column="test_result"/>
+    </resultMap>
+
+
+    <!--    &lt;!&ndash; 학생별 시험 성적 가져오기 &ndash;&gt;-->
+<!--    <select id="getExamResultsByStudent" parameterType="int" resultType="com.lastdance.project.sessionsecurity.user.model.dto.ExamResultDTO">-->
+<!--        SELECT-->
+<!--        t.test_no AS examNo,-->
+<!--        t.test_name AS examName,-->
+<!--        t.test_date AS examDate,-->
+<!--        t.test_info AS examInfo,-->
+<!--        st.test_result AS score-->
+<!--        FROM-->
+<!--        student_test st-->
+<!--        JOIN-->
+<!--        test t ON st.test_no = t.test_no-->
+<!--        JOIN-->
+<!--        student s ON st.member_no = s.member_no-->
+<!--        WHERE-->
+<!--        st.member_no = #{memberNo}-->
+<!--    </select>-->
+
+    <!-- 학생별 시험 성적 조회 -->
+    <select id="getExamResultsByStudent" parameterType="String" resultMap="Exam">
+        SELECT t.test_no, t.test_name, t.test_date, t.test_result
+        FROM test t
+        JOIN student_test st ON t.test_no = st.test_no
+        JOIN member m ON st.member_no = m.member_no
+        WHERE m.id = #{studentId}
+    </select>
+</mapper>

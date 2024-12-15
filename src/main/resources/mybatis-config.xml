@@ -8,5 +8,7 @@
         <mapper resource="mapper/StudentClassMapper.xml"/>
         <mapper resource="mapper/GradeMapper.xml"/>
         <mapper resource="mapper/ClassMapper.xml"/>
+        <mapper resource="mapper/user/ExamMapper.xml"/>
+        <mapper resource="mapper/user/UserMapper.xml"/>
     </mappers>
 </configuration>
