@@ -10,5 +10,9 @@
         <mapper resource="mapper/ClassMapper.xml"/>
         <mapper resource="mapper/user/ExamMapper.xml"/>
         <mapper resource="mapper/user/UserMapper.xml"/>
+        <mapper resource="mapper/PlannerMapper.xml"/>
+        <mapper resource="mapper/MemberMapper.xml"/>
+        <mapper resource="mapper/ScheduleMapper.xml"/>
+        <mapper resource="mapper/ClassMapper2.xml"/>
     </mappers>
 </configuration>

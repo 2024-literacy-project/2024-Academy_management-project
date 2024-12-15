@@ -1,8 +1,8 @@
-package com.lastdance.project.test.model.dto;
+package com.lastdance.project.member.model;
 
 import java.util.Date;
 
-public class TestDTO {
+public class MemberDTO {
 
     private int member_no;
     private String name;
@@ -14,10 +14,15 @@ public class TestDTO {
     private String address;
     private Date enroll_date;
 
-    public TestDTO() {
+    //학생 정보
+    private String school;
+    private int grade;
+    private String parent_contact;
+
+    public MemberDTO() {
     }
 
-    public TestDTO(int member_no, String name, String id, String password, String role_type, Date birth_date, String phone, String address, Date enroll_date) {
+    public MemberDTO(int member_no, String name, String id, String password, String role_type, Date birth_date, String phone, String address, Date enroll_date, String school, int grade, String parent_contact) {
         this.member_no = member_no;
         this.name = name;
         this.id = id;
@@ -27,6 +32,9 @@ public class TestDTO {
         this.phone = phone;
         this.address = address;
         this.enroll_date = enroll_date;
+        this.school = school;
+        this.grade = grade;
+        this.parent_contact = parent_contact;
     }
 
     public int getMember_no() {
@@ -101,18 +109,45 @@ public class TestDTO {
         this.enroll_date = enroll_date;
     }
 
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
+    }
+
+    public int getGrade() {
+        return grade;
+    }
+
+    public void setGrade(int grade) {
+        this.grade = grade;
+    }
+
+    public String getParent_contact() {
+        return parent_contact;
+    }
+
+    public void setParent_contact(String parent_contact) {
+        this.parent_contact = parent_contact;
+    }
+
     @Override
     public String toString() {
-        return "TestDTO{" +
+        return "MemberDTO{" +
                 "member_no=" + member_no +
                 ", name='" + name + '\'' +
                 ", id='" + id + '\'' +
                 ", password='" + password + '\'' +
-                ", role_type=" + role_type +
+                ", role_type='" + role_type + '\'' +
                 ", birth_date=" + birth_date +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
                 ", enroll_date=" + enroll_date +
+                ", school='" + school + '\'' +
+                ", grade=" + grade +
+                ", parent_contact='" + parent_contact + '\'' +
                 '}';
     }
 }

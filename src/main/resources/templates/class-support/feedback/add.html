@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="/assets/img/favicon.png" rel="icon">
+  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.gstatic.com" rel="preconnect">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+  <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+  <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+  <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+  <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+  <!-- Template Main CSS File -->
+  <link href="/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+
+  <div class="d-flex align-items-center justify-content-between">
+    <a href="index.html" class="logo d-flex align-items-center">
+      <img src="/assets/img/logo.png" alt="">
+      <span class="d-none d-lg-block">LastDance</span>
+    </a>
+  </div><!-- End Logo -->
+
+  <nav class="header-nav ms-auto">
+    <button type="button" class="btn btn-outline-dark" href="#">로그아웃</button>
+  </nav><!-- End Icons Navigation -->
+
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+
+    <li class="nav-item">
+      <a class="nav-link " th:href="@{/}">
+        <i class="bi bi-grid"></i>
+        <span>메인</span>
+      </a>
+    </li><!-- End 메인 Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link " th:href="@{/academy/dashboard}">
+        <i class="bi bi-grid"></i>
+        <span>학원현황</span>
+      </a>
+    </li><!-- End 학원현황 Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-menu-button-wide"></i><span>학원관리</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+
+      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>학원정보</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>강사등록</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>강사목록</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>클래스목록</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>권한</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End 학원관리 Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-layout-text-window-reverse"></i><span>학생관리</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a th:href="@{/student/register}">
+            <i class="bi bi-circle"></i><span>학생등록</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>학생정보</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End 학생관리 Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-journal-text"></i><span>수업지원</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a href="#l">
+            <i class="bi bi-circle"></i><span>출석관리</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>성적등록</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>과제등록</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/class-support/class}">
+            <i class="bi bi-circle"></i><span>플래너</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End 수업지원 Nav -->
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+        <i class="bi bi-bar-chart"></i><span>학생상세페이지</span><i class="bi bi-chevron-down ms-auto"></i>
+      </a>
+      <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
+        <li>
+          <a th:href="@{/student/info}">
+            <i class="bi bi-circle"></i><span>학생정보</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/student/time-table}">
+            <i class="bi bi-circle"></i><span>클래스/시간표</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>출석현황</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bi bi-circle"></i><span>학습리포트</span>
+          </a>
+        </li>
+        <li>
+          <a th:href="@{/student/planner/list}">
+            <i class="bi bi-circle"></i><span>My플래너</span>
+          </a>
+        </li>
+      </ul>
+    </li><!-- End 학생상세페이지 Nav -->
+  </ul>
+</aside>
+<!-- End Sidebar-->
+
+<!-- ======= 페이지 ======= -->
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>MY 플래너</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Main</a></li>
+          <li class="breadcrumb-item">학생상세페이지</li>
+          <li class="breadcrumb-item active">플래너</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">플래너 상세</h5>
+
+              <table>
+                <tr>
+                  <th>제목</th>
+                  <td th:text="${plannerDTO.planner_title}"></td>
+                </tr>
+                <tr>
+                  <th>내용</th>
+                  <td th:text="${plannerDTO.planner_txt}"></td>
+                </tr>
+                <tr>
+                  <th>작성자</th>
+                  <td th:text="${plannerDTO.name}"></td>
+                </tr>
+                <tr>
+                  <th>작성일</th>
+                  <td th:text="${#dates.format(plannerDTO.planner_date, 'yyyy-MM-dd')}"></td>
+                </tr>
+              </table>
+     <!-- End 플래너 상세 -->
+            </div>
+          </div>
+        </div>
+
+       <!-- 플래너 피드백 -->
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">플래너 피드백</h4>
+
+              <!-- 피드백 작성 폼 -->
+              <form th:action="@{/class-support/class-list/feedback/add}" method="post">
+                <input type="hidden" name="planner_no" th:value="${planner_no}" />
+                <table class="p-table">
+                  <tr>
+                    <th>작성일</th>
+                    <td><input type="date" name="feedback_date" class="form-control" required></td>
+                  </tr>
+                  <tr>
+                    <th>작성자</th>
+                    <td th:text="${feedbackList.name}"></td>
+                  </tr>
+                  <tr>
+                    <th>내용</th>
+                    <td><textarea name="feedback_txt" class="form-control" style="height: 100px"required></textarea></td>
+                  </tr>
+                </table>
+
+                <!-- 버튼  -->
+                <div class="d-flex justify-content-end mt-3">
+                  <button type="submit" class="btn btn-primary me-3">저장</button>
+                  <a th:href="@{/class-support/class-list/details/{planner_no}(planner_no=${plannerDTO.planner_no})}" class="btn btn-secondary">취소</a>
+                </div>
+              </form>
+      <!-- End 플래너 피드백 -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="/assets/vendor/quill/quill.js"></script>
+  <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>
