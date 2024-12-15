@@ -140,7 +140,7 @@
           </a>
         </li>
         <li>
-          <a th:href="@{/student/planner/list}">
+          <a th:href="@{/class-support/class}">
             <i class="bi bi-circle"></i><span>플래너</span>
           </a>
         </li>
@@ -209,7 +209,7 @@
               <form th:action="@{/student/planner/update}" method="post">
                 <input type="hidden" name="planner_no" th:value="${plannerDTO.planner_no}" />
 
-                <table>
+                <table class="p-table">
                   <tr>
                     <th>제목</th>
                     <td><input type="text" name="planner_title" class="form-control" th:value="${plannerDTO.planner_title}"></td>
@@ -225,8 +225,8 @@
                 </table>
 
                 <!--   버튼  -->
-                <div class="d-flex custom-flex">
-                 <button type="submit" class="btn btn-primary">저장</button>
+                <div class="d-flex justify-content-end mt-3">
+                 <button type="submit" class="btn btn-primary me-3">저장</button>
                  <a th:href="@{/student/planner/details/{planner_no}(planner_no=${plannerDTO.planner_no})}" class="btn btn-secondary">취소</a>
                 </div>
 
@@ -235,29 +235,6 @@
 
             </div>
           </div>
-        </div>
-
-       <!-- 플래너 피드백 -->
-        <div class="col-lg-6">
-
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">플래너 피드백</h5>
-
-              <table>
-                <tr>
-                  <th>작성자</th>
-                  <td>ㄴㄴㄴ</td>
-                </tr>
-                <tr>
-                  <th>피드백</th>
-                  <td>zzzzzzzzzz</td>
-                </tr>
-              </table>
-              <!-- End 플래너 피드백 -->
-            </div>
-          </div>
-
         </div>
       </div>
     </section>

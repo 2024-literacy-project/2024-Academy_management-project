@@ -140,7 +140,7 @@
           </a>
         </li>
         <li>
-          <a th:href="@{/student/planner/list}">
+          <a th:href="@{/class-support/class}">
             <i class="bi bi-circle"></i><span>플래너</span>
           </a>
         </li>
@@ -205,7 +205,7 @@
           <!-- 플래너 작성 폼 -->
           <form th:action="@{/student/planner/add}" method="post">
             <input type="hidden" name="id" th:value="${plannerDTO.id}" />
-            <table>
+            <table class="p-table">
               <tr>
                 <th>제목</th>
                 <td><input type="text" name="planner_title" class="form-control" required></td>
@@ -225,12 +225,13 @@
             </table>
 
             <!--  저장, 취소 버튼  -->
-            <div class="d-flex custom-flex">
-              <button type="submit" class="btn btn-primary">저장</button>
+            <div class="d-flex justify-content-end mt-3">
+              <button type="submit" class="btn btn-primary me-3">저장</button>
               <a th:href="@{/student/planner/list}" class="btn btn-secondary">취소</a>
             </div>
 
-          </form><!-- End 플래너 작성 -->
+          </form>
+          <!-- End 플래너 작성 -->
         </div>
       </div>
   </section>

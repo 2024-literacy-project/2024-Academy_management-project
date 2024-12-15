@@ -54,7 +54,7 @@
     <ul class="sidebar-nav" id="sidebar-nav">
 
         <li class="nav-item">
-            <a class="nav-link " th:href="@{/}">
+            <a class="nav-link " th:href="@{/static}">
                 <i class="bi bi-grid"></i>
                 <span>메인</span>
             </a>
@@ -140,7 +140,7 @@
                     </a>
                 </li>
                 <li>
-                    <a th:href="@{/class-support/class-list}">
+                    <a th:href="@{/class-support/class}">
                         <i class="bi bi-circle"></i><span>플래너</span>
                     </a>
                 </li>
@@ -186,10 +186,10 @@
 <!-- ======= 페이지 ======= -->
 <main id="main" class="main">
     <div class="pagetitle">
-        <h1>클래스 목록</h1>
+        <h1>학생 목록</h1>
         <nav>
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a th:href="@{/}">Main</a></li>
+                <li class="breadcrumb-item"><a th:href="@{/static}">Main</a></li>
                 <li class="breadcrumb-item">수업지원</li>
                 <li class="breadcrumb-item active">플래너</li>
             </ol>
@@ -200,7 +200,6 @@
     <section class="section">
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">학생 목록</h5>
 
                 <table class="table datatable">
                     <thead>

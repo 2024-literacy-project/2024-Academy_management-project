@@ -15,6 +15,8 @@ public class PlannerDTO {
     private String name;
     private String id;
 
+
+
     public PlannerDTO() {
     }
 

@@ -1,10 +1,12 @@
 package com.lastdance.project.planner.service;
 
+import com.lastdance.project.planner.model.FeedbackDTO;
 import com.lastdance.project.planner.model.PlannerDAO;
 import com.lastdance.project.planner.model.PlannerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +29,8 @@ public class PlannerServiceImpl implements PlannerService {
     }
 
     @Override
-    public String getNameByUserId(String id) {
-        return plannerDAO.getNameByUserId(id);
+    public String getStudentNameByUserId(String id) {
+        return plannerDAO.getStudentNameByUserId(id);
     }
 
     @Override
@@ -58,4 +60,47 @@ public class PlannerServiceImpl implements PlannerService {
         PlannerDTO plannerDTO = plannerDAO.findByNo(planner_no);
         return Optional.ofNullable(plannerDTO);
     }
+
+    /* 플래너 피드백 */
+
+    @Override
+    public List<PlannerDTO> getPlannerByMemberNo(int member_no) {
+        return plannerDAO.getPlannerByMemberNo(member_no);
+    }
+    @Override
+    public List<FeedbackDTO> getFeedbackByPlannerNo(int planner_no) {
+
+        List<FeedbackDTO> feedbackList = plannerDAO.getFeedbackByPlannerNo(planner_no);
+        if (feedbackList == null || feedbackList.isEmpty()) {
+            return new ArrayList<>(); // 빈 리스트 반환
+        }
+        return feedbackList;
+    }
+
+    @Override
+    public FeedbackDTO getFeedbackById(int feedback_no) {
+        return plannerDAO.getFeedbackById(feedback_no);
+    }
+
+    @Override
+    public String getTeacherNameByUserId(String id) {
+        return plannerDAO.getTeacherNameByUserId(id);
+    }
+
+    /* 피드백 추가, 수정, 삭제*/
+    @Override
+    public void addFeedback(FeedbackDTO feedbackDTO) {
+        plannerDAO.addFeedback(feedbackDTO);
+    }
+
+    @Override
+    public void updateFeedback(FeedbackDTO feedbackDTO) {
+        plannerDAO.updateFeedback(feedbackDTO);
+    }
+
+    @Override
+    public void deleteFeedback(int feedback_no) {
+        plannerDAO.deleteFeedback(feedback_no);
+    }
+
 }

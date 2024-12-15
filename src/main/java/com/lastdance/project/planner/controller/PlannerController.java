@@ -1,5 +1,6 @@
 package com.lastdance.project.planner.controller;
 
+import com.lastdance.project.planner.model.FeedbackDTO;
 import com.lastdance.project.planner.model.PlannerDTO;
 import com.lastdance.project.planner.service.PlannerService;
 import com.lastdance.project.planner.service.PlannerServiceImpl;
@@ -20,8 +21,8 @@ public class PlannerController {
     @Autowired
     private PlannerServiceImpl plannerServiceImpl;
 
-    // 아이디 고정
-    private final String fixedId = "chulsoo";
+    // 학생 아이디 고정
+    private final String fixedId = "junho";
 
     // 플래너 목록
     @GetMapping("/list")
@@ -38,7 +39,19 @@ public class PlannerController {
     public String getPlannerDetails(@PathVariable int planner_no, Model model) {
 
         PlannerDTO plannerDTO = plannerServiceImpl.getPlannerByNo(planner_no);
+        List<FeedbackDTO> feedbackList = plannerServiceImpl.getFeedbackByPlannerNo(planner_no);
+
+        feedbackList.removeIf(feedback -> feedback == null);
+
+        if (feedbackList.isEmpty()) {
+            System.out.println("피드백이 없습니다.");
+        } else {
+            for (FeedbackDTO feedback : feedbackList) {
+                System.out.println("피드백 번호: " + feedback.getFeedback_no());
+            }
+        }
         model.addAttribute("plannerDTO",plannerDTO);
+        model.addAttribute("feedbackList", feedbackList);
 
         return "student/planner/details";
     }
@@ -47,7 +60,7 @@ public class PlannerController {
     @GetMapping("/add")
     public String getAddPlannerForm(Model model) {
 
-        String userName = plannerServiceImpl.getNameByUserId(fixedId);
+        String userName = plannerServiceImpl.getStudentNameByUserId(fixedId);
 
         PlannerDTO plannerDTO = new PlannerDTO();
         plannerDTO.setName(userName);

@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>Tables / Data - NiceAdmin Bootstrap Template</title>
+  <title>Forms / Elements - NiceAdmin Bootstrap Template</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
 
@@ -27,7 +27,7 @@
   <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
 
   <!-- Template Main CSS File -->
-  <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}"/>
+  <link href="/css/style.css" rel="stylesheet">
 </head>
 
 <body>
@@ -187,64 +187,98 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>My 플래너</h1>
+      <h1>MY 플래너</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a th:href="@{/}">Main</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Main</a></li>
           <li class="breadcrumb-item">학생상세페이지</li>
           <li class="breadcrumb-item active">플래너</li>
         </ol>
       </nav>
-    </div>
-    <!-- End Page Title -->
+    </div><!-- End Page Title -->
 
     <section class="section">
-      <div class="card">
-        <div class="card-body">
-          <h4 class="card-title">플래너 목록</h4>
+      <div class="row">
+        <div class="col-lg-6">
 
-          <!-- 플래너 목록 -->
-          <table class="table datatable">
-            <thead>
-            <tr>
-              <th>제목</th>
-              <th>작성자</th>
-              <th data-type="date" data-format="YYYY/DD/MM">작성일</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="plannerDTO : ${plannerList}">
-              <td><a th:href="@{/student/planner/details/{planner_no}(planner_no=${plannerDTO.planner_no})}" th:text="${plannerDTO.planner_title}">제목</a></td>
-              <td th:text="${plannerDTO.name}">작성자</td>
-              <td th:text="${#dates.format(plannerDTO.planner_date, 'yyyy-MM-dd')}">2005/02/11</td>
-            </tr>
-            </tbody>
-          </table>
-          <!-- End 플래너 목록 -->
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">플래너 상세</h5>
 
-      <!--  버튼   -->
-          <div class="row mb-3">
-            <div class="d-flex justify-content-end mt-3">
-              <button type="submit" class="btn btn-primary">
-                <a th:href="@{/student/planner/add}" style="color: white">글 작성</a>
-              </button>
+              <table>
+                <tr>
+                  <th>제목</th>
+                  <td th:text="${plannerDTO.planner_title}"></td>
+                </tr>
+                <tr>
+                  <th>내용</th>
+                  <td th:text="${plannerDTO.planner_txt}"></td>
+                </tr>
+                <tr>
+                  <th>작성자</th>
+                  <td th:text="${plannerDTO.name}"></td>
+                </tr>
+                <tr>
+                  <th>작성일</th>
+                  <td th:text="${#dates.format(plannerDTO.planner_date, 'yyyy-MM-dd')}"></td>
+                </tr>
+              </table>
+     <!-- End 플래너 상세 -->
+            </div>
+          </div>
+        </div>
+
+       <!-- 플래너 피드백 -->
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h4 class="card-title">플래너 피드백</h4>
+
+              <!-- 피드백 작성 폼 -->
+              <form th:action="@{/class-support/class-list/feedback/add}" method="post">
+                <input type="hidden" name="planner_no" th:value="${planner_no}" />
+                <table class="p-table">
+                  <tr>
+                    <th>작성일</th>
+                    <td><input type="date" name="feedback_date" class="form-control" required></td>
+                  </tr>
+                  <tr>
+                    <th>작성자</th>
+                    <td th:text="${feedbackList.name}"></td>
+                  </tr>
+                  <tr>
+                    <th>내용</th>
+                    <td><textarea name="feedback_txt" class="form-control" style="height: 100px"required></textarea></td>
+                  </tr>
+                </table>
+
+                <!-- 버튼  -->
+                <div class="d-flex justify-content-end mt-3">
+                  <button type="submit" class="btn btn-primary me-3">저장</button>
+                  <a th:href="@{/class-support/class-list/details/{planner_no}(planner_no=${plannerDTO.planner_no})}" class="btn btn-secondary">취소</a>
+                </div>
+              </form>
+      <!-- End 플래너 피드백 -->
+
             </div>
           </div>
         </div>
       </div>
     </section>
-
   </main><!-- End #main -->
 
-<!-- ======= Footer ======= -->
-<footer id="footer" class="footer">
-  <div class="copyright">
-    &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
-  </div>
-  <div class="credits">
-    Designed by BootstrapMade
-  </div>
-</footer><!-- End Footer -->
+  <!-- ======= Footer ======= -->
+
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer>
+  <!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 

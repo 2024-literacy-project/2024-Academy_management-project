@@ -140,7 +140,7 @@
           </a>
         </li>
         <li>
-          <a th:href="@{/student/planner/list}">
+          <a th:href="@{/class-support/class}">
             <i class="bi bi-circle"></i><span>플래너</span>
           </a>
         </li>
@@ -205,7 +205,7 @@
             <div class="card-body">
               <h5 class="card-title">플래너 상세</h5>
 
-              <table>
+              <table class="p-table">
                 <tr>
                   <th>제목</th>
                   <td th:text="${plannerDTO.planner_title}"></td>
@@ -225,9 +225,9 @@
               </table>
 
           <!-- 버튼 -->
-           <div class="d-flex custom-flex">
-            <a th:href="@{/student/planner/list}" class="btn btn-success">목록</a>
-            <a th:href="@{/student/planner/update/{planner_no}(planner_no=${plannerDTO.planner_no})}" class="btn btn-primary">수정</a>
+              <div class="d-flex justify-content-end mt-3">
+            <a th:href="@{/student/planner/list}" class="btn btn-success me-3">목록</a>
+            <a th:href="@{/student/planner/update/{planner_no}(planner_no=${plannerDTO.planner_no})}" class="btn btn-primary me-3">수정</a>
             <form th:action="@{/student/planner/delete/{planner_no}(planner_no=${plannerDTO.planner_no})}">
               <button type="submit" class="btn btn-secondary">삭제</button>
             </form>
@@ -238,25 +238,31 @@
           </div>
         </div>
 
-       <!-- 플래너 피드백 -->
+        <!-- 플래너 피드백 -->
         <div class="col-lg-6">
 
           <div class="card">
             <div class="card-body">
               <h4 class="card-title">플래너 피드백</h4>
 
-              <table>
-                <tr>
+              <table class="p-table">
+                <tr th:each="feedback : ${feedbackList}">
                   <th>작성자</th>
-                  <td>ㄴㄴㄴ</td>
+                  <td th:text="${feedback.name != null ? feedback.name : ' '}">작성자 이름</td>
                 </tr>
-                <tr>
-                  <th>피드백</th>
-                  <td>ㅎㅎㅎㅎ</td>
+                <tr th:each="feedback : ${feedbackList}">
+                  <th>작성일</th>
+                  <td th:text="${feedback.feedback_date != null ? #dates.format(feedback.feedback_date, 'yyyy-MM-dd') : ' '}">작성일</td>
+                </tr>
+                <tr th:each="feedback : ${feedbackList}">
+                  <th>내용</th>
+                  <td th:text="${feedback.feedback_txt != null ? feedback.feedback_txt : ' '}">피드백 내용</td>
+                </tr>
+                <tr th:if="${feedbackList.isEmpty()}">
+                  <td colspan="3">피드백이 없습니다.</td>
                 </tr>
               </table>
-      <!-- End 플래너 피드백 -->
-
+              <!-- End 플래너 피드백 -->
             </div>
           </div>
 

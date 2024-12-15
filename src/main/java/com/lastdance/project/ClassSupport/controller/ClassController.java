@@ -3,7 +3,6 @@ package com.lastdance.project.ClassSupport.controller;
 import com.lastdance.project.ClassSupport.model.ClassDTO;
 import com.lastdance.project.ClassSupport.service.ClassService;
 import com.lastdance.project.ClassSupport.service.ClassServiceImpl;
-import com.lastdance.project.planner.model.PlannerDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,7 @@ public class ClassController {
     @Autowired
     private ClassServiceImpl classServiceImpl;
 
-    // 아이디 고정
+    // 강사 아이디 고정
     private final String fixedId = "minsoo";
 
     // 클래스 목록
@@ -34,7 +33,7 @@ public class ClassController {
 
         System.out.println(classList);
 
-        return "class-support/class-list";
+        return "class-support/feedback/class-list";
     }
 
     @GetMapping("/student-list/{class_no}")
@@ -45,6 +44,6 @@ public class ClassController {
 
         System.out.println(studentList);
 
-        return "class-support/student-list";
+        return "class-support/feedback/student-list";
     }
 }

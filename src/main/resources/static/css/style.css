@@ -37,6 +37,16 @@ h5,
 h6 {
   font-family: "Nunito", sans-serif;
 }
+/* 플래너 css */
+.p-table {
+  border-spacing: 0 7px; /* 행 간격을 10px로 설정 */
+  border-collapse: separate; /* 간격을 적용하려면 separate가 필요 */
+}
+
+tr th,
+tr td {
+  padding: 10px; /* 셀 내부 여백 */
+}
 
 /*--------------------------------------------------------------
 # Main

@@ -54,7 +54,7 @@
   <ul class="sidebar-nav" id="sidebar-nav">
 
     <li class="nav-item">
-      <a class="nav-link " th:href="@{/}">
+      <a class="nav-link " th:href="@{/static}">
         <i class="bi bi-grid"></i>
         <span>메인</span>
       </a>
@@ -187,11 +187,11 @@
   <main id="main" class="main">
 
     <div class="pagetitle">
-      <h1>My 플래너</h1>
+      <h1>플래너 목록</h1>
       <nav>
         <ol class="breadcrumb">
-          <li class="breadcrumb-item"><a th:href="@{/}">Main</a></li>
-          <li class="breadcrumb-item">학생상세페이지</li>
+          <li class="breadcrumb-item"><a th:href="@{/static}">Main</a></li>
+          <li class="breadcrumb-item">수업지원</li>
           <li class="breadcrumb-item active">플래너</li>
         </ol>
       </nav>
@@ -201,7 +201,6 @@
     <section class="section">
       <div class="card">
         <div class="card-body">
-          <h4 class="card-title">플래너 목록</h4>
 
           <!-- 플래너 목록 -->
           <table class="table datatable">
@@ -214,23 +213,13 @@
             </thead>
             <tbody>
             <tr th:each="plannerDTO : ${plannerList}">
-              <td><a th:href="@{/student/planner/details/{planner_no}(planner_no=${plannerDTO.planner_no})}" th:text="${plannerDTO.planner_title}">제목</a></td>
+              <td><a th:href="@{/class-support/class-list/details/{planner_no}(planner_no=${plannerDTO.planner_no})}" th:text="${plannerDTO.planner_title}">제목</a></td>
               <td th:text="${plannerDTO.name}">작성자</td>
               <td th:text="${#dates.format(plannerDTO.planner_date, 'yyyy-MM-dd')}">2005/02/11</td>
             </tr>
             </tbody>
           </table>
           <!-- End 플래너 목록 -->
-
-      <!--  버튼   -->
-          <div class="row mb-3">
-            <div class="d-flex justify-content-end mt-3">
-              <button type="submit" class="btn btn-primary">
-                <a th:href="@{/student/planner/add}" style="color: white">글 작성</a>
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
     </section>
 

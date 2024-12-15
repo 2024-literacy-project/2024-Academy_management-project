@@ -140,7 +140,7 @@
                     </a>
                 </li>
                 <li>
-                    <a th:href="@{/student/planner/list}">
+                    <a th:href="@{/class-support/class}">
                         <i class="bi bi-circle"></i><span>플래너</span>
                     </a>
                 </li>
@@ -201,9 +201,9 @@
      <h5 class="card-title">수강 클래스</h5>
      <!-- 클래스 표 -->
      <table class="table table-bordered">
-       <thead>
+       <thead class="table-primary">
          <tr>
-           <th scope="col">#</th>
+           <th scope="col"></th>
            <th scope="col">과목</th>
            <th scope="col">클래스명</th>
            <th scope="col">시간</th>
@@ -223,12 +223,20 @@
     <!-- End 클래스 표 -->
 
     <!--  시간표  -->
-    <div class="card">
-     <div class="card-body pt-3">
-       <h5 class="card-title">시간표</h5>
-       <div class="tab-content pt-2">
-           <table class="table table-bordered">
-               <thead>
+    <h5 class="card-title">시간표</h5>
+    <div class="tab-content pt-2">
+        <style>
+            .table th, .table td {
+                width: 12%;
+                padding: 10px;
+                text-align: center;
+            }
+            .table th:first-child, .table td:first-child {
+                width: 14%;
+            }
+        </style>
+      <table class="table table-bordered">
+               <thead class="table-primary">
                <tr>
                    <th></th>
                    <th>월</th>
@@ -242,7 +250,7 @@
                </thead>
                <tbody>
                <tr th:each="row : ${timeTable}">
-                   <td th:text="${row.time}"></td>
+                   <td th:text="${row.time}" class="table-primary"></td>
                    <td th:text="${row.mon != null ? row.mon : ''}"></td>
                    <td th:text="${row.tue != null ? row.tue : ''}"></td>
                    <td th:text="${row.wed != null ? row.wed : ''}"></td>
@@ -257,8 +265,6 @@
      </div>
     </div>
     <!--     End 시간표   -->
-   </div>
- </div>
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->

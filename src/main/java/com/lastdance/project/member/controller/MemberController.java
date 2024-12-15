@@ -22,7 +22,7 @@ public class MemberController {
     @Autowired
     private MemberServiceImpl memberServiceImpl;
 
-    // 아이디 고정
+    // 학생 아이디 고정
     private final String fixedId = "chulsoo";
 
     @GetMapping("/student/info")

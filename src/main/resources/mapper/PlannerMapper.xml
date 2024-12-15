@@ -16,6 +16,7 @@
         WHERE p.planner_no = #{planner_no}
     </select>
 
+    <!-- id 로 플래너 가져오기 -->
     <select id="getPlannerByUserId" parameterType="String" resultType="com.lastdance.project.planner.model.PlannerDTO">
         SELECT p.planner_no,
                p.planner_title,
@@ -26,13 +27,25 @@
         FROM planner p
                  JOIN member m ON p.member_no = m.member_no
         WHERE m.id = #{id}
-
     </select>
 
-    <select id="getNameByUserId" parameterType="String" resultType="String">
+    <!--  member_no로 플래너 가져오기 (플래너 피드백)  -->
+    <select id="getPlannerByMemberNo" parameterType="int" resultType="com.lastdance.project.planner.model.PlannerDTO">
+        SELECT p.planner_no,
+               p.planner_title,
+               p.planner_txt,
+               p.planner_date,
+               p.member_no,
+               m.name AS name
+        FROM planner p
+                 JOIN member m ON p.member_no = m.member_no
+        WHERE m.member_no = #{member_no};
+    </select>
+
+    <select id="getStudentNameByUserId" parameterType="String" resultType="String">
         SELECT name
         FROM member
-        WHERE id = #{id}
+        WHERE id = #{id} AND role_type = 'STUDENT';
     </select>
 
     <select id="getMemberNoById" parameterType="String" resultType="int">
@@ -62,5 +75,50 @@
     <select id="findByNo" parameterType="int" resultType="com.lastdance.project.planner.model.PlannerDTO">
         SELECT * FROM planner WHERE planner_no = #{planner_no}
     </select>
+
+    <!--   피드백     -->
+    <select id="getFeedbackByPlannerNo" parameterType="int" resultType="com.lastdance.project.planner.model.FeedbackDTO">
+        SELECT
+            f.feedback_no AS feedback_no,
+            f.planner_no AS planner_no,
+            f.feedback_txt AS feedback_txt,
+            f.feedback_date,
+            m.name AS name
+        FROM planner p
+                 LEFT JOIN planner_feedback f ON p.planner_no = f.planner_no
+                 LEFT JOIN member m ON f.member_no = m.member_no
+        WHERE p.planner_no = #{planner_no};
+    </select>
+
+    <select id="getFeedbackById" parameterType="int" resultType="com.lastdance.project.planner.model.FeedbackDTO">
+        SELECT feedback_no, planner_no, feedback_txt, feedback_date, member_no
+        FROM planner_feedback
+        WHERE feedback_no = #{feedback_no};
+    </select>
+
+    <select id="getTeacherNameByUserId" parameterType="String" resultType="String">
+        SELECT name
+        FROM member
+        WHERE id = #{id} AND role_type = 'EMPLOYEE';
+    </select>
+
+    <!-- 피드백 추가 -->
+    <insert id="addFeedback" parameterType="com.lastdance.project.planner.model.FeedbackDTO">
+        INSERT INTO planner_feedback (planner_no, feedback_txt, feedback_date, member_no)
+        VALUES (#{planner_no}, #{feedback_txt}, #{feedback_date}, #{member_no});
+    </insert>
+
+    <!-- 피드백 수정  -->
+    <update id="updateFeedback" parameterType="com.lastdance.project.planner.model.FeedbackDTO">
+        UPDATE planner_feedback
+        SET feedback_txt = #{feedback_txt}, feedback_date = #{feedback_date}
+        WHERE feedback_no = #{feedback_no};
+    </update>
+
+    <!-- 피드백 삭제  -->
+    <delete id="deleteFeedback" parameterType="int">
+        DELETE FROM planner_feedback WHERE feedback_no = #{feedback_no};
+    </delete>
+
 
 </mapper>
