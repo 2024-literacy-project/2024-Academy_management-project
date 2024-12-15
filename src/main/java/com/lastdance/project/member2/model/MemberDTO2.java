@@ -1,8 +1,8 @@
-package com.lastdance.project.member.model;
+package com.lastdance.project.member2.model;
 
 import java.util.Date;
 
-public class MemberDTO {
+public class MemberDTO2 {
 
     private int member_no;
     private String name;
@@ -19,10 +19,10 @@ public class MemberDTO {
     private int grade;
     private String parent_contact;
 
-    public MemberDTO() {
+    public MemberDTO2() {
     }
 
-    public MemberDTO(int member_no, String name, String id, String password, String role_type, Date birth_date, String phone, String address, Date enroll_date, String school, int grade, String parent_contact) {
+    public MemberDTO2(int member_no, String name, String id, String password, String role_type, Date birth_date, String phone, String address, Date enroll_date, String school, int grade, String parent_contact) {
         this.member_no = member_no;
         this.name = name;
         this.id = id;

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lastdance.project.employeeList.model.dao.EmployeeListDAO">
+
+    <!-- 직원 목록 조회 -->
+    <select id="getAllEmployees" resultType="com.lastdance.project.employeeList.model.dto.EmployeeListDTO">
+        SELECT
+            e.member_no,
+            e.salary,
+            e.bonus,
+            e.total_salary,
+            e.dept_name,
+            m.name,     -- 이름
+            m.id,
+            m.password,
+            m.role_type,
+            m.birth_date,
+            m.phone,
+            m.address,
+            m.enroll_date
+        FROM employee e
+        JOIN member m ON e.member_no = m.member_no
+    </select>
+
+    <!-- 직원 추가 -->
+
+    <!-- 직원 상세보기 -->
+    <select id="getEmployeeByNo" parameterType="int" resultType="com.lastdance.project.employeeList.model.dto.EmployeeListDTO">
+        SELECT
+            e.member_no,
+            e.salary,
+            e.bonus,
+            e.total_salary,
+            e.dept_name,
+            m.name,     -- 이름
+            m.id,
+            m.password,
+            m.role_type,
+            m.birth_date,
+            m.phone,
+            m.address,
+            m.enroll_date
+        FROM employee e
+        JOIN member m ON e.member_no = m.member_no
+        WHERE m.member_no = #{member_no}
+    </select>
+
+    <!-- 직원 수정 -->
+    <update id="updateEmployee" parameterType="com.lastdance.project.employeeList.model.dto.EmployeeListDTO">
+        UPDATE employee e
+        JOIN member m ON e.member_no = m.member_no
+        SET m.name = #{name},
+            m.id = #{id},
+            m.password = #{password},
+            m.role_type = #{role_type},
+            m.birth_date = #{birth_date},
+            m.phone = #{phone},
+            m.address = #{address},
+            m.enroll_date = #{enroll_date},
+            e.salary = #{salary},               -- employee
+            e.bonus = #{bonus},
+            e.total_salary = #{total_salary},
+            e.dept_name = #{dept_name}
+        WHERE e.member_no = #{member_no}
+    </update>
+
+    <!-- 직원 삭제-->
+    <delete id="deleteEmployee" parameterType="int">
+        DELETE FROM employee WHERE member_no = #{member_no}
+    </delete>
+
+
+</mapper>

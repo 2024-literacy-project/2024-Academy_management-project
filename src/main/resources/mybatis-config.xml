@@ -15,9 +15,14 @@
         <mapper resource="mapper/user/ExamMapper.xml"/>
         <mapper resource="mapper/user/UserMapper.xml"/>
         <mapper resource="mapper/PlannerMapper.xml"/>
-        <mapper resource="mapper/MemberMapper.xml"/>
+        <mapper resource="mapper/MemberMapper2.xml"/>
         <mapper resource="mapper/ScheduleMapper.xml"/>
         <mapper resource="mapper/ClassMapper2.xml"/>
         <mapper resource="mapper/NoticeMapper.xml"/>
+        <mapper resource="mapper/MemberMapper.xml"/>
+        <mapper resource="mapper/ClassListMapper.xml"/>
+        <mapper resource="mapper/EmployeeListMapper.xml"/>
+        <mapper resource="mapper/StudentListMapper.xml"/>
+        <mapper resource="mapper/SubjectMapper.xml"/>
     </mappers>
 </configuration>

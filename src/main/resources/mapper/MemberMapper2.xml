@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lastdance.project.member2.model.MemberDAO2">
+
+    <!-- 학생 정보 -->
+    <select id="getStudentInfo" parameterType="String" resultType="com.lastdance.project.member2.model.MemberDTO2">
+        SELECT
+            m.member_no,
+            m.name,
+            m.id,
+            m.role_type,
+            m.birth_date,
+            m.phone,
+            m.address,
+            m.enroll_date,
+            s.school,
+            s.grade,
+            s.parent_contact
+        FROM
+            member m
+                JOIN
+            student s ON m.member_no = s.member_no
+        WHERE
+            m.id = #{id}
+    </select>
+
+</mapper>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lastdance.project.subject.model.dao.SubjectDAO">
+
+    <!-- subject 조회 -->
+    <select id="getAllSubjects" resultType="com.lastdance.project.subject.model.dto.SubjectDTO">
+--         SELECT * FROM subject
+        SELECT subject_no, subject_name
+        FROM subject
+    </select>
+
+</mapper>
