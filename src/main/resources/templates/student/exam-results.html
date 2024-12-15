@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Exam Results</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<h1>Exam Results</h1>
+
+<!-- 차트를 렌더링할 캔버스 -->
+<canvas id="examResultsChart" width="400" height="200"></canvas>
+
+<script th:inline="javascript">
+    // Thymeleaf로 전달받은 examResults 데이터를 JSON 형식으로 변환
+    const examResults = /*[[${examResults}]]*/ [];
+
+    // 차트 데이터 생성
+    const labels = examResults.map(result => result.examName);
+    const scores = examResults.map(result => result.score);
+
+    // Chart.js로 차트 렌더링
+    const ctx = document.getElementById('examResultsChart').getContext('2d');
+    new Chart(ctx, {
+        type: 'bar', // 차트 타입: bar, line, pie 등
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Exam Scores',
+                data: scores,
+                borderWidth: 1,
+                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                borderColor: 'rgba(75, 192, 192, 1)'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
