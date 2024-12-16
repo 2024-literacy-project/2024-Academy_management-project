@@ -2,20 +2,22 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-  <th:block th:replace="fragments/head :: head"></th:block>
+  <div th:replace="~{fragments/head :: head}"></div>
 </head>
 
 <body>
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-  <th:block th:replace="fragments/header :: header"></th:block>
-</header><!-- End Header -->
+  <div th:replace="~{fragments/header :: header}"></div>
+</header>
+<!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-  <th:block th:replace="fragments/aside :: aside"></th:block>
-</aside><!-- End Sidebar -->
+  <div th:replace="~{fragments/aside :: aside}"></div>
+</aside>
+<!-- End Sidebar -->
 
 
 

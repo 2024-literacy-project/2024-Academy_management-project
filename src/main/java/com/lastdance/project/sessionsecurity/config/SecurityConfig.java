@@ -33,7 +33,8 @@ public class SecurityConfig {
         // 하지만 view 페이지에서 css 랑 js 파일 사용하는 것도 일종의 URL 통신
         // 나중에 css, js, 등등 부트스트랩에서 딸려오는 파일들은 static 폴더에 저장해야 됨.
         return web -> web.ignoring()
-                .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+                .requestMatchers(PathRequest.toStaticResources().atCommonLocations())
+                .requestMatchers("/assets/**", "/css/**", "/js/**", "/images/**");
     }
 
     @Bean
@@ -41,12 +42,11 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> {
             // 해당하는 URL 은 로그인(인증이 되지 않은 사람도 들어갈 수 있다.)
-            auth.requestMatchers("/auth/login", "/student/signup", "/employee/signup", "/auth/fail", "/", "/main","/users/**" ).permitAll();
+            auth.requestMatchers("/auth/login", "/student/signup", "/employee/signup", "/auth/fail", "/", "/main","/users/**").permitAll();
             // 해당하는 URL 은 권한이 ADMIN 인 사람만 들어갈 수 있다.
             auth.requestMatchers("/admin/**").hasAnyAuthority(UserRole.ADMIN.getRole());
             // 해당하는 URL 은 권한이 STUDENT 인 사람만 들어갈 수 있다.
             auth.requestMatchers("/student/**").hasAnyAuthority(UserRole.STUDENT.getRole());
-
             // 해당하는 URL 은 권한이 EMPLOYEE 인 사람만 들어갈 수 있다.
             auth.requestMatchers("/employee/**").hasAnyAuthority(UserRole.EMPLOYEE.getRole());
 
