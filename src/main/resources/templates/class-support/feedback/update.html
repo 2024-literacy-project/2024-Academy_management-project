@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <!--    <title>내용</title>-->
+  <th:block th:replace="fragments/head :: head"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <th:block th:replace="fragments/header :: header"></th:block>
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  <th:block th:replace="fragments/aside :: aside"></th:block>
+</aside><!-- End Sidebar -->
+
+<!-- ======= 페이지 ======= -->
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>플래너</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="index.html">Main</a></li>
+          <li class="breadcrumb-item">수업지원</li>
+          <li class="breadcrumb-item active">플래너</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="row">
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">플래너 상세</h5>
+
+              <table class="p-table">
+                <tr>
+                  <th>제목</th>
+                  <td th:text="${plannerDTO.planner_title}"></td>
+                </tr>
+                <tr>
+                  <th>내용</th>
+                  <td th:text="${plannerDTO.planner_txt}"></td>
+                </tr>
+                <tr>
+                  <th>작성자</th>
+                  <td th:text="${plannerDTO.name}"></td>
+                </tr>
+                <tr>
+                  <th>작성일</th>
+                  <td th:text="${#dates.format(plannerDTO.planner_date, 'yyyy-MM-dd')}"></td>
+                </tr>
+              </table>
+     <!-- End 플래너 상세 -->
+
+            </div>
+          </div>
+        </div>
+
+       <!-- 플래너 피드백 -->
+        <div class="col-lg-6">
+
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">피드백 수정</h5>
+
+              <form th:if="${feedback != null}" th:action="@{/class-support/class-list/feedback/update}" method="post">
+                <table class="p-table">
+                  <tr>
+                    <th>작성자</th>
+                    <td th:text="${feedback.name}"></td>
+                  </tr>
+                  <tr>
+                    <th>피드백 내용</th>
+                    <td>
+                        <textarea id="feedback_txt" name="feedback_txt" rows="5" cols="50"
+                                  th:text="${feedback.feedback_txt}"></textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th>작성일</th>
+                    <td><input type="date" name="feedback_date" class="form-control" th:value="${#dates.format(feedback.feedback_date, 'yyyy-MM-dd')}"></td>
+                  </tr>
+                </table>
+
+                <input type="hidden" name="feedback_no" th:value="${feedback.feedback_no}">
+                <input type="hidden" name="planner_no" th:value="${plannerDTO.planner_no}">
+
+                <div class="d-flex justify-content-end mt-3">
+                  <button type="submit" class="btn btn-primary me-3">수정</button>
+                  <a th:href="@{/class-support/class-list/details/{planner_no}(planner_no=${plannerDTO.planner_no})}"
+                     class="btn btn-secondary">취소</a>
+                </div>
+              </form>
+            </div>
+          </div>
+      <!-- End 플래너 피드백 -->
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main><!-- End #main -->
+
+  <!-- ======= Footer ======= -->
+
+  <footer id="footer" class="footer">
+    <div class="copyright">
+      &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+      Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </footer>
+  <!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="/assets/vendor/quill/quill.js"></script>
+  <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

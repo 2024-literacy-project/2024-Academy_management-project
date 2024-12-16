@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lastdance.project.class_support.model.dao.StudentAttendanceDAO">
+
+    <!-- 학생 출석 정보를 모두 가져오기 -->
+    <select id="getAllStudentAttendances" resultType="com.lastdance.project.class_support.model.dto.StudentAttendanceDTO">
+        SELECT * FROM student_attendance
+    </select>
+
+    <!-- 특정 학생의 출석 정보를 가져오기 (출석번호 기준) -->
+    <select id="getStudentAttendanceById" parameterType="int" resultType="com.lastdance.project.class_support.model.dto.StudentAttendanceDTO">
+        SELECT * FROM student_attendance WHERE stu_attendance_no = #{stu_attendance_no}
+    </select>
+
+    <!-- 학생 출석 정보 추가하기 -->
+    <insert id="insertStudentAttendance" parameterType="com.lastdance.project.class_support.model.dto.StudentAttendanceDTO">
+        INSERT INTO student_attendance (stu_attendance_status, stu_attendance_date, member_no, attendance_time, home_time)
+        VALUES (#{stu_attendance_status}, #{stu_attendance_date}, #{member_no}, #{attendance_time}, #{home_time})
+    </insert>
+
+    <!-- 학생 출석 정보 수정하기 -->
+    <update id="updateStudentAttendance" parameterType="com.lastdance.project.class_support.model.dto.StudentAttendanceDTO">
+        UPDATE student_attendance
+        SET stu_attendance_status = #{stu_attendance_status},
+            stu_attendance_date = #{stu_attendance_date},
+            attendance_time = #{attendance_time},
+            home_time = #{home_time}
+        WHERE stu_attendance_no = #{stu_attendance_no}
+    </update>
+
+    <!-- 학생 출석 정보 삭제하기 -->
+    <delete id="deleteStudentAttendance" parameterType="int">
+        DELETE FROM student_attendance WHERE stu_attendance_no = #{stu_attendance_no}
+    </delete>
+
+    <select id="getAttendanceSummaryByDate" parameterType="date" resultType="com.lastdance.project.class_support.model.dto.StudentAttendanceDTO">
+        SELECT sa.stu_attendance_no, sa.stu_attendance_status, sa.stu_attendance_date, sa.member_no, sa.attendance_time, sa.home_time, m.name AS student_name
+        FROM student_attendance sa
+                 JOIN member m ON sa.member_no = m.member_no
+        WHERE sa.stu_attendance_date = #{attendanceDate}
+    </select>
+
+    <select id="getAttendanceSummaryByDateAndClass" parameterType="map" resultType="com.lastdance.project.class_support.model.dto.StudentAttendanceDTO">
+        SELECT
+            sa.stu_attendance_no,
+            sa.stu_attendance_status,
+            sa.stu_attendance_date,
+            sa.member_no,
+            sa.attendance_time,
+            sa.home_time,
+            sc.class_no,
+            m.name AS student_name
+        FROM student_attendance sa
+                 JOIN student_class sc ON sa.member_no = sc.member_no
+                 JOIN member m ON sa.member_no = m.member_no
+        WHERE DATE(sa.stu_attendance_date) = #{date}
+          AND sc.class_no = #{class_no}
+    </select>
+
+
+
+
+
+</mapper>

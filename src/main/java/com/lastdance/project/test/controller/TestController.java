@@ -4,6 +4,7 @@ import com.lastdance.project.test.model.dto.TestDTO;
 import com.lastdance.project.test.service.TestService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class TestController {
         this.testService = testService;
     }
 
-    @RequestMapping("/index")
+    @RequestMapping("/")
     public ModelAndView openAll() throws Exception {
 
         ModelAndView mv = new ModelAndView("index");

@@ -1,0 +1,183 @@
+<th:block th:fragment="aside" xmlns:sec="http://www.thymeleaf.org/extras/spring-security" >
+    <ul class="sidebar-nav" id="sidebar-nav">
+
+        <li class="nav-item">
+            <a class="nav-link " th:href="@{/}">
+                <i class="bi bi-grid"></i>
+                <span th:text="'메인'">메인</span>
+            </a>
+        </li><!-- End 메인 Nav -->
+
+<!--        <li class="nav-item">-->
+<!--            <a class="nav-link " th:href="@{/academy/dashboard}">-->
+<!--                <i class="bi bi-grid"></i>-->
+<!--                <span th:text="'학원현황'">학원현황</span>-->
+<!--            </a>-->
+<!--        </li>&lt;!&ndash; End 학원현황 Nav &ndash;&gt;-->
+
+        <li class="nav-item"  sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i>
+                <span th:text="'학원관리'">학원관리</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+
+            <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+<!--                <li>-->
+<!--                    <a th:href="@{/academy/info}">-->
+<!--                        <i class="bi bi-circle"></i>-->
+<!--                        <span th:text="'학원정보'">학원정보</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+                <li sec:authorize="hasAnyAuthority('ADMIN')">
+                    <a th:href="@{/employee/signup}">
+                        <i class="bi bi-circle"></i>
+                        <span th:text="'강사등록'">강사등록</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasAnyAuthority('ADMIN')">
+                    <a th:href="@{/employeeList}">
+                        <i class="bi bi-circle"></i>
+                        <span th:text="'강사목록'">강사목록</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                    <!--          <a href="../components-cards.html">-->
+                    <a th:href="@{/classList}">
+                        <i class="bi bi-circle"></i><span>클래스목록</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End 학원관리 Nav -->
+
+        <li class="nav-item" sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i>
+                <span th:text="'학생관리'">학생관리</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                    <a th:href="@{/student/signup}">
+                        <i class="bi bi-circle"></i>
+                        <span th:text="'학생등록'">학생등록</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                    <a th:href="@{/studentList}">
+                        <i class="bi bi-circle"></i>
+                        <span th:text="'학생정보'">학생정보</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End 학생관리 Nav -->
+
+        <li class="nav-item" sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i>
+                <span th:text="'수업지원'">수업지원</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                    <a class="nav-link collapsed" data-bs-target="#attendance-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-circle"></i><span>출석관리</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="attendance-nav" class="nav-content collapse background-color: #fff;" data-bs-parent="#forms-nav">
+                        <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                            <a href="/class_support/classAttendanceList">
+                                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">출석/결석 체크</span>
+                            </a>
+                        </li>
+                        <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                            <a href="/class_support/attendanceSummary">
+                                <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">일자별 출결 현황 표시</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+
+                </li>
+
+                <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                    <a class="nav-link collapsed" data-bs-target="#grade-nav" data-bs-toggle="collapse" href="#">
+                        <i class="bi bi-circle"></i><span>성적관리</span><i class="bi bi-chevron-down ms-auto"></i>
+                    </a>
+                    <ul id="grade-nav" class="nav-content collapse background-color: #fff;" data-bs-parent="#forms-nav">
+                        <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                            <a href="/class_support/gradeRegistration">
+                                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">성적 등록</span>
+                            </a>
+                        </li>
+                        <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                            <a href="/class_support/gradeUpdate">
+                                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">성적 관리</span>
+                            </a>
+                        </li>
+                        <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                            <a href="/class_support/gradeSearch">
+                                <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">성적 검색</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+
+                </li>
+<!--                <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">-->
+<!--                    <a th:href="@{/class/list}">-->
+<!--                        <i class="bi bi-circle"></i>-->
+<!--                        <span th:text="'과제등록'">과제등록</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+                <li sec:authorize="hasAnyAuthority('EMPLOYEE', 'ADMIN')">
+                    <a th:href="@{/class-support/class}">
+                        <i class="bi bi-circle"></i>
+                        <span th:text="'플래너'">플래너</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End 수업지원 Nav -->
+
+        <li class="nav-item" sec:authorize="hasAnyAuthority('STUDENT')">
+            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-bar-chart"></i>
+                <span th:text="'학생상세페이지'">학생상세페이지</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li sec:authorize="hasAnyAuthority('STUDENT')">
+                    <a th:href="@{/student/info}">
+                        <i class="bi bi-circle"></i>
+                        <span th:text="'학생정보'">학생정보</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasAnyAuthority('STUDENT')">
+                    <a th:href="@{/student/time-table}">
+                        <i class="bi bi-circle"></i>
+                        <span th:text="'클래스/시간표'">클래스/시간표</span>
+                    </a>
+                </li>
+<!--                <li sec:authorize="hasAnyAuthority('STUDENT')">-->
+<!--                    <a th:href="@{/student/attendance}">-->
+<!--                        <i class="bi bi-circle"></i>-->
+<!--                        <span th:text="'출석현황'">출석현황</span>-->
+<!--                    </a>-->
+<!--                </li>-->
+                <li sec:authorize="hasAnyAuthority('STUDENT')">
+                    <a th:href="@{/student/exam-results}">
+                        <i class="bi bi-circle"></i>
+                        <span th:text="'학습리포트'">학습리포트</span>
+                    </a>
+                </li>
+                <li sec:authorize="hasAnyAuthority('STUDENT')">
+                    <a th:href="@{/student/planner/list}">
+                        <i class="bi bi-circle"></i>
+                        <span th:text="'My플래너'">My플래너</span>
+                    </a>
+                </li>
+            </ul>
+        </li><!-- End 학생상세페이지 Nav -->
+    </ul>
+</th:block>

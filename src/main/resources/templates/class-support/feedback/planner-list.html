@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <!--    <title>내용</title>-->
+  <th:block th:replace="fragments/head :: head"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <th:block th:replace="fragments/header :: header"></th:block>
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  <th:block th:replace="fragments/aside :: aside"></th:block>
+</aside><!-- End Sidebar -->
+
+<!-- ======= 페이지 ======= -->
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>플래너 목록</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a th:href="@{/static}">Main</a></li>
+          <li class="breadcrumb-item">수업지원</li>
+          <li class="breadcrumb-item active">플래너</li>
+        </ol>
+      </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section">
+      <div class="card">
+        <div class="card-body">
+
+          <!-- 플래너 목록 -->
+          <table class="table datatable">
+            <thead>
+            <tr>
+              <th>제목</th>
+              <th>작성자</th>
+              <th data-type="date" data-format="YYYY/DD/MM">작성일</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="plannerDTO : ${plannerList}">
+              <td><a th:href="@{/class-support/class-list/details/{planner_no}(planner_no=${plannerDTO.planner_no})}" th:text="${plannerDTO.planner_title}">제목</a></td>
+              <td th:text="${plannerDTO.name}">작성자</td>
+              <td th:text="${#dates.format(plannerDTO.planner_date, 'yyyy-MM-dd')}">2005/02/11</td>
+            </tr>
+            </tbody>
+          </table>
+          <!-- End 플래너 목록 -->
+      </div>
+
+    </section>
+
+  </main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+  <div class="copyright">
+    &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
+  </div>
+  <div class="credits">
+    Designed by BootstrapMade
+  </div>
+</footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="/assets/vendor/quill/quill.js"></script>
+  <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

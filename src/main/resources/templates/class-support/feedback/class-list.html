@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <!--    <title>내용</title>-->
+    <th:block th:replace="fragments/head :: head"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <th:block th:replace="fragments/header :: header"></th:block>
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+    <th:block th:replace="fragments/aside :: aside"></th:block>
+</aside><!-- End Sidebar -->
+
+<!-- ======= 페이지 ======= -->
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>클래스 목록</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a th:href="@{/static}">Main</a></li>
+                <li class="breadcrumb-item">수업지원</li>
+                <li class="breadcrumb-item active">플래너</li>
+            </ol>
+        </nav>
+    </div>
+    <!-- End Page Title -->
+
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">클래스 목록</h5>
+
+                <table class="table datatable">
+                    <thead>
+                    <tr>
+                        <th>클래스명</th>
+                        <th>강사</th>
+                        <th>수업일정</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="class : ${classList}">
+                        <td><a th:href="@{'/class-support/student-list/' + ${class.class_no}}" th:text="${class.class_name}"></a></td>
+                        <td th:text="${class.name}"></td>
+                        <td th:text="${class.class_schedule}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        Designed by BootstrapMade
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

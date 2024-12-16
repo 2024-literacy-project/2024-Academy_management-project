@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lastdance.project.schedule.model.ScheduleDAO">
+
+    <!-- 수강 클래스 정보 -->
+    <select id="getStudentClass" parameterType="String" resultType="com.lastdance.project.schedule.model.ScheduleDTO">
+        SELECT c.class_no,
+               c.class_name,
+               c.class_schedule,
+               sub.subject_name,
+               sub.class_day,
+               sub.class_time,
+               teacher.name
+        FROM member student
+            JOIN student_class sc ON student.member_no = sc.member_no
+            JOIN class c ON sc.class_no = c.class_no
+            JOIN subject sub ON c.subject_no = sub.subject_no
+            JOIN member teacher ON c.member_no = teacher.member_no
+        WHERE student.id = #{id};
+    </select>
+
+    <!-- 클래스 시간표 -->
+    <select id="getTimeTable" parameterType="String" resultType="com.lastdance.project.schedule.model.TimeTableDTO">
+        SELECT
+            c.class_no,
+            c.class_name,
+            c.class_schedule,
+            sub.subject_name,
+            sub.class_day,
+            sub.class_time
+        FROM
+            member m
+                JOIN student_class sc ON m.member_no = sc.member_no
+                JOIN class c ON sc.class_no = c.class_no
+                JOIN subject sub ON c.subject_no = sub.subject_no
+        WHERE
+            m.id = #{id}
+    </select>
+
+
+</mapper>

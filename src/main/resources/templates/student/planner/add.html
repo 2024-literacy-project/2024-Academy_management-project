@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <!--    <title>내용</title>-->
+  <th:block th:replace="fragments/head :: head"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <th:block th:replace="fragments/header :: header"></th:block>
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  <th:block th:replace="fragments/aside :: aside"></th:block>
+</aside><!-- End Sidebar -->
+
+<!-- ======= 페이지 ======= -->
+  <main id="main" class="main">
+
+    <div class="pagetitle">
+      <h1>MY 플래너</h1>
+      <nav>
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a th:href="@{/}">Main</a></li>
+          <li class="breadcrumb-item">학생상세페이지</li>
+          <li class="breadcrumb-item active">플래너</li>
+        </ol>
+      </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">플래너 작성</h5>
+
+          <!-- 플래너 작성 폼 -->
+          <form th:action="@{/student/planner/add}" method="post">
+            <input type="hidden" name="id" th:value="${plannerDTO.id}" />
+            <table class="p-table">
+              <tr>
+                <th>제목</th>
+                <td><input type="text" name="planner_title" class="form-control" required></td>
+              </tr>
+              <tr>
+                <th>작성자</th>
+                <td th:text="${plannerDTO.name}"></td>
+              </tr>
+              <tr>
+                <th>작성일</th>
+                <td><input type="date" name="planner_date" class="form-control" required></td>
+              </tr>
+              <tr>
+                <th>내용</th>
+                <td><textarea name="planner_txt" class="form-control" style="height: 100px"required></textarea></td>
+              </tr>
+            </table>
+
+            <!--  저장, 취소 버튼  -->
+            <div class="d-flex justify-content-end mt-3">
+              <button type="submit" class="btn btn-primary me-3">저장</button>
+              <a th:href="@{/student/planner/list}" class="btn btn-secondary">취소</a>
+            </div>
+
+          </form>
+          <!-- End 플래너 작성 -->
+        </div>
+      </div>
+  </section>
+
+  </main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+  <div class="copyright">
+    &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
+  </div>
+  <div class="credits">
+    Designed by BootstrapMade
+  </div>
+</footer><!-- End Footer -->
+
+  <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Vendor JS Files -->
+  <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+  <script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/assets/vendor/chart.js/chart.umd.js"></script>
+  <script src="/assets/vendor/echarts/echarts.min.js"></script>
+  <script src="/assets/vendor/quill/quill.js"></script>
+  <script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+  <script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+  <script src="/assets/vendor/php-email-form/validate.js"></script>
+
+  <!-- Template Main JS File -->
+  <script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lastdance.project.sessionsecurity.user.model.dao.UserMapper">
+
+<!--    <resultMap id="login" type="com.lastdance.project.sessionsecurity.user.model.dto.LoginUserDTO">-->
+<!--        <id property="userCode" column="USER_NO"/>-->
+<!--        <result property="userId" column="USER_ID"/>-->
+<!--        <result property="userName" column="USER_NAME"/>-->
+<!--        <result property="password" column="PASSWORD"/>-->
+<!--        <result property="userRole" column="USER_ROLE"/>-->
+<!--    </resultMap>-->
+
+    <resultMap id="login" type="com.lastdance.project.sessionsecurity.user.model.dto.LoginUserDTO">
+        <id property="userCode" column="MEMBER_NO"/>
+        <result property="userId" column="ID"/>
+        <result property="userName" column="NAME"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="userRole" column="ROLE_TYPE"/>
+    </resultMap>
+
+    <resultMap id="BaseUserMap" type="com.lastdance.project.sessionsecurity.user.model.dto.BaseUserDTO">
+        <result property="memberNo" column="MEMBER_NO"/>
+        <result property="userId" column="ID"/>
+        <result property="userName" column="NAME"/>
+        <result property="userPass" column="PASSWORD"/>
+        <result property="role" column="ROLE_TYPE"/>
+    </resultMap>
+
+
+    <insert id="registMember" parameterType="com.lastdance.project.sessionsecurity.user.model.dto.SignupDTO" useGeneratedKeys="true" keyProperty="memberNo">
+        INSERT INTO MEMBER (
+                                NAME
+                                ,ID
+                                ,PASSWORD
+                                ,ROLE_TYPE
+                                ,BIRTH_DATE
+                                ,PHONE
+                                ,ADDRESS
+                                ,ENROLL_DATE
+                              )
+        VALUES (
+                #{ userName }
+                ,#{ userId }
+                ,#{ userPass }
+                ,#{ role }
+                ,#{ birth }
+                ,#{ phone }
+                ,#{ address }
+                ,#{ registrationDate }
+        )
+    </insert>
+
+    <insert id="registMember2" parameterType="com.lastdance.project.sessionsecurity.user.model.dto.SignupDTO2" useGeneratedKeys="true" keyProperty="memberNo">
+        INSERT INTO MEMBER (
+        NAME
+        ,ID
+        ,PASSWORD
+        ,ROLE_TYPE
+        ,BIRTH_DATE
+        ,PHONE
+        ,ADDRESS
+        ,ENROLL_DATE
+        )
+        VALUES (
+        #{ userName }
+        ,#{ userId }
+        ,#{ userPass }
+        ,#{ role }
+        ,#{ birth }
+        ,#{ phone }
+        ,#{ address }
+        ,#{ registrationDate }
+        )
+    </insert>
+
+    <insert id="registStudent" parameterType="com.lastdance.project.sessionsecurity.user.model.dto.StudentDTO">
+        INSERT INTO STUDENT (
+                                MEMBER_NO
+                                ,SCHOOL
+                                ,GRADE
+                                ,PARENT_CONTACT
+                                )
+        VALUES (
+                #{ memberNo },
+                #{ school },
+                #{ grade },
+                #{ parentContact }
+        )
+    </insert>
+
+    <insert id="registEmployee" parameterType="com.lastdance.project.sessionsecurity.user.model.dto.EmployeeDTO">
+        INSERT INTO EMPLOYEE (
+                                MEMBER_NO
+                                ,SALARY
+                                ,BONUS
+                                ,TOTAL_SALARY
+                                ,DEPT_NAME
+                                )
+        VALUES (
+                #{ memberNo },
+                #{ salary },
+                #{ bonus },
+                #{ totalSalary },
+                #{ deptName }
+        )
+    </insert>
+
+
+    <select id="findByUsername" resultMap="login">
+        SELECT
+                MEMBER_NO
+                ,ID
+                ,NAME
+                ,PASSWORD
+                ,ROLE_TYPE
+          FROM MEMBER
+         WHERE ID = #{ username }
+    </select>
+
+
+    <!-- 전체 사용자 조회 -->
+    <select id="selectAllUsers" resultMap="BaseUserMap">
+        SELECT
+            MEMBER_NO
+            ,NAME
+            ,ID
+            ,PASSWORD
+            ,ROLE_TYPE
+        FROM MEMBER
+    </select>
+
+
+    <!-- 특정 사용자 조회 -->
+<!--   parameterType="INT"-->
+    <select id="selectUserById" resultMap="BaseUserMap">
+        SELECT * FROM MEMBER WHERE MEMBER_NO = #{memberNo}
+    </select>
+
+    <!-- 사용자 정보 수정 -->
+    <update id="updateUser" parameterType="com.lastdance.project.sessionsecurity.user.model.dto.BaseUserDTO">
+        UPDATE MEMBER SET NAME = #{userName}, ID = #{userId} ,PASSWORD = #{userPass} WHERE MEMBER_NO = #{memberNo}
+    </update>
+
+
+
+</mapper>
+
+

@@ -5,10 +5,10 @@ import java.util.Date;
 public class TestDTO {
 
     private int member_no;
-    private String member_name;
-    private String member_id;
-    private String member_password;
-    private Enum member_role_type;
+    private String name;
+    private String id;
+    private String password;
+    private String role_type;
     private Date birth_date;
     private String phone;
     private String address;
@@ -17,12 +17,12 @@ public class TestDTO {
     public TestDTO() {
     }
 
-    public TestDTO(int member_no, String member_name, String member_id, String member_password, Enum member_role_type, Date birth_date, String phone, String address, Date enroll_date) {
+    public TestDTO(int member_no, String name, String id, String password, String role_type, Date birth_date, String phone, String address, Date enroll_date) {
         this.member_no = member_no;
-        this.member_name = member_name;
-        this.member_id = member_id;
-        this.member_password = member_password;
-        this.member_role_type = member_role_type;
+        this.name = name;
+        this.id = id;
+        this.password = password;
+        this.role_type = role_type;
         this.birth_date = birth_date;
         this.phone = phone;
         this.address = address;
@@ -37,36 +37,36 @@ public class TestDTO {
         this.member_no = member_no;
     }
 
-    public String getMember_name() {
-        return member_name;
+    public String getName() {
+        return name;
     }
 
-    public void setMember_name(String member_name) {
-        this.member_name = member_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getMember_id() {
-        return member_id;
+    public String getId() {
+        return id;
     }
 
-    public void setMember_id(String member_id) {
-        this.member_id = member_id;
+    public void setId(String id) {
+        this.id = id;
     }
 
-    public String getMember_password() {
-        return member_password;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMember_password(String member_password) {
-        this.member_password = member_password;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Enum getMember_role_type() {
-        return member_role_type;
+    public String getRole_type() {
+        return role_type;
     }
 
-    public void setMember_role_type(Enum member_role_type) {
-        this.member_role_type = member_role_type;
+    public void setRole_type(String role_type) {
+        this.role_type = role_type;
     }
 
     public Date getBirth_date() {
@@ -105,10 +105,10 @@ public class TestDTO {
     public String toString() {
         return "TestDTO{" +
                 "member_no=" + member_no +
-                ", member_name='" + member_name + '\'' +
-                ", member_id='" + member_id + '\'' +
-                ", member_password='" + member_password + '\'' +
-                ", member_role_type=" + member_role_type +
+                ", name='" + name + '\'' +
+                ", id='" + id + '\'' +
+                ", password='" + password + '\'' +
+                ", role_type=" + role_type +
                 ", birth_date=" + birth_date +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +

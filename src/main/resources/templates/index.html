@@ -1,338 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Dashboard - NiceAdmin Bootstrap Template</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link href="/assets/img/favicon.png" rel="icon">
-  <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-  <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-  <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="/css/style.css" rel="stylesheet">
+  <title></title>
+  <div th:replace="~{fragments/head :: head}"></div>
 </head>
 
 <body>
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-
-  <div class="d-flex align-items-center justify-content-between">
-    <a href="index.html" class="logo d-flex align-items-center">
-      <img src="/assets/img/logo.png" alt="">
-      <span class="d-none d-lg-block">LastDance</span>
-    </a>
-    <!--      <i class="bi bi-list toggle-sidebar-btn"></i>-->
-  </div><!-- End Logo -->
-
-  <nav class="header-nav ms-auto">
-    <button type="button" class="btn btn-outline-dark" href="#">로그아웃</button>
-  </nav><!-- End Icons Navigation -->
-
-</header><!-- End Header -->
+  <div th:replace="~{fragments/header :: header}"></div>
+</header>
+<!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
+  <div th:replace="~{fragments/aside :: aside}"></div>
+</aside>
+<!-- End Sidebar -->
 
-  <ul class="sidebar-nav" id="sidebar-nav">
 
-    <li class="nav-item">
-      <a class="nav-link " href="/index">
-        <i class="bi bi-grid"></i>
-        <span>메인</span>
-      </a>
-    </li><!-- End 메인 Nav -->
 
-    <li class="nav-item">
-      <a class="nav-link " href="/academy-management/dashboard">
-        <i class="bi bi-grid"></i>
-        <span>학원현황</span>
-      </a>
-    </li><!-- End 학원현황 Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-menu-button-wide"></i><span>학원관리</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-
-      <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="../components-alerts.html">
-            <i class="bi bi-circle"></i><span>학원정보</span>
-          </a>
-        </li>
-        <li>
-          <a href="../components-accordion.html">
-            <i class="bi bi-circle"></i><span>강사등록</span>
-          </a>
-        </li>
-        <li>
-          <a href="../components-badges.html">
-            <i class="bi bi-circle"></i><span>강사목록</span>
-          </a>
-        </li>
-        <li>
-          <a href="../components-cards.html">
-            <i class="bi bi-circle"></i><span>클래스목록</span>
-          </a>
-        </li>
-        <li>
-          <a href="../components-buttons.html">
-            <i class="bi bi-circle"></i><span>권한</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- End 학원관리 Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i><span>학생관리</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="forms.html">
-            <i class="bi bi-circle"></i><span>학생등록</span>
-          </a>
-        </li>
-        <li>
-          <a href="../tables-data.html">
-            <i class="bi bi-circle"></i><span>학생정보</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- End 학생관리 Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-journal-text"></i><span>수업지원</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="../forms-elements.html">
-            <i class="bi bi-circle"></i><span>출석관리</span>
-          </a>
-        </li>
-        <li>
-          <a href="../forms-layouts.html">
-            <i class="bi bi-circle"></i><span>성적등록</span>
-          </a>
-        </li>
-        <li>
-          <a href="../forms-editors.html">
-            <i class="bi bi-circle"></i><span>과제등록</span>
-          </a>
-        </li>
-        <li>
-          <a href="../forms-validation.html">
-            <i class="bi bi-circle"></i><span>플래너</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- End 수업지원 Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-bar-chart"></i><span>학생상세페이지</span><i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-        <li>
-          <a href="../charts-chartjs.html">
-            <i class="bi bi-circle"></i><span>학생정보</span>
-          </a>
-        </li>
-        <li>
-          <a href="../charts-apexcharts.html">
-            <i class="bi bi-circle"></i><span>클래스/시간표</span>
-          </a>
-        </li>
-        <li>
-          <a href="../charts-echarts.html">
-            <i class="bi bi-circle"></i><span>출석현황</span>
-          </a>
-        </li>
-        <li>
-          <a href="../charts-echarts.html">
-            <i class="bi bi-circle"></i><span>학습리포트</span>
-          </a>
-        </li>
-        <li>
-          <a href="../charts-echarts.html">
-            <i class="bi bi-circle"></i><span>My플래너</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- End 학생상세페이지 Nav -->
-  </ul>
-</aside><!-- End Sidebar-->
-
+<!-- ======= 메인 페이지 ======= -->
 <main id="main" class="main">
 
   <div class="pagetitle">
-    <h1>메인</h1>
+    <h1 th:text="${pageTitle}">메인</h1>
   </div><!-- End Page Title -->
 
   <section class="section dashboard">
 
+  <!--   메인 사진 -->
     <div class="container">
       <div class="row gy-4">
         <div class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center">
-          <h1 data-aos="fade-up">We offer modern solutions for growing your business</h1>
-          <p data-aos="fade-up" data-aos-delay="100">We are team of talented designers making websites with Bootstrap</p>
+          <h1 data-aos="fade-up" th:text="${welcomeTitle}">Welcome Title</h1>
+          <p data-aos="fade-up" data-aos-delay="100" th:text="${welcomeDescription}">Welcome Description</p>
         </div>
         <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-          <img src="assets/img/hero-img.png" class="img-fluid animated" alt="">
+          <img th:src="@{/assets/img/hero-img.png}" class="img-fluid animated" alt="">
         </div>
       </div>
     </div>
 
-    <div class="row">
-
-      <!-- Left side columns -->
-      <div class="col-lg-8">
-        <div class="row">
-
-          <!-- 관리자로그인 Card -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card revenue-card">
-
-              <div class="card-body">
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-currency-dollar"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6 href="#">관리자 로그인</h6>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div><!-- End 관리자로그인 Card -->
-
-          <!-- 직원 로그인 Card -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card revenue-card">
-
-              <div class="card-body">
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-currency-dollar"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>직원 로그인</h6>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div><!-- End 직원 로그인 Card -->
-
-          <!-- 학생 로그인 Card -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
-
-              <div class="card-body">
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cart"></i>
-                  </div>
-                  <div class="ps-3">
-                    <h6>학생 로그인</h6>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div><!-- End 학생 로그인 Card -->
-
-          <!-- Right side columns -->
-          <div class="col-lg-4">
-
-            <!-- News & Updates Traffic -->
+<!--    <div class="row">-->
+<!--      &lt;!&ndash; Left side columns &ndash;&gt;-->
+<!--      <div class="col-lg-8">-->
+<!--        <div class="row">-->
+<!--          &lt;!&ndash; Right side columns &ndash;&gt;-->
+<!--          <div class="col-lg-4">-->
+            <!-- 공지사항 -->
             <div class="card">
-
               <div class="card-body pb-0">
                 <h3 class="card-title">학원공지</h3>
+<!--                <div class="news">-->
+<!--                </div>&lt;!&ndash; End sidebar recent posts&ndash;&gt;-->
 
-                <div class="news">
-                  <div class="post-item clearfix">
-                    <img src="/assets/img/news-1.jpg" alt="">
-                    <h4><a href="#">Nihil blanditiis at in nihil autem</a></h4>
-                    <p>Sit recusandae non aspernatur laboriosam. Quia enim eligendi sed ut harum...</p>
-                  </div>
+                <!-- 공지사항 리스트 -->
+                <div th:if="${#lists.isEmpty(noticeList)}">
+                  <p>현재 공지사항이 없습니다.</p>
+                </div>
 
-                  <div class="post-item clearfix">
-                    <img src="/assets/img/news-2.jpg" alt="">
-                    <h4><a href="#">Quidem autem et impedit</a></h4>
-                    <p>Illo nemo neque maiores vitae officiis cum eum turos elan dries werona nande...</p>
-                  </div>
-
-                  <div class="post-item clearfix">
-                    <img src="/assets/img/news-3.jpg" alt="">
-                    <h4><a href="#">Id quia et et ut maxime similique occaecati ut</a></h4>
-                    <p>Fugiat voluptas vero eaque accusantium eos. Consequuntur sed ipsam et totam...</p>
-                  </div>
-
-                  <div class="post-item clearfix">
-                    <img src="/assets/img/news-4.jpg" alt="">
-                    <h4><a href="#">Laborum corporis quo dara net para</a></h4>
-                    <p>Qui enim quia optio. Eligendi aut asperiores enim repellendusvel rerum cuder...</p>
-                  </div>
-
-                  <div class="post-item clearfix">
-                    <img src="/assets/img/news-5.jpg" alt="">
-                    <h4><a href="#">Et dolores corrupti quae illo quod dolor</a></h4>
-                    <p>Odit ut eveniet modi reiciendis. Atque cupiditate libero beatae dignissimos eius...</p>
-                  </div>
-
-                </div><!-- End sidebar recent posts-->
-
-              </div>
-            </div><!-- End News & Updates -->
-
-          </div><!-- End Right side columns -->
-
-        </div>
+                <!-- 공지사항 리스트 -->
+                <div th:each="notice : ${noticeList}" class="post-item clearfix">
+                  <!-- 기본 이미지 대체 -->
+<!--                  <img src="/assets/img/news-1.jpg" alt="공지 이미지">-->
+                  <h4>
+                    <a th:href="@{/notice/{notice_no}(notice_no=${notice.notice_no})}" th:text="${notice.notice_title}">공지사항 제목</a>
+                  </h4>
+                  <p th:text="${notice.notice_txt}">공지사항 내용</p>
+                 </div>
+              </div><!-- End sidebar recent posts -->
+            </div>
+<!--          </div>&lt;!&ndash; End 공지사항 &ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>&lt;!&ndash; End sidebar recent posts&ndash;&gt;-->
   </section>
 
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
-  <div class="copyright">
-    &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
-  </div>
-  <div class="credits">
-    <!-- All the links in the footer should remain intact. -->
-    <!-- You can delete the links only if you purchased the pro version. -->
-    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
-    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-  </div>
-</footer><!-- End Footer -->
+  <th:block th:replace="fragments/footer :: footer"></th:block>
+</footer>
+<!-- End Footer -->
 
-<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center">
+  <i class="bi bi-arrow-up-short"></i>
+</a>
 
 <!-- Vendor JS Files -->
 <script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>

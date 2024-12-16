@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lastdance.project.classList.model.dao.ClassListDAO">
+
+    <!-- 클래스리스트 확인 -->
+    <select id="getAllClassList" resultType="com.lastdance.project.classList.model.dto.ClassListDTO">
+--         SELECT * FROM `class`
+            SELECT
+                c.class_no,
+                c.class_name,
+                c.class_schedule,
+                c.subject_no,
+                c.member_no,
+                s.subject_name, -- 과목 이름
+                m.name  -- 관련인 이름
+            FROM `class` c
+                     JOIN subject s ON c.subject_no = s.subject_no -- 과목과 연결
+                     JOIN member m ON c.member_no = m.member_no -- 관련인과 연결
+    </select>
+
+    <!-- 클래스리스트 추가 -->
+    <insert id="insertClass" parameterType="com.lastdance.project.classList.model.dto.ClassListDTO">
+        INSERT INTO `class` (class_name, class_schedule, subject_no, member_no)
+        VALUES (#{class_name}, #{class_schedule}, #{subject_no}, #{member_no})
+    </insert>
+
+    <!-- 클래스리스트 상세보기-->
+<!--    <select id="getClassByNo" parameterType="int" resultType="com.lastdance.project.classList.model.dto.ClassListDTO">-->
+<!--        SELECT * FROM `class` WHERE class_no = #{class_no}-->
+<!--         SELECT-->
+<!--            c.class_no,-->
+<!--            c.class_name,-->
+<!--            c.class_schedule,-->
+<!--            c.subject_no,-->
+<!--            c.member_no,-->
+<!--            s.subject_name, &#45;&#45; 과목명-->
+<!--            m.name          &#45;&#45; 관련인 이름-->
+<!--        FROM `class` c-->
+<!--                 JOIN subject s ON c.subject_no = s.subject_no-->
+<!--                 JOIN member m ON c.member_no = m.member_no-->
+<!--        WHERE c.class_no = #{class_no}-->
+<!--    </select>-->
+
+    <resultMap id="ClassDetailResultMap" type="com.lastdance.project.classList.model.dto.ClassListDTO">
+        <id property="class_no" column="class_no"/>
+        <result property="class_name" column="class_name"/>
+        <result property="class_schedule" column="class_schedule"/>
+        <result property="subject_no" column="subject_no"/>
+        <result property="member_no" column="member_no"/>
+        <result property="subject_name" column="subject_name"/>
+        <result property="name" column="name"/>
+    </resultMap>
+
+    <select id="getClassByNo" parameterType="int" resultMap="ClassDetailResultMap">
+        SELECT
+            c.class_no,
+            c.class_name,
+            c.class_schedule,
+            c.subject_no,
+            c.member_no,
+            s.subject_name,
+            m.name
+        FROM `class` c
+                 JOIN subject s ON c.subject_no = s.subject_no
+                 JOIN member m ON c.member_no = m.member_no
+        WHERE c.class_no = #{class_no}
+    </select>
+
+    <!-- 클래스리스트 수정 -->
+    <update id="updateClass" parameterType="com.lastdance.project.classList.model.dto.ClassListDTO">
+        UPDATE `class`
+        SET class_name = #{class_name},
+            class_schedule = #{class_schedule},
+            subject_no = #{subject_no},
+            member_no = #{member_no}
+        WHERE class_no = #{class_no}
+    </update>
+
+    <!-- 클래스리스트 삭제 -->
+    <delete id="deleteClass" parameterType="int">
+        DELETE FROM `class` WHERE class_no = #{class_no}
+    </delete>
+
+
+    <!-- 클래스-학생 조회 -->
+    <select id="getStudentsByClassNo" resultType="com.lastdance.project.studentList.model.dto.StudentListDTO">
+        SELECT m.member_no,
+               m.name,
+               m.birth_date,
+               m.phone,
+               s.school,
+               s.grade,
+               s.parent_contact
+        FROM student_class sc
+        JOIN member m ON sc.member_no = m.member_no
+        JOIN student s ON m.member_no = s.member_no
+        WHERE sc.class_no = #{class_no}
+    </select>
+
+</mapper>

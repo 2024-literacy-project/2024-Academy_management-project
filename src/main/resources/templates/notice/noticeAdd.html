@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <!--    <title>내용</title>-->
+  <th:block th:replace="fragments/head :: head"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+  <th:block th:replace="fragments/header :: header"></th:block>
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+  <th:block th:replace="fragments/aside :: aside"></th:block>
+</aside><!-- End Sidebar -->
+
+<main id="main" class="main">
+
+  <div class="pagetitle">
+    <h1>공지사항 추가</h1>
+    <nav>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="../templates/index.html">Home</a></li>
+        <li class="breadcrumb-item"><a href="/notice">공지사항</a></li>
+        <li class="breadcrumb-item">공지사항 추가</li>
+      </ol>
+    </nav>
+  </div><!-- End Page Title -->
+
+  <section class="section">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">공지사항 등록</h5>
+            <!-- 공지사항 추가 폼 -->
+            <form th:action="@{/notice/add}" th:method="post">
+              <div class="mb-3">
+                <label for="noticeTitle" class="form-label">공지사항 제목</label>
+                <input type="text" class="form-control" id="noticeTitle" name="notice_title" required>
+              </div>
+              <div class="mb-3">
+                <label for="noticeTxt" class="form-label">공지사항 내용</label>
+                <textarea class="form-control" id="noticeTxt" name="notice_txt" rows="5" required></textarea>
+              </div>
+              <div class="mb-3">
+                <label for="noticeDate" class="form-label">공지사항 날짜</label>
+                <input type="date" class="form-control" id="noticeDate" name="notice_date" required>
+              </div>
+              <button type="submit" class="btn btn-primary">추가하기</button>
+              <a href="/notice" class="btn btn-secondary">취소</a>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main><!-- End #main -->
+
+<!-- ======= Footer ======= -->
+<footer id="footer" class="footer">
+  <div class="copyright">
+    &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
+  </div>
+  <div class="credits">
+    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+  </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

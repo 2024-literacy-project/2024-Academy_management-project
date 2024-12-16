@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <!--    <title>내용</title>-->
+    <th:block th:replace="fragments/head :: head"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <th:block th:replace="fragments/header :: header"></th:block>
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+    <th:block th:replace="fragments/aside :: aside"></th:block>
+</aside><!-- End Sidebar -->
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>공지사항 수정</h1>
+    </div>
+
+    <section class="section">
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">공지사항 수정하기</h5>
+                        <!-- 공지사항 수정 폼 -->
+                        <form th:action="@{/notice/update}" th:method="post" th:object="${notice}">
+                            <input type="hidden" th:field="*{notice_no}">
+                            <div class="mb-3">
+                                <label for="notice_title" class="form-label">공지사항 제목</label>
+                                <input type="text" class="form-control" id="notice_title" th:field="*{notice_title}" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="notice_txt" class="form-label">공지사항 내용</label>
+                                <textarea type="date" class="form-control" id="notice_txt" th:field="*{notice_txt}" rows="5" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="notice_date" class="form-label">공지사항 날짜</label>
+                                <input type="date" class="form-control" id="notice_date" th:value="${formattedDate}" name="notice_date" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">수정하기</button>
+                            <a href="/notice" class="btn btn-secondary">취소</a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main><!-- End #main -->
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>

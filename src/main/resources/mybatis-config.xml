@@ -2,7 +2,27 @@
 <!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <typeHandlers>
+        <typeHandler javaType="java.time.LocalDate" handler="org.apache.ibatis.type.LocalDateTypeHandler"/>
+    </typeHandlers>
+
     <mappers>
         <mapper resource="mapper/TestMapper.xml"/>
+        <mapper resource="mapper/StudentAttendanceMapper.xml"/>
+        <mapper resource="mapper/StudentClassMapper.xml"/>
+        <mapper resource="mapper/GradeMapper.xml"/>
+        <mapper resource="mapper/ClassMapper.xml"/>
+        <mapper resource="mapper/user/ExamMapper.xml"/>
+        <mapper resource="mapper/user/UserMapper.xml"/>
+        <mapper resource="mapper/PlannerMapper.xml"/>
+        <mapper resource="mapper/MemberMapper2.xml"/>
+        <mapper resource="mapper/ScheduleMapper.xml"/>
+        <mapper resource="mapper/ClassMapper2.xml"/>
+        <mapper resource="mapper/NoticeMapper.xml"/>
+        <mapper resource="mapper/MemberMapper.xml"/>
+        <mapper resource="mapper/ClassListMapper.xml"/>
+        <mapper resource="mapper/EmployeeListMapper.xml"/>
+        <mapper resource="mapper/StudentListMapper.xml"/>
+        <mapper resource="mapper/SubjectMapper.xml"/>
     </mappers>
 </configuration>

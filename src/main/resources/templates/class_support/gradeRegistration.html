@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <!--    <title>내용</title>-->
+    <th:block th:replace="fragments/head :: head"></th:block>
+</head>
+
+<body>
+
+<!-- ======= Header ======= -->
+<header id="header" class="header fixed-top d-flex align-items-center">
+    <th:block th:replace="fragments/header :: header"></th:block>
+</header><!-- End Header -->
+
+<!-- ======= Sidebar ======= -->
+<aside id="sidebar" class="sidebar">
+    <th:block th:replace="fragments/aside :: aside"></th:block>
+</aside><!-- End Sidebar -->
+
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>성적 관리</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="../templates/index.html">Home</a></li>
+                <li class="breadcrumb-item">수업 관리</li>
+                <li class="breadcrumb-item active">성적 관리</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <!-- 1. 새로운 시험과 성적 등록 폼 -->
+    <section class="mb-5">
+        <h2>새로운 시험과 성적 등록</h2>
+        <form id="registerGradeForm">
+            <!-- 클래스 선택 -->
+            <div class="mb-4">
+                <label for="classSelect" class="form-label">클래스 선택</label>
+                <select id="classSelect" class="form-select" required>
+                    <option value="" disabled selected>클래스를 선택하세요</option>
+                    <option th:each="cls : ${classList}" th:value="${cls.class_no}" th:text="${cls.class_name}"></option>
+                </select>
+            </div>
+
+            <!-- 학생 선택 -->
+            <div class="mb-4" id="studentSelectContainer" style="display: none;">
+                <label for="studentSelect" class="form-label">학생 선택</label>
+                <select id="studentSelect" class="form-select" required>
+                    <option value="" disabled selected>학생을 선택하세요</option>
+                </select>
+            </div>
+
+            <!-- 시험 이름 입력 -->
+            <div class="mb-4">
+                <label for="testName" class="form-label">시험 이름</label>
+                <input type="text" id="testName" class="form-control" placeholder="시험 이름을 입력하세요" required>
+            </div>
+
+            <!-- 시험 정보 입력 -->
+            <div class="mb-4">
+                <label for="testInfo" class="form-label">시험 정보</label>
+                <input type="text" id="testInfo" class="form-control" placeholder="시험 정보를 입력하세요" required>
+            </div>
+
+            <!-- 시험 날짜 입력 -->
+            <div class="mb-4">
+                <label for="testDate" class="form-label">시험 날짜</label>
+                <input type="date" id="testDate" class="form-control" required>
+            </div>
+
+            <!-- 시험 점수 입력 -->
+            <div class="mb-4">
+                <label for="testScore" class="form-label">시험 점수</label>
+                <input type="number" id="testScore" class="form-control" placeholder="점수를 입력하세요" min="0" max="100" step="1" required>
+            </div>
+
+            <!-- 등록 버튼 -->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">등록</button>
+            </div>
+        </form>
+    </section>
+
+    <hr>
+
+
+</main>
+
+<!-- Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // 새로운 시험과 성적 등록 폼 요소
+        const registerGradeForm = document.getElementById('registerGradeForm');
+        const classSelect = document.getElementById('classSelect');
+        const studentSelect = document.getElementById('studentSelect');
+        const studentSelectContainer = document.getElementById('studentSelectContainer');
+
+
+        // 클래스 선택 시 학생 목록 로드 (새로운 시험 등록 폼)
+        classSelect.addEventListener('change', function () {
+            const classNo = this.value;
+
+            if (classNo) {
+                fetch(`/class_support/studentsByClass?class_no=${classNo}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        // 학생 드롭다운 초기화
+                        studentSelect.innerHTML = '<option value="" disabled selected>학생을 선택하세요</option>';
+                        // 학생 목록 추가
+                        data.forEach(student => {
+                            const option = document.createElement('option');
+                            option.value = student.member_no; // member_no
+                            option.textContent = student.name; // student_name
+                            studentSelect.appendChild(option);
+                        });
+                        studentSelectContainer.style.display = 'block'; // 학생 선택 창 표시
+                    })
+                    .catch(error => {
+                        console.error('Error fetching students:', error);
+                        alert('학생 목록을 불러오는 중 오류가 발생했습니다.');
+                    });
+            } else {
+                studentSelectContainer.style.display = 'none';
+            }
+        });
+
+
+
+
+        // 새로운 시험과 성적 등록 폼 제출 처리
+        registerGradeForm.addEventListener('submit', function (e) {
+            e.preventDefault(); // 폼 기본 제출 방지
+
+            const classNo = classSelect.value;
+            const testName = document.getElementById('testName').value.trim();
+            const testInfo = document.getElementById('testInfo').value.trim();
+            const testDate = document.getElementById('testDate').value;
+            const testScore = document.getElementById('testScore').value;
+            const memberNo = studentSelect.value;
+
+            // 필수 필드 확인
+            if (classNo && memberNo && testName && testInfo && testDate && testScore) {
+                const gradeData = {
+                    classNo: parseInt(classNo),
+                    memberNo: parseInt(memberNo),
+                    testName: testName,
+                    testInfo: testInfo,
+                    testDate: testDate,
+                    score: parseInt(testScore)
+                };
+
+                console.log('Sending gradeData:', gradeData); // 데이터 확인
+
+                fetch('/class_support/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(gradeData)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.text();
+                    })
+                    .then(message => {
+                        alert(message);
+                        // 폼 초기화
+                        registerGradeForm.reset();
+                        studentSelectContainer.style.display = 'none';
+                    })
+                    .catch(error => {
+                        console.error('Error registering grade:', error);
+                        alert('성적 등록 중 오류가 발생했습니다. 다시 시도해주세요.');
+                    });
+            } else {
+                alert('모든 필드를 올바르게 입력해주세요.');
+            }
+        });
+
+
+    });
+</script>
+
+<footer id="footer" class="footer">
+    <div class="copyright">
+        &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
+    </div>
+    <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+</footer><!-- End Footer -->
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<!-- Vendor JS Files -->
+<script src="/assets/vendor/apexcharts/apexcharts.min.js"></script>
+<script src="/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/assets/vendor/chart.js/chart.umd.js"></script>
+<script src="/assets/vendor/echarts/echarts.min.js"></script>
+<script src="/assets/vendor/quill/quill.js"></script>
+<script src="/assets/vendor/simple-datatables/simple-datatables.js"></script>
+<script src="/assets/vendor/tinymce/tinymce.min.js"></script>
+<script src="/assets/vendor/php-email-form/validate.js"></script>
+
+<!-- Template Main JS File -->
+<script src="/assets/js/main.js"></script>
+
+</body>
+
+</html>
