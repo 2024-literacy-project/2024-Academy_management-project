@@ -97,7 +97,7 @@
 | :------: |  :------: |  :------: |  :------: |
 | [<img src="https://github.com/2024-literacy-project/2024-literacy-project/assets/82174047/34321251-97e6-4ef1-adfd-059cc4f0066f" height=150 width=150> <br/> @inredzero](https://github.com/inredzero) | [<img src="https://github.com/2024-literacy-project/2024-literacy-project/assets/82174047/e21f081d-d9ee-431a-b8ff-0e963fad3811" height=150 width=150> <br/> @moressangplease](https://github.com/moressangplease) | [<img src="https://github.com/2024-literacy-project/2024-literacy-project/assets/82174047/4a486b99-1b23-4a85-bb09-a29c026e37e1" height=150 width=150> <br/> @se-3-yeon](https://github.com/se-3-yeon) | [<img src="https://github.com/2024-literacy-project/2024-literacy-project/assets/82174047/87154d04-2119-472d-89d9-eb512feff02b" height=150 width=150> <br/> @Realyunjae](https://github.com/Realyunjae) |
 | 팀장 | 팀원 | 팀원 | 팀원 | 
-| 기획, DB구성, 로그인/회원가입 기능, 학습리포트 관리, 성적 평균 통계 |기획,DB구성, 학생 상세페이지(정보,클래스, 플래너), 플래너 피드백|기획, DB구성, 강사관리, 학생 관리, 클래스 관리 |기획, DB구성, 수업지원(성적,출석) 페이지 구현, 공지사항 구현<br>  | 
+| 기획, DB구성, 로그인/회원가입,<br> 학습리포트 관리, 성적 평균 통계 |기획,DB구성, 학생상세페이지<br>(정보,클래스, 플래너),<br> 플래너 피드백|&nbsp;기획, DB구성, 강사 관리,<br> 학생 관리, 클래스 관리 |기획, DB구성, 수업지원(성적,출석),<br> 공지사항 페이지<br>  | 
 </div>
 
 
@@ -113,7 +113,9 @@
 -  notion 에 회의내용을 기록함.
 
 #### 깃허브 Issues & Discussions
-<div align="left"><img src="https://github.com/user-attachments/assets/5ee3dfc8-83e2-4224-a3de-676a1c998759" alt="사진" width="600" height="300"/></div>
+![스크린샷 2024-12-17 045224](https://github.com/user-attachments/assets/e8a95483-f9b7-4707-8bbc-0ffb44507a61)
+![스크린샷 2024-12-17 045320](https://github.com/user-attachments/assets/719ac35d-6370-44ac-9a2c-bb736da7d175)
+
 
 #### 개발 기간
 -  개발 기간 : 2024-08 ~ 2024-12
@@ -175,11 +177,8 @@
 
 ## 4. 유사 프로그램 분석
 ### 
-<div align="left"> <img src="https://github.com/user-attachments/assets/769fb1f5-93e1-4e8d-871f-9bc3ca98d0ad" alt="사진" width="600" height="300">
-<div align="left"> <img src="https://github.com/user-attachments/assets/1b4e480f-ae0f-4948-bdf8-e9916c062d88" alt="사진" width="700" height="300">
-
-
-
+<div align="left"> <img src="https://github.com/user-attachments/assets/eb0db5da-3ac3-4bc2-8116-1cabb0ed30db" alt="사진" width="800" height="550">
+<div align="left"> <img src="https://github.com/user-attachments/assets/3e544919-ffef-4d3e-b276-8b2f15c5684e" alt="사진" width="800" height="550">
 
 
 #### 문제점
@@ -205,10 +204,10 @@
      
 ## 6. DB/프로젝트 구조
 ### 논리 ERD
-![논리](https://github.com/user-attachments/assets/10656655-b77b-454f-8966-261cd9dbe497)
+![논리ERD_1120 (1)](https://github.com/user-attachments/assets/653955a2-19e7-49d9-a0e2-d02c6d95c3be)
 
  ### 물리 ERD
-![물리](https://github.com/user-attachments/assets/0acdc5ab-df53-42fe-9d58-c36acb2ae3cd)
+![물리ERD_1120 (1)](https://github.com/user-attachments/assets/7d3ba872-a22a-42c5-87c9-bf825400408a)
 
  
 
@@ -241,13 +240,16 @@
 - 강사 관리: 강사 리스트 조회, 신규 등록, 개별 상세페이지를 통해 강사 정보 확인 및 수정 기능 제공.
 - 학생 관리: 학생 리스트 조회, 신규 등록, 개별 상세페이지를 통해 학생 정보, 클래스 배정 및 학습 리포트 관리 기능 제공.
   
- <img width="972"  src="">
+ <img width="770"  src="https://github.com/user-attachments/assets/c82547eb-f6ec-4279-b1f1-d5bfb3066dcc">
+ <img width="770"  src="https://github.com/user-attachments/assets/6c6dc200-269a-418f-84c4-77e238525714">
+ 
 
 ### ③ 클래스 관리 페이지
  **기능 설명**
 - 클래스 리스트 조회 및 추가, 수정, 삭제 기능 제공.
 - 클래스 상세보기: 클래스명, 수업 일정, 과목명, 담당자 정보 확인 및 관리.
- <img width="972" src="">
+- 클래스별 학생 조회: 해당 클래스 수강 학생 목록 조회
+ <img width="770" src="https://github.com/user-attachments/assets/a27d3590-d05b-4736-9463-6ecab3b2d368">
 
 
 ### ④ 학습 리포트 페이지
