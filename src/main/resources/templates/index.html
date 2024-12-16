@@ -1,244 +1,20 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-  <title>Dashboard</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
-
-  <!-- Favicons -->
-  <link th:href="@{/assets/img/favicon.png}" rel="icon">
-  <link th:href="@{/assets/img/apple-touch-icon.png}" rel="apple-touch-icon">
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link th:href="@{/assets/vendor/bootstrap/css/bootstrap.min.css}" rel="stylesheet">
-  <link th:href="@{/assets/vendor/bootstrap-icons/bootstrap-icons.css}" rel="stylesheet">
-  <link th:href="@{/assets/vendor/boxicons/css/boxicons.min.css}" rel="stylesheet">
-  <link th:href="@{/assets/vendor/quill/quill.snow.css}" rel="stylesheet">
-  <link th:href="@{/assets/vendor/quill/quill.bubble.css}" rel="stylesheet">
-  <link th:href="@{/assets/vendor/remixicon/remixicon.css}" rel="stylesheet">
-  <link th:href="@{/assets/vendor/simple-datatables/style.css}" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link th:href="@{/css/style.css}" rel="stylesheet">
+  <th:block th:replace="fragments/head :: head"></th:block>
 </head>
 
 <body>
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-
-  <div class="d-flex align-items-center justify-content-between">
-    <a th:href="@{/}" class="logo d-flex align-items-center">
-      <img th:src="@{/assets/img/logo.png}" alt="Logo">
-      <span class="d-none d-lg-block" th:text="'LastDance'">LastDance</span>
-    </a>
-    <!--      <i class="bi bi-list toggle-sidebar-btn"></i>-->
-  </div><!-- End Logo -->
-
-  <nav class="header-nav ms-auto">
-    <button type="button" class="btn btn-outline-dark" href="#">로그아웃</button>
-  </nav><!-- End Icons Navigation -->
-
+  <th:block th:replace="fragments/header :: header"></th:block>
 </header><!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-
-  <ul class="sidebar-nav" id="sidebar-nav">
-
-    <li class="nav-item">
-      <a class="nav-link " th:href="@{/}">
-        <i class="bi bi-grid"></i>
-        <span th:text="'메인'">메인</span>
-      </a>
-    </li><!-- End 메인 Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link " th:href="@{/academy/dashboard}">
-        <i class="bi bi-grid"></i>
-        <span th:text="'학원현황'">학원현황</span>
-      </a>
-    </li><!-- End 학원현황 Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-menu-button-wide"></i>
-        <span th:text="'학원관리'">학원관리</span>
-        <i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-
-      <ul id="components-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
-          <a th:href="@{/academy/info}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'학원정보'">학원정보</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/teacher/regist}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'강사등록'">강사등록</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/teacher/list}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'강사목록'">강사목록</span>
-          </a>
-        </li>
-        <li>
-<!--          <a href="../components-cards.html">-->
-          <a href="./classList/classList.html">
-            <i class="bi bi-circle"></i><span>클래스목록</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/academy/auth}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'권한'">권한</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- End 학원관리 Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-layout-text-window-reverse"></i>
-        <span th:text="'학생관리'">학생관리</span>
-        <i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="tables-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
-          <a th:href="@{/student/regist}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'학생등록'">학생등록</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/student/info}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'학생정보'">학생정보</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- End 학생관리 Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-journal-text"></i>
-        <span th:text="'수업지원'">수업지원</span>
-        <i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
-          <a class="nav-link collapsed" data-bs-target="#attendance-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-circle"></i><span>출석관리</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="attendance-nav" class="nav-content collapse background-color: #fff;" data-bs-parent="#forms-nav">
-            <li>
-              <a href="/class_support/classAttendanceList">
-                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">출석/결석 체크</span>
-              </a>
-            </li>
-            <li>
-              <a href="/class_support/attendanceSummary">
-                <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">일자별 출결 현황 표시</span>
-              </a>
-            </li>
-
-          </ul>
-
-
-        </li>
-
-        <li>
-          <a class="nav-link collapsed" data-bs-target="#grade-nav" data-bs-toggle="collapse" href="#">
-            <i class="bi bi-circle"></i><span>성적관리</span><i class="bi bi-chevron-down ms-auto"></i>
-          </a>
-          <ul id="grade-nav" class="nav-content collapse background-color: #fff;" data-bs-parent="#forms-nav">
-            <li>
-              <a href="/class_support/gradeRegistration">
-                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">성적 등록</span>
-              </a>
-            </li>
-            <li>
-              <a href="/class_support/gradeUpdate">
-                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">성적 관리</span>
-              </a>
-            </li>
-            <li>
-              <a href="/class_support/gradeSearch">
-                <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">성적 검색</span>
-              </a>
-            </li>
-
-          </ul>
-
-
-        </li>
-        <li>
-          <a th:href="@{/class/list}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'과제등록'">과제등록</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/class/list}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'플래너'">플래너</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- End 수업지원 Nav -->
-
-    <li class="nav-item">
-      <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-        <i class="bi bi-bar-chart"></i>
-        <span th:text="'학생상세페이지'">학생상세페이지</span>
-        <i class="bi bi-chevron-down ms-auto"></i>
-      </a>
-      <ul id="charts-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-        <li>
-          <a th:href="@{/student/info}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'학생정보'">학생정보</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/student/class}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'클래스/시간표'">클래스/시간표</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/student/attendance}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'출석현황'">출석현황</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/student/report}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'학습리포트'">학습리포트</span>
-          </a>
-        </li>
-        <li>
-          <a th:href="@{/student/planner/list}">
-            <i class="bi bi-circle"></i>
-            <span th:text="'My플래너'">My플래너</span>
-          </a>
-        </li>
-      </ul>
-    </li><!-- End 학생상세페이지 Nav -->
-  </ul>
+  <th:block th:replace="fragments/aside :: aside"></th:block>
 </aside><!-- End Sidebar -->
 
 
@@ -282,7 +58,9 @@
                     <i class="bi bi-currency-dollar"></i>
                   </div>
                   <div class="ps-3">
-                    <h6 href="#">관리자 로그인</h6>
+                    <a href="student/signup">
+                      <h6 href="#">학생 회원가입</h6>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -301,7 +79,9 @@
                     <i class="bi bi-currency-dollar"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>직원 로그인</h6>
+                    <a href="employee/signup">
+                    <h6>직원 회원가입</h6>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -320,7 +100,9 @@
                     <i class="bi bi-cart"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>학생 로그인</h6>
+                    <a href="auth/login">
+                      <h6>로그인</h6>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -368,25 +150,13 @@
 
                 </div><!-- End sidebar recent posts-->
 
-              </div>
-            </div><!-- End News & Updates -->
-
-          </div><!-- End Right side columns -->
-
-        </div>
-      </div></div>
   </section>
 
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
 <footer id="footer" class="footer">
-  <div class="copyright">
-    &copy; Copyright <strong><span>LastDance</span></strong>. All Rights Reserved
-  </div>
-  <div class="credits">
-    Designed by BootstrapMade
-  </div>
+  <th:block th:replace="fragments/footer :: footer"></th:block>
 </footer>
 <!-- End Footer -->
 

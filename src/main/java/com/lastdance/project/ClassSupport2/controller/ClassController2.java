@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -22,13 +23,16 @@ public class ClassController2 {
     private ClassService2Impl classServiceImpl;
 
     // 강사 아이디 고정
-    private final String fixedId = "minsoo";
+//    private final String fixedId = "minsoo";
 
     // 클래스 목록
     @GetMapping("/class")
-    public String getClassList(Model model) {
+    public String getClassList(Model model, Principal principal) {
+        String id = principal.getName(); // 로그인한 사용자 ID 가져오기
 
-        List<ClassDTO2> classList = classServiceImpl.getClassList(fixedId);
+        System.out.println("id: " + id);
+
+        List<ClassDTO2> classList = classServiceImpl.getClassList(id);
         model.addAttribute("classList", classList);
 
         System.out.println(classList);

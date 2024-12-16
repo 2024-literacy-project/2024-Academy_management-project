@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,9 +27,13 @@ public class PlannerController {
 
     // 플래너 목록
     @GetMapping("/list")
-    public String getPlannerByUser(Model model) {
+    public String getPlannerByUser(Model model, Principal principal) {
 
-        List<PlannerDTO> plannerDTO = plannerServiceImpl.getPlannerByUser(fixedId);
+        String studentId = principal.getName(); // 로그인한 사용자 ID 가져오기
+
+        System.out.println("studentId: " + studentId);
+
+        List<PlannerDTO> plannerDTO = plannerServiceImpl.getPlannerByUser(studentId);
         model.addAttribute("plannerList", plannerDTO);
 
         return "student/planner/list";

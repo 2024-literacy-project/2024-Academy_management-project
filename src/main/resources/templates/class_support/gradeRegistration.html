@@ -1,219 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
-    <title>성적 관리 - LastDance</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="/assets/img/favicon.png" rel="icon">
-    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-
-    <!-- Vendor CSS Files -->
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="/css/style.css" rel="stylesheet">
+    <!--    <title>내용</title>-->
+    <th:block th:replace="fragments/head :: head"></th:block>
 </head>
 
 <body>
+
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-            <img src="/assets/img/logo.png" alt="">
-            <span class="d-none d-lg-block">LastDance</span>
-        </a>
-        <!--      <i class="bi bi-list toggle-sidebar-btn"></i>-->
-    </div><!-- End Logo -->
-
-    <nav class="header-nav ms-auto">
-        <button type="button" class="btn btn-outline-dark" href="#">로그아웃</button>
-    </nav><!-- End Icons Navigation -->
-
+    <th:block th:replace="fragments/header :: header"></th:block>
 </header><!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
-<!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
-
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-        <li class="nav-item">
-            <a class="nav-link " href="/index">
-                <i class="bi bi-grid"></i>
-                <span>메인</span>
-            </a>
-        </li><!-- End 메인 Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link " href="/academy-management/dashboard">
-                <i class="bi bi-grid"></i>
-                <span>학원현황</span>
-            </a>
-        </li><!-- End 학원현황 Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>학원관리</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-
-            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="../components-alerts.html">
-                        <i class="bi bi-circle"></i><span>학원정보</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../components-accordion.html">
-                        <i class="bi bi-circle"></i><span>강사등록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../components-badges.html">
-                        <i class="bi bi-circle"></i><span>강사목록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../components-cards.html">
-                        <i class="bi bi-circle"></i><span>클래스목록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../components-buttons.html">
-                        <i class="bi bi-circle"></i><span>권한</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End 학원관리 Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>학생관리</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="forms.html">
-                        <i class="bi bi-circle"></i><span>학생등록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../tables-data.html">
-                        <i class="bi bi-circle"></i><span>학생정보</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End 학생관리 Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span>수업지원</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="forms-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
-                <li>
-                    <a class="nav-link collapsed" data-bs-target="#attendance-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-circle"></i><span>출석관리</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="attendance-nav" class="nav-content collapse background-color: #fff;" data-bs-parent="#forms-nav">
-                        <li>
-                            <a href="/class_support/classAttendanceList">
-                                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">출석/결석 체크</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/class_support/attendanceSummary">
-                                <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">일자별 출결 현황 표시</span>
-                            </a>
-                        </li>
-
-                    </ul>
-
-
-                </li>
-
-                <li>
-                    <a class="nav-link collapsed" data-bs-target="#grade-nav" data-bs-toggle="collapse" href="#">
-                        <i class="bi bi-circle"></i><span>성적관리</span><i class="bi bi-chevron-down ms-auto"></i>
-                    </a>
-                    <ul id="grade-nav" class="nav-content collapse background-color: #fff;" data-bs-parent="#forms-nav">
-                        <li>
-                            <a href="/class_support/gradeRegistration">
-                                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">성적 등록</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/class_support/gradeUpdate">
-                                <i class="bi bi-check h4"></i><span class="breadcrumb text-success">성적 관리</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/class_support/gradeSearch">
-                                <i class="bi bi-circle h4"></i><span class="breadcrumb text-success">성적 검색</span>
-                            </a>
-                        </li>
-
-                    </ul>
-
-
-                </li>
-                <li>
-                    <a href="../forms-editors.html">
-                        <i class="bi bi-circle"></i><span>과제등록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../forms-validation.html">
-                        <i class="bi bi-circle"></i><span>플래너</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End 수업지원 Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-bar-chart"></i><span>학생상세페이지</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="../charts-chartjs.html">
-                        <i class="bi bi-circle"></i><span>학생정보</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../charts-apexcharts.html">
-                        <i class="bi bi-circle"></i><span>클래스/시간표</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../charts-echarts.html">
-                        <i class="bi bi-circle"></i><span>출석현황</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../charts-echarts.html">
-                        <i class="bi bi-circle"></i><span>학습리포트</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../charts-echarts.html">
-                        <i class="bi bi-circle"></i><span>My플래너</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End 학생상세페이지 Nav -->
-    </ul>
-</aside><!-- End Sidebar-->
+    <th:block th:replace="fragments/aside :: aside"></th:block>
+</aside><!-- End Sidebar -->
 
 
 <main id="main" class="main">

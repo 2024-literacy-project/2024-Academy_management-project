@@ -8,6 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.security.Principal;
+
 @Controller
 public class MemberController2 {
 
@@ -17,12 +19,15 @@ public class MemberController2 {
     private MemberServiceImpl2 memberServiceImpl2;
 
     // 학생 아이디 고정
-    private final String fixedId = "chulsoo";
+//    private final String fixedId = "chulsoo";
 
     @GetMapping("/student/info")
-    public String studentInfo(Model model) {
+    public String studentInfo(Model model, Principal principal) {
+        String studentId = principal.getName();
 
-        MemberDTO2 memberDTO2 = memberServiceImpl2.getStudentInfo(fixedId);
+        System.out.println("studentId: " + studentId);
+
+        MemberDTO2 memberDTO2 = memberServiceImpl2.getStudentInfo(studentId);
 
         model.addAttribute("studentInfo", memberDTO2);
 

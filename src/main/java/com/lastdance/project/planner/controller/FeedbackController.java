@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -58,9 +59,13 @@ public class FeedbackController {
 
     // 피드백 작성
     @GetMapping("/feedback/add/{planner_no}")
-    public String showAddFeedbackPage(@PathVariable int planner_no,Model model) {
+    public String showAddFeedbackPage(@PathVariable int planner_no,Model model, Principal principal) {
 
-        String userName = plannerServiceImpl.getTeacherNameByUserId(fixedId);
+        String id = principal.getName(); // 로그인한 사용자 ID 가져오기
+
+        System.out.println("id: " + id);
+
+        String userName = plannerServiceImpl.getTeacherNameByUserId(id);
         PlannerDTO plannerDTO = plannerServiceImpl.getPlannerByNo(planner_no);
 
         FeedbackDTO feedbackList = new FeedbackDTO();
@@ -74,9 +79,13 @@ public class FeedbackController {
     }
 
     @PostMapping("/feedback/add")
-    public String addFeedback(@ModelAttribute FeedbackDTO feedbackDTO) {
+    public String addFeedback(@ModelAttribute FeedbackDTO feedbackDTO, Principal principal) {
 
-        int memberNo = plannerServiceImpl.getMemberNoById(fixedId);
+        String id = principal.getName(); // 로그인한 사용자 ID 가져오기
+
+        System.out.println("id: " + id);
+
+        int memberNo = plannerServiceImpl.getMemberNoById(id);
         feedbackDTO.setMember_no(memberNo);
 
         plannerServiceImpl.addFeedback(feedbackDTO);
@@ -86,9 +95,13 @@ public class FeedbackController {
 
     // 피드백 수정
     @GetMapping("/feedback/update/{feedback_no}")
-    public String showUpdateFeedbackPage(@PathVariable int feedback_no, Model model) {
+    public String showUpdateFeedbackPage(@PathVariable int feedback_no, Model model, Principal principal) {
 
-        String userName = plannerServiceImpl.getTeacherNameByUserId(fixedId);
+        String id = principal.getName(); // 로그인한 사용자 ID 가져오기
+
+        System.out.println("id: " + id);
+
+        String userName = plannerServiceImpl.getTeacherNameByUserId(id);
         FeedbackDTO feedback = plannerServiceImpl.getFeedbackById(feedback_no);
         feedback.setName(userName);
 

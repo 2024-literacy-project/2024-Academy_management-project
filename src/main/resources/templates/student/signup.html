@@ -1,302 +1,130 @@
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--    <script>-->
-<!--        const message = `[[${ message }]]`-->
-<!--        if(message) {-->
-<!--            alert(message);-->
-<!--        }-->
-<!--    </script>-->
-<!--</head>-->
-<!--<body>-->
-<!--    <h1>회원가입</h1>-->
-<!--    <form th:action="@{/user/signup}" method="post">-->
-<!--        ID : <input type="text" name="userId"><br>-->
-<!--        이름 : <input type="text" name="userName"><br>-->
-<!--        PWD : <input type="password" name="userPass"><br>-->
-<!--        권한 :-->
-<!--        <select name="role">-->
-<!--            <option value="USER">일반회원</option>-->
-<!--            <option value="ADMIN">관리자</option>-->
-<!--        </select><br>-->
-<!--        <button>회원가입</button>-->
-<!--    </form>-->
-<!--</body>-->
-<!--</html>-->
-
-
-
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--    <script>-->
-<!--        const message = `[[${ message }]]`-->
-<!--        if(message) {-->
-<!--            alert(message);-->
-<!--        }-->
-<!--    </script>-->
-<!--</head>-->
-<!--<body>-->
-<!--<a href="/employee/signup">employee 회원가입 이동</a>-->
-<!--<h1>회원가입</h1>-->
-<!--<form th:action="@{/student/signup}" method="post">-->
-<!--    이름 : <input type="text" name="userName"><br>-->
-<!--    ID : <input type="text" name="userId"><br>-->
-<!--    PWD : <input type="password" name="userPass"><br>-->
-<!--    권한 :-->
-<!--    <select name="role">-->
-<!--        <option value="STUDENT">학생</option>-->
-<!--        <option value="EMPLOYEE">강사</option>-->
-<!--        <option value="ADMIN">관리자</option>-->
-<!--    </select><br>-->
-<!--    생일 : <input type="date" name="birth"><br>-->
-<!--    휴대폰 : <input type="tel" name="phone"><br>-->
-<!--    주소 : <input type="text" name="address"><br>-->
-<!--    등록일 : <input type="date" name="registrationDate"><br>-->
-<!--    소속학교 : <input type="text" name="school"><br>-->
-<!--    학년(숫자) : <input type="text" name="grade"><br>-->
-<!--    보호자 연락처 : <input type="text" name="parentContact"><br>-->
-
-<!--    <button type="submit">회원가입</button>-->
-<!--</form>-->
-<!--</body>-->
-<!--</html>-->
 
 
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="utf-8">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport">
-
     <script>
         const message = `[[${ message }]]`
         if(message) {
             alert(message);
         }
     </script>
-
     <title>클래스 리스트 추가</title>
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
-    <!-- Favicons -->
-    <link href="/assets/img/favicon.png" rel="icon">
-    <link href="/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
-
-    <!-- Google Fonts -->
-    <link href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-    <!-- Vendor CSS Files -->
-    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-    <link href="/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-    <link href="/assets/vendor/quill/quill.snow.css" rel="stylesheet">
-    <link href="/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
-    <link href="/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-    <link href="/assets/vendor/simple-datatables/style.css" rel="stylesheet">
-
-    <!-- Template Main CSS File -->
-    <link href="/css/style.css" rel="stylesheet">
-
-    <!--    <style></style>-->
-    <!--    <link rel="stylesheet" type="text/css" th:href="@{/css/classList/classList.css}"/>-->
-
+    <th:block th:replace="fragments/head :: head"></th:block>
 </head>
 
 <body>
 
 <!-- ======= Header ======= -->
 <header id="header" class="header fixed-top d-flex align-items-center">
-
-    <div class="d-flex align-items-center justify-content-between">
-        <a href="index.html" class="logo d-flex align-items-center">
-            <img src="/assets/img/logo.png" alt="">
-            <span class="d-none d-lg-block">LastDance</span>
-        </a>
-        <!--      <i class="bi bi-list toggle-sidebar-btn"></i>-->
-    </div><!-- End Logo -->
-
-    <nav class="header-nav ms-auto">
-        <button type="button" class="btn btn-outline-dark" href="#">로그아웃</button>
-    </nav><!-- End Icons Navigation -->
-
+    <th:block th:replace="fragments/header :: header"></th:block>
 </header><!-- End Header -->
 
 <!-- ======= Sidebar ======= -->
 <aside id="sidebar" class="sidebar">
+    <th:block th:replace="fragments/aside :: aside"></th:block>
+</aside><!-- End Sidebar -->
 
-    <ul class="sidebar-nav" id="sidebar-nav">
-
-        <li class="nav-item">
-            <a class="nav-link " href="/index">
-                <i class="bi bi-grid"></i>
-                <span>메인</span>
-            </a>
-        </li><!-- End 메인 Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link " href="/academy-management/dashboard">
-                <i class="bi bi-grid"></i>
-                <span>학원현황</span>
-            </a>
-        </li><!-- End 학원현황 Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-menu-button-wide"></i><span>학원관리</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-
-            <ul id="components-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="../components-alerts.html">
-                        <i class="bi bi-circle"></i><span>학원정보</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../components-accordion.html">
-                        <i class="bi bi-circle"></i><span>강사등록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../components-badges.html">
-                        <i class="bi bi-circle"></i><span>강사목록</span>
-                    </a>
-                </li>
-                <li>
-                    <!--          <a href="../components-cards.html">-->
-                    <a href="./classList/classList.html">
-                        <i class="bi bi-circle"></i><span>클래스목록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../components-buttons.html">
-                        <i class="bi bi-circle"></i><span>권한</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End 학원관리 Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-layout-text-window-reverse"></i><span>학생관리</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="tables-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="forms.html">
-                        <i class="bi bi-circle"></i><span>학생등록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../tables-data.html">
-                        <i class="bi bi-circle"></i><span>학생정보</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End 학생관리 Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-journal-text"></i><span>수업지원</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="../forms-elements.html">
-                        <i class="bi bi-circle"></i><span>출석관리</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../forms-layouts.html">
-                        <i class="bi bi-circle"></i><span>성적등록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../forms-editors.html">
-                        <i class="bi bi-circle"></i><span>과제등록</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../forms-validation.html">
-                        <i class="bi bi-circle"></i><span>플래너</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End 수업지원 Nav -->
-
-        <li class="nav-item">
-            <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
-                <i class="bi bi-bar-chart"></i><span>학생상세페이지</span><i class="bi bi-chevron-down ms-auto"></i>
-            </a>
-            <ul id="charts-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-                <li>
-                    <a href="../charts-chartjs.html">
-                        <i class="bi bi-circle"></i><span>학생정보</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../charts-apexcharts.html">
-                        <i class="bi bi-circle"></i><span>클래스/시간표</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../charts-echarts.html">
-                        <i class="bi bi-circle"></i><span>출석현황</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../charts-echarts.html">
-                        <i class="bi bi-circle"></i><span>학습리포트</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="../charts-echarts.html">
-                        <i class="bi bi-circle"></i><span>My플래너</span>
-                    </a>
-                </li>
-            </ul>
-        </li><!-- End 학생상세페이지 Nav -->
-    </ul>
-</aside><!-- End Sidebar-->
 
 <main id="main" class="main">
+        <div class="pagetitle">
+            <h1>학생등록</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">Home</li>
+                    <li class="breadcrumb-item">학생관리</li>
+                    <li class="breadcrumb-item active">학생등록</li>
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
 
-    <div class="pagetitle">
-        <h1>학생 회원가입</h1>
-    </div><!-- End Page Title -->
+    <!-- 학생 입력폼 -->
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">회원가입</h5>
 
-    <section>
-        <a href="/employee/signup">employee 회원가입 이동</a>
-        <h1>회원가입</h1>
-        <form th:action="@{/student/signup}" method="post">
+                        <!-- Table with stripped rows -->
+                        <table class="table datata">
+                            <thead>
+                            <tr style="height: 40px;width:80px;border: 1px solid lightgray;">
+                                <th>작성제목</th>
+                                <th>작성공간</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <form th:action="@{/student/signup}" method="post">
 
-            이름 : <input type="text" id="userName" name="userName"><br>
-            ID : <input type="text" name="userId"><br>
-            PWD : <input type="password" name="userPass"><br>
-            권한 :
-            <select name="role">
-                <option value="STUDENT">학생</option>
-                <option value="EMPLOYEE">강사</option>
-                <option value="ADMIN">관리자</option>
-            </select><br>
-            생일 : <input type="date" name="birth"><br>
-            휴대폰 : <input type="tel" name="phone"><br>
-            주소 : <input type="text" name="address"><br>
-            등록일 : <input type="date" name="registrationDate"><br>
-            소속학교 : <input type="text" name="school"><br>
-            학년(숫자) : <input type="text" name="grade"><br>
-            보호자 연락처 : <input type="text" name="parentContact"><br>
+                                <tr>
+                                    <td>이름 </td>
+                                    <td><input type="text" id="userName" name="userName"> </td>
+                                </tr>
 
-            <button type="submit">회원가입</button>
-        </form>
+                                <tr>
+                                    <td>ID </td>
+                                    <td><input type="text" name="userId"></td>
+                                </tr>
+
+                                <tr>
+                                    <td>PWD </td>
+                                    <td><input type="password" name="userPass"></td>
+                                </tr>
+
+                                <tr>
+                                    <td>권한 </td>
+                                    <td>
+                                        <select name="role">
+                                            <option value="STUDENT">학생</option>
+<!--                                            <option value="EMPLOYEE">강사</option>-->
+<!--                                            <option value="ADMIN">관리자</option>-->
+                                        </select>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>생일 </td>
+                                    <td><input type="date" name="birth"></td>
+                                </tr>
+                                <tr>
+                                    <td>휴대폰 </td>
+                                    <td><input type="tel" name="phone"></td>
+                                </tr>
+                                <tr>
+                                    <td>주소 </td>
+                                    <td><input type="text" name="address"></td>
+                                </tr>
+                                <tr>
+                                    <td>등록일 </td>
+                                    <td><input type="date" name="registrationDate"></td>
+                                </tr>
+                                <tr>
+                                    <td>소속학교 </td>
+                                    <td><input type="text" name="school"></td>
+                                </tr>
+                                <tr>
+                                    <td>학년(숫자) </td>
+                                    <td><input type="text" name="grade"></td>
+                                </tr>
+                                <tr>
+                                    <td>보호자 연락처 </td>
+                                    <td><input type="text" name="parentContact"></td>
+                                </tr>
+                                <tr>
+                                    <td><button type="submit">회원가입</button></td>
+                                </tr>
+                            </form>
+                            </tbody>
+                        </table> <!-- End Table with stripped rows -->
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
+
 </main><!-- End #main -->
 
 <!-- ======= Footer ======= -->
