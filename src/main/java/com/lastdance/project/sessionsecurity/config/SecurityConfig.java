@@ -42,13 +42,15 @@ public class SecurityConfig {
 
         http.authorizeHttpRequests(auth -> {
             // 해당하는 URL 은 로그인(인증이 되지 않은 사람도 들어갈 수 있다.)
-            auth.requestMatchers("/auth/login", "/student/signup", "/employee/signup", "/auth/fail", "/", "/main","/users/**").permitAll();
+            auth.requestMatchers("/auth/login", "/auth/fail", "/", "/main","/users/**").permitAll();
             // 해당하는 URL 은 권한이 ADMIN 인 사람만 들어갈 수 있다.
-            auth.requestMatchers("/admin/**").hasAnyAuthority(UserRole.ADMIN.getRole());
+            auth.requestMatchers("/employee/signup", "/employeeList").hasAnyAuthority(UserRole.ADMIN.getRole());
             // 해당하는 URL 은 권한이 STUDENT 인 사람만 들어갈 수 있다.
-            auth.requestMatchers("/student/**").hasAnyAuthority(UserRole.STUDENT.getRole());
+            auth.requestMatchers("/student/info","/student/time-table", "/student/exam-results", "/student/planner/list").hasAnyAuthority(UserRole.STUDENT.getRole());
             // 해당하는 URL 은 권한이 EMPLOYEE 인 사람만 들어갈 수 있다.
-            auth.requestMatchers("/employee/**").hasAnyAuthority(UserRole.EMPLOYEE.getRole());
+//            auth.requestMatchers("").hasAnyAuthority(UserRole.EMPLOYEE.getRole());
+            // 해당하는 URL 은 권한이 EMPLOYEE랑 ADMIN 사람만 들어갈 수 있다.
+            auth.requestMatchers("/student/signup","/classList","/studentList", "/class_support/**").hasAnyAuthority(UserRole.ADMIN.getRole(), UserRole.EMPLOYEE.getRole());
 
             // 위에 작성하지 않은 URL 은 로그인(인증이 필요하다.) > 로그인페이지로 이동 됨.
             auth.anyRequest().authenticated();

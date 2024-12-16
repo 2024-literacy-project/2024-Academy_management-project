@@ -2,6 +2,7 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
+  <title></title>
   <div th:replace="~{fragments/head :: head}"></div>
 </head>
 
@@ -43,88 +44,19 @@
       </div>
     </div>
 
-    <div class="row">
-
-      <!-- Left side columns -->
-      <div class="col-lg-8">
-        <div class="row">
-
-          <!-- 관리자로그인 Card -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card revenue-card">
-
-              <div class="card-body">
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-currency-dollar"></i>
-                  </div>
-                  <div class="ps-3">
-                    <a href="student/signup">
-                      <h6 href="#">학생 회원가입</h6>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div><!-- End 관리자로그인 Card -->
-
-          <!-- 직원 로그인 Card -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card revenue-card">
-
-              <div class="card-body">
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-currency-dollar"></i>
-                  </div>
-                  <div class="ps-3">
-                    <a href="employee/signup">
-                    <h6>직원 회원가입</h6>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div><!-- End 직원 로그인 Card -->
-
-          <!-- 학생 로그인 Card -->
-          <div class="col-xxl-4 col-md-6">
-            <div class="card info-card sales-card">
-
-              <div class="card-body">
-
-                <div class="d-flex align-items-center">
-                  <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cart"></i>
-                  </div>
-                  <div class="ps-3">
-                    <a href="auth/login">
-                      <h6>로그인</h6>
-                    </a>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div><!-- End 학생 로그인 Card -->
-
-          <!-- Right side columns -->
-          <div class="col-lg-4">
-
+<!--    <div class="row">-->
+<!--      &lt;!&ndash; Left side columns &ndash;&gt;-->
+<!--      <div class="col-lg-8">-->
+<!--        <div class="row">-->
+<!--          &lt;!&ndash; Right side columns &ndash;&gt;-->
+<!--          <div class="col-lg-4">-->
             <!-- 공지사항 -->
             <div class="card">
-
               <div class="card-body pb-0">
                 <h3 class="card-title">학원공지</h3>
+<!--                <div class="news">-->
+<!--                </div>&lt;!&ndash; End sidebar recent posts&ndash;&gt;-->
 
-                <div class="news">
-
-
-                </div><!-- End sidebar recent posts-->
                 <!-- 공지사항 리스트 -->
                 <div th:if="${#lists.isEmpty(noticeList)}">
                   <p>현재 공지사항이 없습니다.</p>
@@ -138,20 +70,13 @@
                     <a th:href="@{/notice/{notice_no}(notice_no=${notice.notice_no})}" th:text="${notice.notice_title}">공지사항 제목</a>
                   </h4>
                   <p th:text="${notice.notice_txt}">공지사항 내용</p>
-                </div>
+                 </div>
               </div><!-- End sidebar recent posts -->
-
-
-
-
-              </div>
-            </div><!-- End 공지사항 -->
-
-        </div>
-    </div>
-
-                </div><!-- End sidebar recent posts-->
-
+            </div>
+<!--          </div>&lt;!&ndash; End 공지사항 &ndash;&gt;-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>&lt;!&ndash; End sidebar recent posts&ndash;&gt;-->
   </section>
 
 </main><!-- End #main -->
