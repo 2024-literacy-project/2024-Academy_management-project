@@ -3,6 +3,7 @@ package com.lastdance.project.employeeList.service;
 import com.lastdance.project.employeeList.model.dao.EmployeeListDAO;
 import com.lastdance.project.employeeList.model.dto.EmployeeListDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,6 +12,10 @@ import java.util.List;
 public class EmployeeListServiceImpl implements EmployeeListService{
 
     private final EmployeeListDAO employeeListDAO;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
     @Autowired
     public EmployeeListServiceImpl(EmployeeListDAO employeeListDAO) {
@@ -34,6 +39,7 @@ public class EmployeeListServiceImpl implements EmployeeListService{
     /* 직원 수정 */
     @Override
     public void updateEmployee(EmployeeListDTO employeeListDTO){
+        employeeListDTO.setPassword(passwordEncoder.encode(employeeListDTO.getPassword()));
         employeeListDAO.updateEmployee(employeeListDTO);
     }
 

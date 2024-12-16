@@ -3,7 +3,9 @@ package com.lastdance.project.studentList.service;
 import com.lastdance.project.studentList.model.dao.StudentListDAO;
 import com.lastdance.project.studentList.model.dto.StudentListDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -11,6 +13,9 @@ import java.util.List;
 public class StudentListServiceImpl implements StudentListService{
 
     private final StudentListDAO studentListDAO;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
     public StudentListServiceImpl(StudentListDAO studentListDAO) {
@@ -33,7 +38,9 @@ public class StudentListServiceImpl implements StudentListService{
 
     /* 학생 수정 */
     @Override
+    @Transactional
     public void updateStudent(StudentListDTO studentListDTO){
+        studentListDTO.setPassword(passwordEncoder.encode(studentListDTO.getPassword()));
         studentListDAO.updateStudent(studentListDTO);
     }
 
