@@ -204,14 +204,14 @@
 - 로그인, 회원가입 기능
 - 지문등록, 실종 아동 신고 알림 배너
 
- <img width="700" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/2024-literacy-project/2024-child-protect-project/assets/129252557/841e559f-e427-46d5-a56a-b28eb7cab931">
+ <img width="700" alt="스크린샷 2024-06-03 오후 6 34 30" src="">
 
 
 ### ② 메인 지도 기능(내 주변 아동안전 지킴이집)
 
 - 현재 내 위치 기준으로 주변 아동안전지킴이집 리스트 확인/보여주기
 - 내 현재 위치 반경 1km, 2km ,3km, 5km 주변 아동지킴이집 검색
- <img width="972" alt="스크린샷 2024-06-13 오후 11 37 33" src="https://github.com/2024-literacy-project/2024-child-protect-project/assets/129252557/9ae4d4d1-e08d-42f5-8d0f-4440743ed25a">
+ <img width="972" alt="스크린샷 2024-06-13 오후 11 37 33" src="">
 
 
 ### ③ 로그인 & 회원가입 
@@ -221,8 +221,8 @@
 - 관리자용 페이지 구현 (사용자 관리)
 
 
-<img width="400" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/2024-literacy-project/2024-child-protect-project/assets/129252557/d73fd48a-a6cb-4fc7-87ec-d2c0db67979b"><br>
-<img width="400" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/2024-literacy-project/2024-child-protect-project/assets/129252557/87a51bfe-9366-4fe1-bf28-53471500bc5d">
+<img width="400" alt="스크린샷 2024-06-03 오후 6 34 30" src=""><br>
+
 
 ### ④ 날짜별 출석 현황 표시
 
@@ -232,7 +232,8 @@
 - 클래스 선택: 특정 클래스의 출석 현황 조회
 - 차트 시각화: 각 학생의 출석 상태 (출석, 지각, 결석)가 차트로 표시되어 한눈에 확인할 수 있습니다.
   
-<img width="700" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/2024-literacy-project/2024-child-protect-project/assets/129252557/723f6f0f-0042-4f61-a8c0-48409819b72a">
+<img width="700" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/e9cbac02-343f-43a0-8712-7e1e59c30567">
+
 
  
 ### ⑤ 시험별 성적 검색 
@@ -242,7 +243,8 @@
 - 시험 선택: 해당 클래스의 시험 목록에서 원하는 시험 선택
 - 차트 시각화: 각 학생의 성적이 막대 차트로 표시되며 성적 평균이나 분포를 시각적으로 확인할 수 있습니다.
   
-<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/2024-literacy-project/2024-child-protect-project/assets/129252557/186ebed3-13a1-4413-908b-18d6fe563cc0">
+<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/aacfa64e-6e8b-47d6-bd89-6c58157acb89">
+
 
 
 
@@ -250,7 +252,7 @@
 
  - 내 주변 아동안전수호천사(아동지킴이들) 리스트를 제공하여 동네 아동 안전 강화
 
-<img width="700" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/2024-literacy-project/2024-child-protect-project/assets/129252557/ca87cd23-f4b6-402b-b507-7a728f85b3c0">
+<img width="700" alt="스크린샷 2024-06-03 오후 6 34 30" src="">
 
 
 
