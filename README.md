@@ -225,15 +225,17 @@
  <img width="972" alt="스크린샷 2024-06-13 오후 11 37 33" src="">
 
 
-### ③ ( )페이지
+### ③ 학습 리포트 페이지
  **기능 설명**
-- 
+ 시험 평균 점수 표시: 선택한 시험에 대한 전체 평균 점수를 계산하고 시각적으로 표시.
+ 학생별 시험 평균 점수: 각 학생의 시험별 평균 점수를 차트로 제공
 
 
-<img width="400" alt="스크린샷 2024-06-03 오후 6 34 30" src=""><br>
+<img width="700" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/df86aa9f-8a82-46c2-af3c-2b63aaf67401"><br>
 
 
-### ④ 날짜별 출석 현황 표시
+
+### ④ 일자별 출석 현황 표시
 
 **기능 설명:**
 사용자가 원하는 날짜를 검색하면 해당 날짜의 출석 정보를 조회할 수 있습니다. 이후 특정 클래스를 선택하면 해당 클래스에 속한 학생들의 출석 현황이 차트로 시각화되어 표시됩니다.
@@ -241,7 +243,7 @@
 - 클래스 선택: 특정 클래스의 출석 현황 조회
 - 차트 시각화: 각 학생의 출석 상태 (출석, 지각, 결석)가 차트로 표시되어 한눈에 확인할 수 있습니다.
   
-<img width="700" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/e9cbac02-343f-43a0-8712-7e1e59c30567">
+<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/e9cbac02-343f-43a0-8712-7e1e59c30567">
 
 
  
@@ -252,7 +254,8 @@
 - 시험 선택: 해당 클래스의 시험 목록에서 원하는 시험 선택
 - 차트 시각화: 각 학생의 성적이 막대 차트로 표시되며 성적 평균이나 분포를 시각적으로 확인할 수 있습니다.
   
-<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/aacfa64e-6e8b-47d6-bd89-6c58157acb89">
+<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/3be602f3-aaf4-42e7-8f1e-fe12d733d390">
+
 
 
 
@@ -265,7 +268,7 @@
 - 직관적 인터페이스: 시간표를 사용자 친화적인 UI로 구성하여 빠르고 정확한 정보 제공.
 
 
-<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/1a9a7b33-640d-4fc9-aae5-28eb90d4a582">
+<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/6a795943-dc25-446e-bd98-568f919fccf4">
 
 ### ⑦ 플래너(목록, 작성, 피드백) 페이지
 
@@ -275,8 +278,10 @@
 - 강사 피드백 페이지: 강사가 학생의 플래너를 확인하고 코멘트나 피드백을 작성해 학습 방향 제시 및 동기 부여.
 - 맞춤형 학습 지원: 플래너와 피드백을 통해 학생의 학습 상태를 지속적으로 모니터링하고 맞춤형 학습 관리를 실현.
 
-<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/cf18818d-35f6-4ff2-904c-58509620ed5d">
-<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/9f00d554-55b6-49d7-9eeb-8ddeb3df0e9e">
+<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/16afeaa0-afc6-4554-ad54-c8cfeaa12a27">
+<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/0648c964-9490-4145-a059-dd669a52d16e">
+
+
 
 
 
