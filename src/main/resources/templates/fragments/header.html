@@ -9,26 +9,27 @@
         </div><!-- End Logo -->
 
         <nav class="header-nav ms-auto">
-            <p>안녕하세요, <span th:text="${#authentication.principal.username}"></span>님! (<span th:each="role : ${#authentication.authorities}" th:text="${role.authority}"></span>) </p>
-            <div sec:authorize="hasAnyAuthority('ADMIN')">
-                <h6>=== 관리자 페이지 ===</h6>
-            </div>
-            <div sec:authorize="hasAnyAuthority('STUDENT')">
-                <h6>=== 학생 페이지 ===</h6>
-            </div>
-            <div sec:authorize="hasAnyAuthority('EMPLOYEE')">
-                <h6>=== 강사 페이지 ===</h6>
-            </div>
+            <p>안녕하세요, <span th:text="${#authentication.principal.username}"></span>님! (<span th:each="role : ${#authentication.authorities}" th:text="${role.authority}"></span>) &nbsp&nbsp </p>
+<!--            <p>안녕하세요, <span th:text="${#authentication.principal.username}">님</span></p>-->
+<!--            <span sec:authorize="hasAnyAuthority('ADMIN')">-->
+<!--                <h6>===관리자===</h6>-->
+<!--            </span>-->
+<!--            <span sec:authorize="hasAnyAuthority('STUDENT')">-->
+<!--                <h6>===학생===</h6>-->
+<!--            </span>-->
+<!--            <span sec:authorize="hasAnyAuthority('EMPLOYEE')">-->
+<!--                <h6>===강사===</h6>-->
+<!--            </span>-->
         </nav><!-- End Icons Navigation -->
 
         <div>
             <nav class="header-nav ms-auto">
-                <a href="auth/login">로그인</a>
+                <button href="auth/login" style="background-color: transparent; border: none; color: blue">로그인 &nbsp</button>
                 <!--      <form th:action="@{/auth/logout}" th:method="post">-->
                 <!--        <button type="button" class="btn btn-outline-dark" href="#">로그아웃</button>-->
                 <!--      </form>-->
                 <form th:action="@{/auth/logout}" th:method="post">
-                    <button>로그아웃</button>
+                    <button style="background-color: transparent; border: none; color: blue">로그아웃 &nbsp</button>
                 </form>
             </nav><!-- End Icons Navigation -->
         </div>
