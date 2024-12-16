@@ -8,7 +8,8 @@
         <id property="examNo" column="test_no"/>
         <result property="examName" column="test_name"/>
         <result property="examDate" column="test_date"/>
-        <result property="score" column="test_result"/>
+        <result property="score" column="score"/>
+        <result property="avg" column="test_result"/>
     </resultMap>
 
 
@@ -32,7 +33,12 @@
 
     <!-- 학생별 시험 성적 조회 -->
     <select id="getExamResultsByStudent" parameterType="String" resultMap="Exam">
-        SELECT t.test_no, t.test_name, t.test_date, t.test_result
+        SELECT
+            t.test_no,
+            t.test_name,
+            t.test_date,
+            st.score AS score,
+            t.test_result
         FROM test t
         JOIN student_test st ON t.test_no = st.test_no
         JOIN member m ON st.member_no = m.member_no
