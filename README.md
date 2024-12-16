@@ -97,7 +97,7 @@
 | :------: |  :------: |  :------: |  :------: |
 | [<img src="https://github.com/2024-literacy-project/2024-literacy-project/assets/82174047/34321251-97e6-4ef1-adfd-059cc4f0066f" height=150 width=150> <br/> @inredzero](https://github.com/inredzero) | [<img src="https://github.com/2024-literacy-project/2024-literacy-project/assets/82174047/e21f081d-d9ee-431a-b8ff-0e963fad3811" height=150 width=150> <br/> @moressangplease](https://github.com/moressangplease) | [<img src="https://github.com/2024-literacy-project/2024-literacy-project/assets/82174047/4a486b99-1b23-4a85-bb09-a29c026e37e1" height=150 width=150> <br/> @se-3-yeon](https://github.com/se-3-yeon) | [<img src="https://github.com/2024-literacy-project/2024-literacy-project/assets/82174047/87154d04-2119-472d-89d9-eb512feff02b" height=150 width=150> <br/> @Realyunjae](https://github.com/Realyunjae) |
 | 팀장 | 팀원 | 팀원 | 팀원 | 
-| 기획, DB구성, 로그인/회원가입,<br> 학습리포트 관리, 성적 평균 통계 |기획,DB구성, 학생상세페이지<br>(정보,클래스, 플래너),<br> 플래너 피드백|&nbsp;기획, DB구성, 강사 관리,<br> 학생 관리, 클래스 관리 |기획, DB구성, 수업지원(성적,출석),<br> 공지사항 페이지<br>  | 
+| 기획, DB구성, 로그인/회원가입,<br> 학습리포트 관리, 성적 평균 통계 |기획,DB구성,학생상세페이지<br>(정보,클래스, 플래너),<br> 플래너 피드백| &nbsp; 기획, DB구성, 강사 관리,<br> 학생 관리, 클래스 관리 |기획, DB구성, 수업지원(성적,출석),<br> 공지사항 페이지<br>  | 
 </div>
 
 
