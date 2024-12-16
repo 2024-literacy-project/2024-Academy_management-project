@@ -113,8 +113,9 @@
 -  notion 에 회의내용을 기록함.
 
 #### 깃허브 Issues & Discussions
-![스크린샷 2024-12-17 045224](https://github.com/user-attachments/assets/e8a95483-f9b7-4707-8bbc-0ffb44507a61)
-![스크린샷 2024-12-17 045320](https://github.com/user-attachments/assets/719ac35d-6370-44ac-9a2c-bb736da7d175)
+
+<img width="770"  src="https://github.com/user-attachments/assets/e8a95483-f9b7-4707-8bbc-0ffb44507a61">
+<img width="680"  src="https://github.com/user-attachments/assets/719ac35d-6370-44ac-9a2c-bb736da7d175">
 
 
 #### 개발 기간
