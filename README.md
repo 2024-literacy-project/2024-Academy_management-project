@@ -125,21 +125,27 @@
  ###   ① 개발 환경 
  ###  프로그래밍 언어 및 프레임워크
   
-
+#### 사용 언어
+- Java (JDK 17): 애플리케이션 백엔드 개발에 사용.
+- JavaScript: 프론트엔드 동적 기능 및 이벤트 처리 구현.
 #### Spring boot
 -   Spring Boot Java 기반의 오픈 소스 경량 프레임워크로, Spring 프레임워크 위에서 동작
-#### thymeleaf
-- Thymeleaf는 서버 사이드 자바 템플릿 엔진으로, XML/XHTML/HTML5 컨텐츠를 웹 애플리케이션에서 동적으로 생성하는데 사용.
-#### MySQL
--  MySQL을 데이터베이스 관리 시스템으로 사용
-#### MyBatis
--  데이터베이스와 객체 간의 자동 매핑 기능을 제공하여, SQL 쿼리 실행 및 결과 매핑
+#### Spring Security
+- 사용자 인증 및 권한 관리 등 보안 기능 제공.
+#### Bootstrap & Thymeleaf
+- Bootstrap: 웹 페이지의 반응형 레이아웃과 UI 구현.
+- Thymeleaf: 서버 사이드 템플릿 엔진으로 HTML 동적 렌더링 지원
+#### MySQL & MyBatis
+-  MySQL: 데이터베이스 관리 시스템으로 사용.
+-  MyBatis: SQL 기반의 데이터베이스 접근과 매핑 지원.
+#### Chart.js
+-  데이터를 시각화하는 다양한 차트 기능 제공.
 #### CSS 
 -  웹 페이지의 레이아웃, 색상, 글꼴 등의 스타일을 정의하는 스타일 시트 언어
 
 
 ### ② 버전 및 이슈관리
-  -  Github, Github Issues, Github Project
+  -  Github, Github Issues, Github Discussions, Github Project
    <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
   
   <img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
@@ -210,32 +216,51 @@
 
 ## 7. 페이지별 설명
 
-### ① 메인 화면
+### ① 권한 페이지
+**기능 설명**
+- 사용자 권한에 따라 화면 표시 제어
+- Spring Security 적용: 권한 기반 접근 제어를 통해 페이지별 접근을 제한
 
-- 모든 페이지(아동안전지킴이집 지도, 자율방범대 커뮤니티, 안전수칙 메뉴얼, 수호천사 리스트) 연결
-- 로그인, 회원가입 기능
-- 지문등록, 실종 아동 신고 알림 배너
+- 비로그인 상태
+<img src="https://github.com/user-attachments/assets/3de09a50-27af-4d1e-8948-4f629cf53ac0" alt="비로그인 상태" width="700">
 
- <img width="700" alt="스크린샷 2024-06-03 오후 6 34 30" src="">
+- 학생 권한
+<img src="https://github.com/user-attachments/assets/e4fa66d9-8474-4d2c-812b-90ea22345dc4" alt="학생 권한" width="700">
+
+- 강사 권한
+<img src="https://github.com/user-attachments/assets/7e17303f-8de7-45b0-9a93-64ddc8d162f0" alt="강사 권한" width="700">
+
+- 관리자 권한
+<img src="https://github.com/user-attachments/assets/b1070ee8-0ff5-404c-87b0-47aa24073a9a" alt="관리자 권한" width="700">
 
 
-### ② ( )페이지
+
+
+### ② 학원 관리(강사,학생관리) 페이지
+ **페이지 설명**
+- 강사 관리: 강사 리스트 조회, 신규 등록, 개별 상세페이지를 통해 강사 정보 확인 및 수정 기능 제공.
+- 학생 관리: 학생 리스트 조회, 신규 등록, 개별 상세페이지를 통해 학생 정보, 클래스 배정 및 학습 리포트 관리 기능 제공.
+  
+ <img width="972"  src="">
+
+### ③ 클래스 관리 페이지
  **기능 설명**
-- 
- <img width="972" alt="스크린샷 2024-06-13 오후 11 37 33" src="">
+- 클래스 리스트 조회 및 추가, 수정, 삭제 기능 제공.
+- 클래스 상세보기: 클래스명, 수업 일정, 과목명, 담당자 정보 확인 및 관리.
+ <img width="972" src="">
 
 
-### ③ 학습 리포트 페이지
+### ④ 학습 리포트 페이지
  **기능 설명**
  시험 평균 점수 표시: 선택한 시험에 대한 전체 평균 점수를 계산하고 시각적으로 표시.
  학생별 시험 평균 점수: 각 학생의 시험별 평균 점수를 차트로 제공
 
 
-<img width="700" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/df86aa9f-8a82-46c2-af3c-2b63aaf67401"><br>
+<img width="700"  src="https://github.com/user-attachments/assets/df86aa9f-8a82-46c2-af3c-2b63aaf67401"><br>
 
 
 
-### ④ 일자별 출석 현황 표시
+### ⑤ 일자별 출석 현황 표시
 
 **기능 설명:**
 사용자가 원하는 날짜를 검색하면 해당 날짜의 출석 정보를 조회할 수 있습니다. 이후 특정 클래스를 선택하면 해당 클래스에 속한 학생들의 출석 현황이 차트로 시각화되어 표시됩니다.
@@ -243,24 +268,24 @@
 - 클래스 선택: 특정 클래스의 출석 현황 조회
 - 차트 시각화: 각 학생의 출석 상태 (출석, 지각, 결석)가 차트로 표시되어 한눈에 확인할 수 있습니다.
   
-<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/e9cbac02-343f-43a0-8712-7e1e59c30567">
+<img width="900"  src="https://github.com/user-attachments/assets/e9cbac02-343f-43a0-8712-7e1e59c30567">
 
 
  
-### ⑤ 시험별 성적 검색 
+### ⑥ 시험별 성적 검색 
 **기능 설명:**
 클래스 선택 후 해당 클래스의 시험 정보를 선택하면, 학생들의 시험 성적이 차트로 시각화되어 표시됩니다. 이를 통해 각 학생의 성적 분포를 한눈에 파악하고 클래스 전체의 성과를 분석할 수 있습니다.
 - 클래스 선택: 특정 클래스의 시험 데이터를 조회
 - 시험 선택: 해당 클래스의 시험 목록에서 원하는 시험 선택
 - 차트 시각화: 각 학생의 성적이 막대 차트로 표시되며 성적 평균이나 분포를 시각적으로 확인할 수 있습니다.
   
-<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/3be602f3-aaf4-42e7-8f1e-fe12d733d390">
+<img width="900"  src="https://github.com/user-attachments/assets/3be602f3-aaf4-42e7-8f1e-fe12d733d390">
 
 
 
 
 
-### ⑥ 클래스/시간표 페이지
+### ⑦ 클래스/시간표 페이지
 
  **페이지 설명**
  - 학원 전체 클래스 정보 조회: 과목명, 클래스명, 수업 시간, 담당 강사 정보를 한눈에 확인 가능.
@@ -268,9 +293,9 @@
 - 직관적 인터페이스: 시간표를 사용자 친화적인 UI로 구성하여 빠르고 정확한 정보 제공.
 
 
-<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/6a795943-dc25-446e-bd98-568f919fccf4">
+<img width="900" src="https://github.com/user-attachments/assets/6a795943-dc25-446e-bd98-568f919fccf4">
 
-### ⑦ 플래너(목록, 작성, 피드백) 페이지
+###  ⑧ 플래너(목록, 작성, 피드백) 페이지
 
  **기능 설명**
 - 플래너 목록: 학생이 작성한 플래너를 날짜별, 주별로 정리하여 목록으로 표시.
@@ -278,8 +303,8 @@
 - 강사 피드백 페이지: 강사가 학생의 플래너를 확인하고 코멘트나 피드백을 작성해 학습 방향 제시 및 동기 부여.
 - 맞춤형 학습 지원: 플래너와 피드백을 통해 학생의 학습 상태를 지속적으로 모니터링하고 맞춤형 학습 관리를 실현.
 
-<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/16afeaa0-afc6-4554-ad54-c8cfeaa12a27">
-<img width="900" alt="스크린샷 2024-06-03 오후 6 34 30" src="https://github.com/user-attachments/assets/0648c964-9490-4145-a059-dd669a52d16e">
+<img width="900"  src="https://github.com/user-attachments/assets/16afeaa0-afc6-4554-ad54-c8cfeaa12a27">
+<img width="900"  src="https://github.com/user-attachments/assets/0648c964-9490-4145-a059-dd669a52d16e">
 
 
 
