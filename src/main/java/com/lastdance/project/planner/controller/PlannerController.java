@@ -63,12 +63,14 @@ public class PlannerController {
 
     // 플래너 추가
     @GetMapping("/add")
-    public String getAddPlannerForm(Model model) {
+    public String getAddPlannerForm(Model model, Principal principal) {
 
-        String userName = plannerServiceImpl.getStudentNameByUserId(fixedId);
+        String studentId = principal.getName(); // 로그인한 사용자 ID 가져오기
+
+//        String userName = plannerServiceImpl.getStudentNameByUserId(fixedId);
 
         PlannerDTO plannerDTO = new PlannerDTO();
-        plannerDTO.setName(userName);
+        plannerDTO.setName(studentId);
 
         model.addAttribute("plannerDTO", plannerDTO);
 
@@ -76,9 +78,11 @@ public class PlannerController {
     }
 
     @PostMapping("/add")
-    public String addPlanner(@ModelAttribute PlannerDTO plannerDTO) {
+    public String addPlanner(@ModelAttribute PlannerDTO plannerDTO, Principal principal) {
 
-        int memberNo = plannerServiceImpl.getMemberNoById(fixedId);
+        String studentId = principal.getName(); // 로그인한 사용자 ID 가져오기
+
+        int memberNo = plannerServiceImpl.getMemberNoById(studentId);
         plannerDTO.setMember_no(memberNo);
         plannerServiceImpl.insertPlanner(plannerDTO);
 
@@ -96,11 +100,13 @@ public class PlannerController {
     }
 
     @PostMapping("/update")
-    public String updatePlanner(@ModelAttribute PlannerDTO plannerDTO) {
+    public String updatePlanner(@ModelAttribute PlannerDTO plannerDTO, Principal principal) {
 
-        int memberNo = plannerServiceImpl.getMemberNoById(fixedId);
+        String studentId = principal.getName(); // 로그인한 사용자 ID 가져오기
+
+        int memberNo = plannerServiceImpl.getMemberNoById(studentId);
         plannerDTO.setMember_no(memberNo);
-        plannerDTO.setId(fixedId);
+        plannerDTO.setId(studentId);
 
         plannerServiceImpl.updatePlanner(plannerDTO);
 
